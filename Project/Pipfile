@@ -5,8 +5,21 @@ name = "pypi"
 
 [packages]
 django = "*"
+psycopg2 = "*"
+pillow = "*"
+django-debug-toolbar = "*"
+whitenoise = {extras = ["brotli"], version = "*"}
+djangorestframework = "*"
+django-cors-headers = "*"
+django-import-export = "*"
+django-rosetta = "*"
+django-tinymce = "*"
+django-multiselectfield = "*"
 
 [dev-packages]
+docutils = "*"
+django-extensions = "*"
+faker = "*"
 
 [requires]
 python_version = "3.10"
