@@ -32,6 +32,18 @@ THIRD_PARTY_APPS = [
     'tinymce',
 ]
 LOCAL_APPS = [
+    'apps.accounts',
+    'apps.celebrations',
+    'apps.competitions',
+    'apps.core',
+    'apps.files',
+    'apps.geoposition',
+    'apps.jurisdictions',
+    'apps.payments',
+    'apps.projects',
+    'apps.registrations',
+    'apps.training',
+    'apps.youth_programme',
 ]
 
 MIDDLEWARE = [
@@ -47,15 +59,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.http.ConditionalGetMiddleware',
     'django.contrib.admindocs.middleware.XViewMiddleware',
-    'django_htmx.middleware.HtmxMiddleware',
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-ROOT_URLCONF = 'Portal.urls'
-WSGI_APPLICATION = 'Portal.wsgi.application'
+ROOT_URLCONF = 'Project.urls'
+WSGI_APPLICATION = 'Project.wsgi.application'
 
 SITE_ID = 1
-AUTH_USER_MODEL = 'accounts.User'
+# AUTH_USER_MODEL = 'accounts.User'
 
 ADMINS = [('Charles', 'ngangaricharles@gmail.com'), ]
 # SERVER_EMAIL = 'KSA Portal @ksa-portal.kenyascouts.org'
