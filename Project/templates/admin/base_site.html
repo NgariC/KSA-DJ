@@ -1,0 +1,36 @@
+{% extends "admin/base.html" %}
+{% load i18n static %}
+
+{% block extrahead %}<link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />{% endblock %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('MyProject') }}{% endblock %}
+
+{% block extrastyle %}<link rel="stylesheet" type="text/css" href="{% static 'css/admin_color.css' %}"/>{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('MyProject') }}</a></h1>
+{% endblock %}
+
+{% block userlinks %}
+{% if site_url %}
+    <a href="{{ site_url }}">{% trans 'View site' %}</a> /
+{% endif %}
+{% if user.has_usable_password %}
+    <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> /
+{% endif %}
+    <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+
+{% block footer %}
+<div id="footer">
+    <div class="text-muted">Copyright &copy; {{ company }} {% now "Y" %}  &nbsp</div>
+    <div>
+        <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
+        &middot;
+        <a href="{% url 'terms_&_conditions' %}">Terms &amp; Conditions</a>
+    </div>
+</div>
+{% endblock %}

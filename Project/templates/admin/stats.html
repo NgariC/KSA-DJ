@@ -1,0 +1,83 @@
+{% extends "admin/change_list.html" %}
+{% load i18n static %}
+
+{% block content_title %}
+    <h1> {{ title }} Statistics </h1>
+{% endblock %}
+
+{% block extrahead %}
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/changelists.css' %}">
+    {% include 'admin/stats_layout.html' %}
+{% endblock %}
+
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/admin_color.css' %}"/>
+<script type="text/javascript" src="{% static 'js/ploty.js' %}"></script>
+<style>
+
+</style>
+{% endblock %}
+
+
+{% block welcome-msg %}
+    <strong>{% firstof user.get_short_name user.get_username %}</strong>.
+{% endblock %}
+{% block userlinks %}
+    <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>
+{% endblock %}
+
+{% block object-tools %}{% endblock %}
+{% block pagination %}{% endblock %}
+
+
+
+
+
+
+{% block result_list %}
+
+
+<div class="results">
+    <div class="stats">
+
+        <input type="radio" name="tabs" id="tab1" checked /><label for="tab1">Regional Stats</label>
+        <input type="radio" name="tabs" id="tab2" /><label for="tab2">Counties Stats</label>
+        <input type="radio" name="tabs" id="tab3" /><label for="tab3">SubCounty Stats</label>
+
+        <div class="tab content1" id="tab1">
+{#        {% if not regions %}#}
+{#        {% else %}#}
+            {% block regions %}
+            {% endblock %}
+{#        {% endif %}#}
+        </div>
+
+        <div class="tab content2" id="tab2">
+{#        {% if not counties %}#}
+{#        {% else %}#}
+            {% block counties %}
+            {% endblock %}
+{#        {% endif %}#}
+        </div>
+
+        <div class="tab content3" id="tab3">
+{#        {% if not sub_counties %}#}
+{#        {% else %}#}
+            {% block sub_counties %}
+            {% endblock %}
+{#        {% endif %}#}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+
+{% block footer %}
+{{ block.super }}
+    {% block myjs %}{% endblock %}
+{% endblock %}
