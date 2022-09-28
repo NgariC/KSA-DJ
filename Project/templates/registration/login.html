@@ -1,0 +1,20 @@
+{% extends 'registration/base.html' %}
+{% load i18n crispy_forms_tags %}
+
+{% block title %} Login {% endblock title %}
+
+{% block auth_content %}
+    <h1> {% translate "Sign In" %}</h1>
+
+    <p>If you have not created an account yet, then please
+        <a href="{% url 'sign_up' %}">sign up</a> first.</p>
+
+    <form class="login" method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <a class="button secondaryAction" href="{% url 'password_reset' %}">{% translate "Forgot Password?" %}</a>
+        <button class="primaryAction" type="submit">{% translate "Sign In" %}</button>
+    </form>
+
+
+{% endblock auth_content %}

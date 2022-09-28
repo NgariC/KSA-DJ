@@ -1,0 +1,214 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-09-27 22:42+0300\n"
+"PO-Revision-Date: 2022-09-27 22:46+0300\n"
+"Last-Translator: Charles Ngari <ngangaricharles@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.9.8\n"
+
+#: Project/settings/base.py:188
+msgid "English"
+msgstr "Kingereza"
+
+#: Project/settings/base.py:189
+msgid "French"
+msgstr "Kifaransa"
+
+#: Project/settings/base.py:190
+msgid "Swahili"
+msgstr "Kiswahili"
+
+#: apps/accounts/models.py:15
+msgid "description"
+msgstr "maelezo"
+
+#: apps/accounts/models.py:20
+msgid "group"
+msgstr "kundi"
+
+#: apps/accounts/models.py:21
+msgid "groups"
+msgstr "makundi"
+
+#: apps/accounts/models.py:32 apps/accounts/models.py:42
+msgid "email address"
+msgstr ""
+
+#: apps/accounts/models.py:33
+msgid "Profile Picture"
+msgstr ""
+
+#: apps/accounts/models.py:43
+msgid "key"
+msgstr ""
+
+#: apps/accounts/models.py:44
+msgid "activated"
+msgstr ""
+
+#: apps/accounts/models.py:45
+msgid "forced_expired"
+msgstr ""
+
+#: apps/accounts/models.py:46
+msgid "expires"
+msgstr ""
+
+#: apps/accounts/models.py:47
+msgid "timestamp"
+msgstr ""
+
+#: apps/accounts/models.py:48
+msgid "update"
+msgstr ""
+
+#: templates/admin/base_site.html:6 templates/admin/base_site.html:11
+msgid "MyProject"
+msgstr ""
+
+#: templates/admin/base_site.html:16
+msgid "View site"
+msgstr ""
+
+#: templates/admin/base_site.html:19
+msgid "Change password"
+msgstr ""
+
+#: templates/admin/base_site.html:21 templates/admin/stats.html:28
+msgid "Log out"
+msgstr ""
+
+#: templates/admin/filter.html:4
+#, python-format
+msgid " By %(filter_title)s "
+msgstr ""
+
+#: templates/registration/account_creation_email.html:2
+#, python-format
+msgid ""
+"Hello from %(site_name)s!\n"
+"\n"
+"You're receiving this e-mail because you or someone else has requested a password for your user account.\n"
+"It can be safely ignored if you did not request a password reset. Click the link below to reset your password."
+msgstr ""
+
+#: templates/registration/account_creation_email.html:9
+#, python-format
+msgid "In case you forgot, your username is %(user.get_username)s."
+msgstr ""
+
+#: templates/registration/account_creation_email.html:11
+#, python-format
+msgid ""
+"Thank you for using %(site_name)s!\n"
+"%(site_domain)s"
+msgstr ""
+
+#: templates/registration/login.html:7 templates/registration/login.html:16
+msgid "Sign In"
+msgstr ""
+
+#: templates/registration/login.html:15
+msgid "Forgot Password?"
+msgstr ""
+
+#: templates/registration/password_change_done.html:8
+msgid "Password Change Successful"
+msgstr ""
+
+#: templates/registration/password_change_done.html:10
+msgid "Your password was changed."
+msgstr ""
+
+#: templates/registration/password_change_form.html:8
+msgid "Password Change"
+msgstr ""
+
+#: templates/registration/password_change_form.html:10
+msgid ""
+"Please enter your old password, for security’s sake, and then enter your new"
+" password twice so we can verify you typed it in correctly."
+msgstr ""
+
+#: templates/registration/password_change_form.html:15
+msgid "Change my password"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:8
+msgid "Password Reset Complete"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:10
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:12
+msgid "Log in"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:8
+msgid "Password Reset Confirmation"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:12
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:17
+msgid "Confirm password"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:22
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+
+#: templates/registration/password_reset_done.html:8
+msgid "Password Reset Sent"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:10
+msgid ""
+"We’ve emailed you instructions for setting your password, if an account "
+"exists with the email you entered. You should receive them shortly."
+msgstr ""
+
+#: templates/registration/password_reset_done.html:12
+msgid ""
+"If you don’t receive an email, please make sure you’ve entered the address "
+"you registered with, and check your spam folder."
+msgstr ""
+
+#: templates/registration/password_reset_form.html:8
+msgid "Password Reset"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:10
+msgid ""
+"Forgotten your password? Enter your email address below, and we’ll email "
+"instructions for setting a new one."
+msgstr ""
+
+#: templates/registration/password_reset_form.html:15
+msgid "Reset my password"
+msgstr ""
+
+#: templates/registration/sign_up.html:7
+msgid "Sign Up"
+msgstr ""

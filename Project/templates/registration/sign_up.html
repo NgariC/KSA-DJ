@@ -1,0 +1,17 @@
+{% extends 'registration/base.html' %}
+{% load i18n crispy_forms_tags %}
+
+{% block title %} SighUp {% endblock title %}
+
+{% block auth_content %}
+    <h1> {% translate "Sign Up" %}</h1>
+
+    <p>Already have an account? Then please <a href="{% url 'login' %}">sign in</a>.</p>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% crispy form %}
+    </form>
+
+
+{% endblock auth_content %}

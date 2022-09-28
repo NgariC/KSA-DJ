@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}" />
+{% endblock static %}
+
+{% block content_auth %}
+    <div class="img_background">
+        <div class="my_padding row justify-content-center">
+            <div class="col-md-6">
+                {% block auth_content %}{% endblock auth_content %}
+            </div>
+        </div>
+    </div>
+{% endblock content_auth %}
+
+{% block footer %}{% endblock footer %}

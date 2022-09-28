@@ -66,7 +66,7 @@ ROOT_URLCONF = 'Project.urls'
 WSGI_APPLICATION = 'Project.wsgi.application'
 
 SITE_ID = 1
-# AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'accounts.User'
 
 ADMINS = [('Charles', 'ngangaricharles@gmail.com'), ]
 # SERVER_EMAIL = 'KSA Portal @ksa-portal.kenyascouts.org'

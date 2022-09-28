@@ -1,0 +1,70 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>{% block title %} {{ brand }} {% endblock title %}</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content={{ description }} />
+    <meta name="author" content={{ author }} />
+    <meta name="theme-color" content="#00332a">
+
+    <!-- Favicons -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+    <link rel="apple-touch-icon" href="{% static 'img/favicon.ico' %}">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+          crossorigin="anonymous">
+
+
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+
+
+    <!--Custom css -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    {% block static %}{% endblock static %}
+
+  </head>
+  <body>
+  {% include 'partials/header.html' %}
+
+  <div class="body-content">
+  {% block content_auth %}
+
+    {% if messages %}
+        <div class="my-messages" hx-get="{% url 'clear' %}" hx-trigger="load delay:3s">
+            {% for message in messages %}
+            <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% block content %}
+    {% endblock content %}
+
+  {% endblock content_auth %}
+    {% include 'partials/footer.html' %}
+</div>
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+            crossorigin="anonymous"></script>
+    <!--HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.8.0"></script>
+
+    <!--Custom js -->
+    <script>document.body.addEventListener('htmx:configRequest', (event) => {event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';})</script>
+    {% block js %}{% endblock js %}
+    </body>
+</html>
