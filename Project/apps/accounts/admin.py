@@ -9,6 +9,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import Group
 from django.db.models import Q
 from django.utils.crypto import get_random_string
+from apps.accounts.resources import UserResource
 from import_export.admin import ImportExportModelAdmin
 
 from apps.accounts.models import User, Groups, EmailActivation
@@ -113,6 +114,8 @@ class CustomUserAdmin(StrippedUserAdmin, ImportExportModelAdmin):
             my_excludes(db_field, kwargs)
         return super().formfield_for_manytomany(db_field, request=request, **kwargs)
 
+    
+    resource_class = UserResource
     filter_horizontal = ('groups', 'user_permissions')
     list_display = ('get_full_name', 'email', 'is_staff', 'last_login')
     list_filter = ('is_active', 'is_staff', 'date_joined')
