@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-27 22:42+0300\n"
-"PO-Revision-Date: 2022-09-27 22:46+0300\n"
+"POT-Creation-Date: 2022-10-04 11:18+0300\n"
+"PO-Revision-Date: 2022-10-04 13:33+0300\n"
 "Last-Translator: Charles Ngari <ngangaricharles@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -75,19 +75,114 @@ msgstr ""
 msgid "update"
 msgstr ""
 
+#: apps/jurisdictions/models.py:11 apps/jurisdictions/models.py:42
+#: apps/jurisdictions/models.py:109
+msgid "code"
+msgstr "kanuni"
+
+#: apps/jurisdictions/models.py:12 apps/jurisdictions/models.py:28
+#: apps/jurisdictions/models.py:43 apps/jurisdictions/models.py:66
+#: apps/jurisdictions/models.py:86 apps/jurisdictions/models.py:110
+msgid "name"
+msgstr ""
+
+#: apps/jurisdictions/models.py:20
+msgid "country"
+msgstr "nchi"
+
+#: apps/jurisdictions/models.py:21
+msgid "countries"
+msgstr ""
+
+#: apps/jurisdictions/models.py:34
+msgid "region"
+msgstr "mkoa"
+
+#: apps/jurisdictions/models.py:35
+msgid "regions"
+msgstr ""
+
+#: apps/jurisdictions/models.py:45 apps/jurisdictions/models.py:68
+msgid "activeness"
+msgstr ""
+
+#: apps/jurisdictions/models.py:54
+msgid "county"
+msgstr "kata"
+
+#: apps/jurisdictions/models.py:55
+msgid "counties"
+msgstr ""
+
+#: apps/jurisdictions/models.py:74
+msgid "sub_county"
+msgstr "kata_ndogo"
+
+#: apps/jurisdictions/models.py:75
+msgid "sub_counties"
+msgstr ""
+
+#: apps/jurisdictions/models.py:92
+msgid "zone"
+msgstr ""
+
+#: apps/jurisdictions/models.py:93
+msgid "zones"
+msgstr ""
+
+#: apps/jurisdictions/models.py:101
+msgid "National Level"
+msgstr "ngazi ya taifa"
+
+#: apps/jurisdictions/models.py:102
+msgid "Regional Level"
+msgstr "ngazi ya mkoa"
+
+#: apps/jurisdictions/models.py:103
+msgid "County Level"
+msgstr "ngazi ya kata"
+
+#: apps/jurisdictions/models.py:104
+msgid "SubCounty Level"
+msgstr "ngazi ya kata_ndogo"
+
+#: apps/jurisdictions/models.py:105
+msgid "Zonal Level"
+msgstr "ngazi ya eneo"
+
+#: apps/jurisdictions/models.py:106
+msgid "Unit Level"
+msgstr "ngazi ya kitengo"
+
+#: apps/jurisdictions/models.py:107
+msgid "Scouts Level"
+msgstr "ngazi ya skauti"
+
+#: apps/jurisdictions/models.py:111
+msgid "level"
+msgstr "kiwango"
+
+#: apps/jurisdictions/models.py:118
+msgid "rank"
+msgstr ""
+
+#: apps/jurisdictions/models.py:119
+msgid "ranks"
+msgstr ""
+
 #: templates/admin/base_site.html:6 templates/admin/base_site.html:11
 msgid "MyProject"
 msgstr ""
 
-#: templates/admin/base_site.html:16
+#: templates/admin/base_site.html:30
 msgid "View site"
 msgstr ""
 
-#: templates/admin/base_site.html:19
+#: templates/admin/base_site.html:33
 msgid "Change password"
 msgstr ""
 
-#: templates/admin/base_site.html:21 templates/admin/stats.html:28
+#: templates/admin/base_site.html:35 templates/admin/stats.html:28
 msgid "Log out"
 msgstr ""
 
