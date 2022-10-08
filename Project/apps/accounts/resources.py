@@ -4,11 +4,6 @@ from import_export.fields import Field
 from apps.accounts.models import User
 
 
-def dehydrate_user_permissions(obj):
-    data = [x.name for x in obj.user_permissions.all()]
-    return ", ".join(data)
-
-
 class UserResource(resources.ModelResource):
     groups = Field()
     user_permissions = Field()
