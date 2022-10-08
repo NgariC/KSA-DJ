@@ -17,6 +17,10 @@ django-tinymce = "*"
 django-multiselectfield = "*"
 django-crispy-forms = "*"
 crispy-bootstrap5 = "*"
+reportlab = "*"
+pandas = "*"
+matplotlib = "*"
+seaborn = "*"
 
 [dev-packages]
 docutils = "*"

@@ -35,7 +35,7 @@ class RegionAdmin(Perm, ImportExportActionModelAdmin):
 
 @admin.register(County)
 class CountyAdmin(Perm, ImportExportActionModelAdmin):
-    # actions = ExportActionModelAdmin.actions + [active]
+    actions = ExportActionModelAdmin.actions + (active, )
     list_per_page = sys.maxsize
     resource_class = CountyResource
     show_full_result_count = False
@@ -65,7 +65,7 @@ class CountyAdmin(Perm, ImportExportActionModelAdmin):
 
 @admin.register(SubCounty)
 class SubCountyAdmin(Perm, ImportExportActionModelAdmin):
-    # actions = ExportActionModelAdmin.actions + [active]
+    actions = ExportActionModelAdmin.actions + (active, )
     list_per_page = sys.maxsize
     resource_class = SubCountyResource
     show_full_result_count = False
@@ -106,7 +106,7 @@ class ZoneAdmin(Perm, ImportExportActionModelAdmin):
 
 @admin.register(Rank)
 class RankAdmin(Perm, ImportExportActionModelAdmin):
-    # resource_class = RankResource
+    resource_class = RankResource
     list_display = ('code', 'level', 'name')
     search_fields = ('code', 'name', 'level')
     list_filter = ('level',)

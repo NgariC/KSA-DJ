@@ -135,7 +135,7 @@ is_published.short_description = "Mark selected %(verbose_name_plural)s as publi
 
 @admin.register(ComingEvent)
 class ComingEventAdmin(ImportExportActionModelAdmin):
-    actions = ExportActionModelAdmin.actions + [is_published]
+    actions = ExportActionModelAdmin.actions + (is_published, )
     list_display = ('event_type', 'start_date', 'end_date', 'county')
     list_filter = ('event_type', 'county__region', 'county')
     search_fields = ('event_type', 'county__region', 'county', 'start_date', 'end_date')

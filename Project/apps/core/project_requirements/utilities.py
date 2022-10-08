@@ -1,11 +1,16 @@
+import base64
 import datetime
 import os
+from io import BytesIO
 
+import numpy as np
+import pandas as pd
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db.models import Q
 from django.utils.html import format_html
+from matplotlib import pyplot as plt
 
 GENDER = (
     ('M', 'Male'),
@@ -269,3 +274,61 @@ def report_template(model):
         'then attach in this form' % (settings.MEDIA_URL, model)
     )
 
+
+
+
+
+def get_graph():
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+    image_png = buffer.getvalue()
+    graph = base64.b64encode(image_png)
+    graph = graph.decode('utf-8')
+    buffer.close()
+    return graph
+
+
+def event_chart(df, level, model):
+    plt.switch_backend('AGG')
+    plt.subplots()
+    plt.figure(figsize=(16, 9))
+
+    x = df[level]
+    y1 = df[f'{model}']
+    y2 = df['Male']
+    y3 = df['Female']
+    width = 0.4
+    z = np.arange(len(df))
+
+    plt.plot(x, y1, label='Totals', color='red', marker='o', linestyle='dashed')
+    plt.bar(z - (width / 2), y2, width=width, color='blue', label='Male')
+    plt.bar(z + (width / 2), y3, width=width, color='pink', label='Female')
+    if level == 'Region':
+        plt.title(f'{model.upper()} PER {level.upper()}S', fontsize=20)
+        plt.xlabel(f'{level.upper()}S', fontsize=14)
+    elif level == 'County':
+        plt.title(f'{model.upper()} PER COUNTIES', fontsize=20)
+        plt.xlabel('COUNTIES', fontsize=14)
+    elif level == 'SubCounty':
+        plt.title(f'{model.upper()} PER SUBCOUNTIES', fontsize=20)
+        plt.xlabel('SUBCOUNTIES', fontsize=14)
+    plt.ylabel(model.upper(), fontsize=14)
+    plt.legend()
+    plt.xticks(rotation=90)
+    plt.tight_layout()
+    return get_graph()
+
+
+def event_table(df, summary_total, level, model):
+    new_row = pd.Series(data={f'{level}': 'Total',
+                              'Male': summary_total.get('male_total'),
+                              'Female': summary_total.get('female_total'),
+                              f'{model}': summary_total.get('total'),
+                              'Percentage': '100% of Total'}, name='-')
+    df['Percentage'] = round((df.get(model) / summary_total.get('total') * 100), 2)
+    df.index = np.arange(1, len(df) + 1)
+    df = df.append(new_row, ignore_index=False)
+    df.insert(2, 'M-%', round((df.get('Male') / summary_total.get('male_total') * 100)), 2)
+    df.insert(4, 'F-%', round((df.get('Female') / summary_total.get('female_total') * 100)), 2)
+    return df.to_html(border=0, classes='totals')
