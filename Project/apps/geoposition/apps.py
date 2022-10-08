@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class GeopositionConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
+class GeoPositionConfig(AppConfig):
     name = 'apps.geoposition'
+    verbose_name = "GeoPosition"
