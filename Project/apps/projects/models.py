@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models import Q
 from django.db.models import UniqueConstraint
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 from tinymce.models import HTMLField
 
 from apps.core.project_requirements.utilities import validate_file_extension
@@ -11,21 +12,26 @@ from apps.registrations.models import Unit, Scout, ScoutLeader
 
 
 class Reports(models.Model):
-    proposal = models.FileField("Proposal", upload_to='Projects/Proposals/%Y/%m', validators=[validate_file_extension])
-    report1 = models.FileField("1st Report", upload_to='Projects/Reports/%Y/%m', validators=[validate_file_extension],
+    proposal = models.FileField(_("Proposal"), upload_to='Projects/Proposals/%Y/%m',
+                                validators=[validate_file_extension])
+    report1 = models.FileField(_("1st Report"), upload_to='Projects/Reports/%Y/%m',
+                               validators=[validate_file_extension],
                                null=True, blank=True)
-    report2 = models.FileField("2nd Report", upload_to='Projects/Reports/%Y/%m', validators=[validate_file_extension],
+    report2 = models.FileField(_("2nd Report"), upload_to='Projects/Reports/%Y/%m',
+                               validators=[validate_file_extension],
                                null=True, blank=True)
-    report3 = models.FileField("3rd Report", upload_to='Projects/Reports/%Y/%m', validators=[validate_file_extension],
+    report3 = models.FileField(_("3rd Report"), upload_to='Projects/Reports/%Y/%m',
+                               validators=[validate_file_extension],
                                null=True, blank=True)
-    completion_date = models.DateField(null=True, blank=True, help_text='Only feel when the project is complete')
+    completion_date = models.DateField(_('completion date'), null=True, blank=True,
+                                       help_text='Only feel when the project is complete')
 
     class Meta:
         abstract = True
 
 
 class Project(models.Model):
-    title = models.CharField('Project Title', max_length=100)
+    title = models.CharField(_('Project Title'), max_length=100)
     project_description = HTMLField()
 
     class Meta:
@@ -127,7 +133,7 @@ class UnitProject(Project):
     coordinator = models.ForeignKey(ScoutLeader, on_delete=models.PROTECT, blank=True, null=True,
                                     limit_choices_to=Q(active=True),
                                     help_text="Only active Scout Leaders are valid options")
-    detailed_report = models.FileField(upload_to='Unit Projects/%Y/%m')
+    detailed_report = models.FileField(_('detailed report'), upload_to='Unit Projects/%Y/%m')
 
     objects = UnitProjectManager()
 

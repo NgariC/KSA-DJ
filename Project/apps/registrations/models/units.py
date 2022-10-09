@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 from multiselectfield import MultiSelectField
 
 from apps.jurisdictions.models import SubCounty
@@ -9,13 +10,13 @@ from apps.registrations.utilities import SECTION, u_code
 
 
 class Unit(models.Model):
-    name = models.CharField("Unit Name", max_length=100, db_index=True)
-    sponsoring_authority = models.CharField(max_length=100, blank=True, null=True)
-    # sections = MultiSelectField(choices=SECTION, max_choices=4, db_index=True)
-    sections = MultiSelectField(choices=SECTION, min_choices=1, max_choices=4, max_length=10, db_index=True)
-    date_warranted = models.DateTimeField(auto_now_add=True, editable=False, db_index=True)
+    name = models.CharField(_("Unit Name"), max_length=100, db_index=True)
+    sponsoring_authority = models.CharField(_('sponsoring authority'), max_length=100, blank=True, null=True)
+    sections = MultiSelectField(_('sections'), choices=SECTION, min_choices=1, max_choices=4, max_length=10,
+                                db_index=True)
+    date_warranted = models.DateTimeField(_('date warranted'), auto_now_add=True, editable=False, db_index=True)
     sub_county = models.ForeignKey(SubCounty, on_delete=models.PROTECT)
-    active = models.BooleanField('activeness', default=False, db_index=True)
+    active = models.BooleanField(_('activeness'), default=False, db_index=True)
 
     objects = UnitManager()
 

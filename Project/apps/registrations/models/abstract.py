@@ -31,7 +31,7 @@ class Person(models.Model):
     def get_short_name(self):
         return f"{self.first_name} {self.middle_name}"
 
-    @admin.display(description='Picture')
+    @admin.display(description=_('Picture'))
     def profile_image(self):
         return mark_safe('<img base="{url}" width="{width}" height={height} />'.format(
             url=self.image.path,

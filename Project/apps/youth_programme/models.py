@@ -2,8 +2,10 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Q
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
-from apps.core.project_requirements.utilities import active_ptc_and_above_limit, active_limit, active_invested_limit, validate_file_extension
+from apps.core.project_requirements.utilities import active_ptc_and_above_limit, active_limit, active_invested_limit, \
+    validate_file_extension
 
 from apps.geoposition.fields import GeopositionField
 from apps.jurisdictions.models import SubCounty
@@ -13,12 +15,13 @@ from apps.youth_programme.managers import InvestitureManager, BadgeCampManager, 
 
 
 class Event(models.Model):
-    report = models.FileField(upload_to='Youth Programme Department/%Y/%m', validators=[validate_file_extension])
-    start_date = models.DateField()
-    end_date = models.DateField()
-    venue_name = models.CharField("Venue Name", max_length=50)
-    venue = GeopositionField()
-    payments = models.BooleanField(default=False, db_index=True)
+    report = models.FileField(_('report'), upload_to='Youth Programme Department/%Y/%m',
+                              validators=[validate_file_extension])
+    start_date = models.DateField(_('start date'))
+    end_date = models.DateField(_('end date'))
+    venue_name = models.CharField(_("Venue Name"), max_length=50)
+    venue = GeopositionField(_('venue'))
+    payments = models.BooleanField(_('payments'), default=False, db_index=True)
     sub_county = models.ForeignKey(SubCounty, on_delete=models.PROTECT, db_index=True)
     director = models.ForeignKey(ScoutLeader, on_delete=models.PROTECT, related_name='%(class)s_director',
                                  null=True, blank=True)
@@ -26,14 +29,14 @@ class Event(models.Model):
     trainees = models.ManyToManyField(Scout, related_name='%(class)s_trainees', blank=True)
     support_staff = models.ManyToManyField(ScoutLeader, related_name='%(class)s_trainers',
                                            limit_choices_to=active_limit,
-                                           help_text="Limited to only active Scout Leaders")
+                                           help_text=_("Limited to only active Scout Leaders"))
 
     class Meta:
         abstract = True
 
     def clean(self):
         if self.end_date and self.start_date and self.end_date < self.start_date:
-            raise ValidationError('Start date should be before end date.')
+            raise ValidationError(_('Start date should be before end date.'))
 
     @property
     def cert_amount(self):
@@ -43,13 +46,13 @@ class Event(models.Model):
 
 class Badge(models.Model):
     SECTION = (
-        ('Sungura', 'Sungura'),
-        ('Chipukizi', 'Chipukizi'),
-        ('Mwamba', 'Mwamba'),
-        ('Jasiri', 'Jasiri'),
+        ('Sungura', _('Sungura')),
+        ('Chipukizi', _('Chipukizi')),
+        ('Mwamba', _('Mwamba')),
+        ('Jasiri', _('Jasiri')),
     )
-    name = models.CharField(primary_key=True, max_length=100)
-    section = models.CharField(max_length=10, choices=SECTION, db_index=True)
+    name = models.CharField(_('name'), primary_key=True, max_length=100)
+    section = models.CharField(_('sections'), max_length=10, choices=SECTION, db_index=True)
 
     objects = models.Manager()
 
@@ -203,7 +206,7 @@ class PLC(Event):
         unique_together = ['venue_name', 'start_date', 'sub_county']
         permissions = [('can_verify_PLC_payments', 'Can verify PLC payments'),
                        ('can_edit_PLC_trainees', 'Can edit PLC Trainees')]
-        verbose_name = "Patrol Leaders Course"
+        verbose_name = _("Patrol Leaders Course")
 
     def save(self, *args, **kwargs):
         if self.course_director:
@@ -223,7 +226,7 @@ class RM(Event):
     course_director = models.ForeignKey(
         ScoutLeader, on_delete=models.PROTECT,
         limit_choices_to=active_ptc_and_above_limit,
-        help_text="Limited to active Scout Leaders with training level of PTC and above")
+        help_text=_("Limited to active Scout Leaders with training level of PTC and above"))
     participants = models.ManyToManyField(
         Scout, related_name='%(class)s_participants',
         limit_choices_to=Q(active=True) & Q(section='Jasiri') & Q(jasiri_investiture=True))

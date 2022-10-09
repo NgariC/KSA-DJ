@@ -4,16 +4,17 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Q
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
 from apps.competitions.managers import TeamManager, CompetitionManager
-from apps.core.project_requirements.utilities import active_limit, validate_file_extension
+from apps.core.project_requirements.utilities import active_limit, validate_file_extension, GENDER
 from apps.geoposition.fields import GeopositionField
 from apps.jurisdictions.models import SubCounty, Country
 from apps.registrations.models import ScoutLeader, Unit, Scout
 
 
 class SpecialTeamsCategories(models.Model):
-    name = models.CharField(max_length=150, db_index=True)
+    name = models.CharField(_('name'), max_length=150, db_index=True)
 
     class Meta:
         ordering = ['name']
@@ -23,33 +24,29 @@ class SpecialTeamsCategories(models.Model):
 
 
 class CompetitionTeam(models.Model):
-    GENDER = (
-        ('M', 'Male'),
-        ('F', 'Female'),
-    )
     LEVEL = (
-        ('SubCounty', 'SubCounty'),
-        ('County', 'County'),
-        ('Region', 'Region'),
-        ('National', 'National'),
-        ('Zonal', 'Zonal'),
+        ('SubCounty', _('SubCounty')),
+        ('County', _('County')),
+        ('Region', _('Region')),
+        ('National', _('National')),
+        ('Zonal', _('Zonal')),
     )
     SECTION = (
-        ('Chipukizi', 'Chipukizi'),
-        ('Mwamba', 'Mwamba'),
-        ('Jasiri', 'Jasiri'),
+        ('Chipukizi', _('Chipukizi')),
+        ('Mwamba', _('Mwamba')),
+        ('Jasiri', _('Jasiri')),
     )
-    year = models.PositiveSmallIntegerField("Competition Year", default=datetime.date.today().year, editable=False)
-    gender = models.CharField(max_length=1, choices=GENDER, db_index=True)
-    name = models.CharField(max_length=150, db_index=True)
+    year = models.PositiveSmallIntegerField(_("Competition Year"), default=datetime.date.today().year, editable=False)
+    gender = models.CharField(_('gender'), max_length=1, choices=GENDER, db_index=True)
+    name = models.CharField(_('name'), max_length=150, db_index=True)
     team_leaders = models.ManyToManyField(ScoutLeader, related_name='%(class)s_team_leaders',
                                           limit_choices_to=active_limit,
                                           help_text="Only active Scout Leaders are valid options")
     leaders = models.ManyToManyField(ScoutLeader, related_name='%(class)s_leaders', blank=True)
-    level_of_competition = models.CharField('Level of Competition', default='SubCounty', max_length=15, choices=LEVEL,
+    level_of_competition = models.CharField(_('Level of Competition'), default='SubCounty', max_length=15, choices=LEVEL,
                                             db_index=True)
-    section = models.CharField('Team Section', max_length=15, choices=SECTION, db_index=True)
-    special = models.BooleanField('If the Team is a Special team', default=False, db_index=True)
+    section = models.CharField(_('Team Section'), max_length=15, choices=SECTION, db_index=True)
+    special = models.BooleanField(_('If the Team is a Special team'), default=False, db_index=True)
     special_category = models.ForeignKey(SpecialTeamsCategories, on_delete=models.PROTECT, null=True, blank=True,
                                          help_text="Only select if the Team is a Special Team, otherwise leave blank")
     competitors = models.ManyToManyField(Scout, related_name='%(class)s_competitors', blank=True)
@@ -92,19 +89,19 @@ class CompetitionTeam(models.Model):
 
 class Competition(models.Model):
     LEVELS = (
-        ('SubCounty', 'SubCounty'),
-        ('County', 'County'),
-        ('Regional', 'Regional'),
-        ('National', 'National'),
-        ('Zonal', 'Zonal'),
+        ('SubCounty', _('SubCounty')),
+        ('County', _('County')),
+        ('Regional', _('Regional')),
+        ('National', _('National')),
+        ('Zonal', _('Zonal')),
     )
-    year = models.PositiveSmallIntegerField("Competition Year", default=datetime.date.today().year, editable=False)
-    start_date = models.DateField(db_index=True)
-    end_date = models.DateField(db_index=True)
-    report = models.FileField(upload_to='Competition Report/%Y/%m', validators=[validate_file_extension])
-    level = models.CharField('Level of Competition', max_length=15, choices=LEVELS, db_index=True)
-    venue_name = models.CharField(max_length=50)
-    venue = GeopositionField()
+    year = models.PositiveSmallIntegerField(_("Competition Year"), default=datetime.date.today().year, editable=False)
+    start_date = models.DateField(_('start date'), db_index=True)
+    end_date = models.DateField(_('end date'), db_index=True)
+    report = models.FileField(_('report'), upload_to='Competition Report/%Y/%m', validators=[validate_file_extension])
+    level = models.CharField(_('Level of Competition'), max_length=15, choices=LEVELS, db_index=True)
+    venue_name = models.CharField(_('venue name'), max_length=50)
+    venue = GeopositionField(_('venue'))
     payments = models.BooleanField(default=False)
     chief = models.ForeignKey(ScoutLeader, on_delete=models.PROTECT, related_name='%(class)s_chief',
                               null=True, blank=True)

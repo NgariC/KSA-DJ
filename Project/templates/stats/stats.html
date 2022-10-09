@@ -1,0 +1,19 @@
+{% extends "admin/stats.html" %}
+
+{% load i18n %}
+
+    {% block regions %}
+        <h2> {% blocktrans %} Regional Statistics {% endblocktrans %} </h2><br/>
+        <img style="width: 100%" src="data:image/png;base64, {{chart1|safe}}" id='img'><br/><hr/><br/>
+        <div style="overflow-x: auto">{{ dataframe1|safe }}</div>
+    {% endblock %}
+    {% block counties %}
+        <h2> {% blocktrans %} Counties Statistics {% endblocktrans %} </h2><br/>
+        <img style="width: 100%" src="data:image/png;base64, {{chart2|safe}}" id='img'><br/><hr/><br/>
+        <div style="overflow-x: auto">{{ dataframe2|safe }}</div>
+    {% endblock %}
+    {% block sub_counties %}
+        <h2> {% blocktrans %} SubCounties Statistics {% endblocktrans %} </h2><br/>
+        <img style="width: 100%" src="data:image/png;base64, {{chart3|safe}}" id='img'><br/><hr/><br/>
+        <div style="overflow-x: auto">{{ dataframe3|safe }}</div>
+    {% endblock %}

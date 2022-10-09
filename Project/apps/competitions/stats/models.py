@@ -1,3 +1,5 @@
+from django.utils.translation import gettext_lazy as _
+
 from apps.competitions.models import CompetitionTeam, Competition
 from apps.competitions.stats.managers import TeamManager, CompetitionManager
 
@@ -8,8 +10,8 @@ class CompetitionTeamStats(CompetitionTeam):
     class Meta:
         proxy = True
         default_permissions = ('view',)
-        verbose_name = 'Competition Team Stats'
-        verbose_name_plural = 'Competition Teams Stats'
+        verbose_name = _('Competition Team Stats')
+        verbose_name_plural = _('Competition Teams Stats')
 
 
 class CompetitionStats(Competition):
@@ -18,5 +20,5 @@ class CompetitionStats(Competition):
     class Meta:
         proxy = True
         default_permissions = ('view',)
-        verbose_name = 'Competition Stats'
-        verbose_name_plural = 'Competitions Stats'
+        verbose_name = _('Competition Stats')
+        verbose_name_plural = _('Competitions Stats')

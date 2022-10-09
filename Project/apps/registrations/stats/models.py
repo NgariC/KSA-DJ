@@ -1,3 +1,5 @@
+from django.utils.translation import gettext_lazy as _
+
 from apps.registrations.models import Unit, Scout, ScoutLeader
 from apps.registrations.stats.managers import UnitManager, ScoutManager, ScoutLeaderManager
 
@@ -8,8 +10,8 @@ class UnitStats(Unit):
     class Meta:
         proxy = True
         default_permissions = ('view',)
-        verbose_name = 'Units Stats'
-        verbose_name_plural = 'Units Stats'
+        verbose_name = _('Units Stats')
+        verbose_name_plural = _('Units Stats')
 
 
 class ScoutStats(Scout):
@@ -18,8 +20,8 @@ class ScoutStats(Scout):
     class Meta:
         proxy = True
         default_permissions = ('view',)
-        verbose_name = 'Scouts Stats'
-        verbose_name_plural = 'Scouts Stats'
+        verbose_name = _('Scouts Stats')
+        verbose_name_plural = _('Scouts Stats')
 
 
 class ScoutLeaderStats(ScoutLeader):
@@ -28,5 +30,5 @@ class ScoutLeaderStats(ScoutLeader):
     class Meta:
         proxy = True
         default_permissions = ('view',)
-        verbose_name = 'Scout Leaders Stats'
-        verbose_name_plural = 'Scout Leaders Stats'
+        verbose_name = _('Scout Leaders Stats')
+        verbose_name_plural = _('Scout Leaders Stats')

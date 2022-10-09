@@ -3,6 +3,7 @@ import datetime
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
 from apps.core.project_requirements.utilities import mobile_num_regex
 from apps.jurisdictions.models import SubCounty, Rank
@@ -21,17 +22,17 @@ def over_26_years(value):
 
 
 class ScoutLeader(Person):
-    date_of_birth = models.DateField(validators=[over_26_years])
-    national_id = models.CharField('National ID/Passport', max_length=8, unique=True)
-    email = models.EmailField(unique=True, help_text='example@gmail.com')
-    phone_number = models.CharField(validators=[mobile_num_regex], max_length=13)
-    tsc_number = models.CharField(max_length=6, null=True, blank=True)
+    date_of_birth = models.DateField(_('date of birth'), validators=[over_26_years])
+    national_id = models.CharField(_('National ID/Passport'), max_length=8, unique=True)
+    email = models.EmailField(_('email'), unique=True, help_text='example@gmail.com')
+    phone_number = models.CharField(_('phone number'), validators=[mobile_num_regex], max_length=13)
+    tsc_number = models.CharField(_('tsc number'), max_length=6, null=True, blank=True)
     rank = models.ForeignKey(Rank, default='Unit-Leader', on_delete=models.PROTECT, db_index=True)
     unit = models.ForeignKey(Unit, on_delete=models.PROTECT, db_index=True, null=True, blank=True)
     sub_county = models.ForeignKey(SubCounty, on_delete=models.PROTECT, db_index=True)
-    training = models.CharField('Level of Training', default='Not Yet Trained', max_length=15, choices=TRAINING,
+    training = models.CharField(_('Level of Training'), default='Not Yet Trained', max_length=15, choices=TRAINING,
                                 db_index=True)
-    life_member = models.BooleanField(default=False, db_index=True)
+    life_member = models.BooleanField(_('life member'), default=False, db_index=True)
 
     objects = ScoutLeaderManager()
 
@@ -47,7 +48,7 @@ class ScoutLeader(Person):
 
     def clean(self):
         if self.life_member and not self.active:
-            raise ValidationError('A life member should always be active. Mark the Scout Leader as active')
+            raise ValidationError(_('A life member should always be active. Mark the Scout Leader as active'))
 
     @property
     def code(self):
@@ -70,8 +71,8 @@ class ScoutLeader(Person):
 
 
 class ScoutLeaderCert(models.Model):
-    code = models.CharField(primary_key=True, max_length=20, db_index=True)
-    name = models.CharField(max_length=100)
+    code = models.CharField(_('code'), primary_key=True, max_length=20, db_index=True)
+    name = models.CharField(_('name'), max_length=100)
     scout_leader = models.ForeignKey(ScoutLeader, on_delete=models.CASCADE)
 
     objects = models.Manager()

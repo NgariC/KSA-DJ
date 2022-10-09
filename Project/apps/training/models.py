@@ -2,6 +2,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Q
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 from tinymce.models import HTMLField
 
 from apps.core.project_requirements.utilities import active_limit, active_four_beads_limit, \
@@ -16,12 +17,12 @@ from apps.registrations.models import ScoutLeader, Unit
 
 
 class Event(models.Model):
-    report = models.FileField(upload_to='Training Department/%Y/%m', validators=[validate_file_extension])
-    start_date = models.DateField()
-    end_date = models.DateField()
-    venue_name = models.CharField("Venue Name", max_length=50)
-    venue = GeopositionField()
-    payments = models.BooleanField(default=False, db_index=True)
+    report = models.FileField(_('report'), upload_to='Training Department/%Y/%m', validators=[validate_file_extension])
+    start_date = models.DateField(_('start date'))
+    end_date = models.DateField(_('end date'))
+    venue_name = models.CharField(_("Venue Name"), max_length=50)
+    venue = GeopositionField(_('venue'))
+    payments = models.BooleanField(_('payments'), default=False, db_index=True)
     director = models.ForeignKey(ScoutLeader, on_delete=models.PROTECT, related_name='%(class)s_director',
                                  null=True, blank=True)
     staff = models.ManyToManyField(ScoutLeader, related_name='%(class)s_staff', blank=True)
@@ -32,7 +33,7 @@ class Event(models.Model):
 
     def clean(self):
         if self.end_date and self.start_date and self.end_date < self.start_date:
-            raise ValidationError('Start date should be before end date.')
+            raise ValidationError(_('Start date should be before end date.'))
 
     def save(self, *args, **kwargs):
         if self.course_director:
@@ -106,8 +107,8 @@ class PTC(Event):
 
 
 class WBI(models.Model):
-    theory_book = models.FileField(upload_to='Woodbadge Theory Books/%Y/%m')
-    submission_date = models.DateTimeField(auto_now_add=True, editable=False)
+    theory_book = models.FileField(_('theory book'), upload_to='Woodbadge Theory Books/%Y/%m')
+    submission_date = models.DateTimeField(_('submission date'), auto_now_add=True, editable=False)
     scout_leader = models.OneToOneField(
         ScoutLeader, on_delete=models.PROTECT,
         limit_choices_to=Q(active=True) & Q(training='PTC'),
@@ -120,16 +121,16 @@ class WBI(models.Model):
         help_text="Only active Scout Leaders with training level of Four Beads are valid options")
     marker_name = models.ForeignKey(ScoutLeader, on_delete=models.PROTECT, null=True, blank=True,
                                     related_name='%(class)s_marker_name')
-    comments = HTMLField()
-    payments = models.BooleanField(default=False, db_index=True)
-    marked = models.BooleanField(default=False, db_index=True)
+    comments = HTMLField(_('comments'))
+    payments = models.BooleanField(_('payments'), default=False, db_index=True)
+    marked = models.BooleanField(_('marked'), default=False, db_index=True)
 
     objects = WBIManager()
 
     class Meta:
         permissions = [('can_verify_WoodBadge_I_payments', 'Can verify WoodBadge I payments')]
-        verbose_name = "WoodBadge I (Theory)"
-        verbose_name_plural = "WoodBadge I (Theories)"
+        verbose_name = _("WoodBadge I (Theory)")
+        verbose_name_plural = _("WoodBadge I (Theories)")
 
     def save(self, *args, **kwargs):
         if self.scout_leader:
@@ -152,16 +153,16 @@ class WBI(models.Model):
 
     def clean(self):
         if self.marked and (not self.marker or not self.marker_name):
-            raise ValidationError('The theory cannot be marked without a maker.')
+            raise ValidationError(_('The theory cannot be marked without a maker.'))
 
 
 class WBII(Event):
     county = models.ForeignKey(County, on_delete=models.PROTECT, db_index=True)
-    number = models.PositiveSmallIntegerField('WoodBadge Number')
+    number = models.PositiveSmallIntegerField(_('WoodBadge Number'))
     course_director = models.ForeignKey(
         ScoutLeader, on_delete=models.PROTECT,
         limit_choices_to=active_four_beads_limit,
-        help_text="Only active Scout Leaders with training level of Four Beads are valid options")
+        help_text=_("Only active Scout Leaders with training level of Four Beads are valid options"))
     support_staff = models.ManyToManyField(
         ScoutLeader, related_name='%(class)s_trainers',
         limit_choices_to=active_three_beads_and_above_limit)
@@ -175,8 +176,8 @@ class WBII(Event):
         indexes = [models.Index(fields=['course_director', 'start_date'])]
         permissions = [('can_verify_WoodBadge_II_payments', 'Can verify WoodBadge II payments'),
                        ('can_edit_WoodBadge_II_trainees', 'Can edit WoodBadge II Trainees')]
-        verbose_name = "WoodBadge II (Course)"
-        verbose_name_plural = "WoodBadge II (Courses)"
+        verbose_name = _("WoodBadge II (Course)")
+        verbose_name_plural = _("WoodBadge II (Courses)")
 
     def __str__(self):
         return f'{self.county} - {self.start_date.month}/{self.start_date.year}'
@@ -201,17 +202,17 @@ class WBIII(models.Model):
                                                   "level of WB Course are valid options")
     scout_leader_name = models.OneToOneField(ScoutLeader, on_delete=models.PROTECT, null=True, blank=True,
                                              related_name='%(class)s_scout_leader_name')
-    report = models.FileField(upload_to=' Woodbadge Assessment/%Y/%m')
-    venue = GeopositionField()
-    payments = models.BooleanField(default=False, db_index=True)
-    assessed = models.BooleanField(default=False, db_index=True)
+    report = models.FileField(_('report'), upload_to=' Woodbadge Assessment/%Y/%m')
+    venue = GeopositionField(_('venue'))
+    payments = models.BooleanField(_('payments'), default=False, db_index=True)
+    assessed = models.BooleanField(_('assessed'), default=False, db_index=True)
 
     objects = WBIIIManager()
 
     class Meta:
         permissions = [('can_verify_WoodBadge_III_payments', 'Can verify WoodBadge III payments')]
-        verbose_name = "WoodBadge III (Assessment)"
-        verbose_name_plural = "WoodBadge III (Assessments)"
+        verbose_name = _("WoodBadge III (Assessment)")
+        verbose_name_plural = _("WoodBadge III (Assessments)")
 
     def save(self, *args, **kwargs):
         if self.assessor:
@@ -234,15 +235,15 @@ class WBIII(models.Model):
 
     def clean(self):
         if self.assessed and (not self.assessor or not self.assessor_name):
-            raise ValidationError('The Application cannot be marked as assessed without an assessor.')
+            raise ValidationError(_('The Application cannot be marked as assessed without an assessor.'))
 
 
 class ALT(Event):
     county = models.ForeignKey(County, on_delete=models.PROTECT, db_index=True)
-    number = models.PositiveSmallIntegerField('ALT Number')
+    number = models.PositiveSmallIntegerField(_('ALT Number'))
     course_director = models.ForeignKey(
         ScoutLeader, on_delete=models.PROTECT, limit_choices_to=active_four_beads_limit,
-        help_text="Only active Scout Leaders with training level of Four Beads are valid options")
+        help_text=_("Only active Scout Leaders with training level of Four Beads are valid options"))
     support_staff = models.ManyToManyField(
         ScoutLeader, related_name='%(class)s_trainers', limit_choices_to=active_four_beads_limit)
     participants = models.ManyToManyField(
@@ -255,7 +256,7 @@ class ALT(Event):
         indexes = [models.Index(fields=['course_director', 'start_date']), ]
         permissions = [('can_verify_ALT_payments', 'Can verify ALT payments'),
                        ('can_edit_ALT_trainees', 'Can edit ALT Trainees')]
-        verbose_name = "ALT"
+        verbose_name = _("ALT")
 
     def __str__(self):
         return f'{self.county} - {self.start_date.month}/{self.start_date.year}'
@@ -266,10 +267,10 @@ class ALT(Event):
 
 class LT(Event):
     county = models.ForeignKey(County, on_delete=models.PROTECT, db_index=True)
-    number = models.PositiveSmallIntegerField('LT Number')
+    number = models.PositiveSmallIntegerField(_('LT Number'))
     course_director = models.ForeignKey(
         ScoutLeader, on_delete=models.PROTECT, limit_choices_to=active_four_beads_limit,
-        help_text="Only active Scout Leaders with training level of Four Beads are valid options")
+        help_text=_("Only active Scout Leaders with training level of Four Beads are valid options"))
     support_staff = models.ManyToManyField(
         ScoutLeader, related_name='%(class)s_trainers', limit_choices_to=active_four_beads_limit)
     participants = models.ManyToManyField(
@@ -282,7 +283,7 @@ class LT(Event):
         indexes = [models.Index(fields=['course_director', 'start_date']), ]
         permissions = [('can_verify_LT_payments', 'Can verify LT payments'),
                        ('can_edit_LT_trainees', 'Can edit LT Trainees')]
-        verbose_name = "LT"
+        verbose_name = _("LT")
 
     def __str__(self):
         return f'{self.county} - {self.start_date.month}/{self.start_date.year}'
@@ -292,7 +293,7 @@ class LT(Event):
 
 
 class SLSpecialEvent(Event):
-    event_name = models.CharField('Event Name', max_length=100, db_index=True)
+    event_name = models.CharField(_('Event Name'), max_length=100, db_index=True)
     sub_county = models.ForeignKey(SubCounty, on_delete=models.PROTECT, db_index=True)
     course_director = models.ForeignKey(ScoutLeader, on_delete=models.PROTECT, limit_choices_to=active_limit,
                                         help_text="Only active Scout Leaders are valid options")
@@ -310,7 +311,7 @@ class SLSpecialEvent(Event):
         indexes = [models.Index(fields=['course_director', 'start_date']), ]
         permissions = [('can_verify_SLSpecialEvent_payments', 'Can verify SLSpecialEvent payments'),
                        ('can_edit_SLSpecialEvent_trainees', 'Can edit SLSpecialEvent Trainees')]
-        verbose_name = "Scout Leader Special Event"
+        verbose_name = _("Scout Leader Special Event")
 
     def __str__(self):
         return f'{self.sub_county} - {self.start_date.month}/{self.start_date.year}'

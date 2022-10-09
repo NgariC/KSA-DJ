@@ -3,6 +3,7 @@ import datetime
 from django.db import models
 from django.db.models import Q
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
 from apps.celebrations.managers import LinkBadgeAwardManager, ChuiBadgeAwardManager, SimbaBadgeAwardManager, \
     ChiefScoutAwardManager, ScoutLeaderAwardManager, CountyParticipantsManager, PatronsDayManager, BeadsAwardManager
@@ -12,8 +13,8 @@ from apps.registrations.models import ScoutLeader, Scout
 
 
 class Award(models.Model):
-    award_date = models.DateField()
-    year = models.PositiveSmallIntegerField("Awards Year", default=datetime.date.today().year, editable=False)
+    award_date = models.DateField(_('awards date'))
+    year = models.PositiveSmallIntegerField(_("Awards Year"), default=datetime.date.today().year, editable=False)
 
     class Meta:
         abstract = True
@@ -122,7 +123,7 @@ class ChiefScoutAward(Award):
 
 
 class ScoutLeaderAward(Award, SLAward):
-    name = models.CharField(max_length=250, db_index=True)
+    name = models.CharField(_('name'), max_length=250, db_index=True)
     scout_leaders = models.ManyToManyField(ScoutLeader, blank=True, limit_choices_to=active_limit,
                                            help_text="Only active Scout Leaders are valid options")
 
@@ -133,8 +134,8 @@ class ScoutLeaderAward(Award, SLAward):
 
 
 class CountyParticipants(models.Model):
-    year = models.PositiveSmallIntegerField("Year", default=datetime.date.today().year, editable=False)
-    date_added = models.DateTimeField(auto_now_add=True, editable=False, db_index=True)
+    year = models.PositiveSmallIntegerField(_("Year"), default=datetime.date.today().year, editable=False)
+    date_added = models.DateTimeField(_('date added'), auto_now_add=True, editable=False, db_index=True)
     county = models.ForeignKey(County, on_delete=models.PROTECT, db_index=True, unique_for_year="year")
     sungura_scouts = models.ManyToManyField(Scout, related_name='sungura_scouts',
                                             limit_choices_to=Q(active=True) & Q(section='Sungura'),
@@ -163,8 +164,8 @@ class CountyParticipants(models.Model):
 
 
 class PatronsDay(models.Model):
-    year = models.PositiveSmallIntegerField("Year", default=datetime.date.today().year, editable=False)
-    date = models.DateField(db_index=True)
+    year = models.PositiveSmallIntegerField(_("Year"), default=datetime.date.today().year, editable=False)
+    date = models.DateField(_('date'), db_index=True)
     sungura_awards = models.ManyToManyField(LinkBadgeAward, blank=True, limit_choices_to=this_year_limit)
     chipukizi_awards = models.ManyToManyField(ChuiBadgeAward, blank=True, limit_choices_to=this_year_limit)
     mwamba_awards = models.ManyToManyField(SimbaBadgeAward, blank=True, limit_choices_to=this_year_limit)

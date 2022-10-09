@@ -3,12 +3,13 @@ import os
 from django.db import models
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
+from django.utils.translation import gettext_lazy as _
 
 
 class Doc(models.Model):
-    timestamp = models.DateTimeField(auto_now_add=True, editable=False)
-    doc_name = models.CharField('Document name', max_length=200, unique=True)
-    file = models.FileField(upload_to='Document/%Y/%m')
+    timestamp = models.DateTimeField(_('time stamp'), auto_now_add=True, editable=False)
+    doc_name = models.CharField(_('Document name'), max_length=200, unique=True)
+    file = models.FileField(_('file'), upload_to='Document/%Y/%m')
 
     class Meta:
         abstract = True
@@ -35,8 +36,8 @@ class Doc(models.Model):
 
 
 class Document(Doc):
-    description = models.TextField()
-    date_to_cease_showing = models.DateField(db_index=True)
+    description = models.TextField(_('description'))
+    date_to_cease_showing = models.DateField(_('date to cease showing'), db_index=True)
 
     class Meta:
         ordering = ['-timestamp']
@@ -56,8 +57,8 @@ class LegalDocuments(Doc):
 
 
 class FormTemplate(models.Model):
-    name = models.CharField('Form Name', max_length=200)
-    file = models.FileField(upload_to='Templates')
+    name = models.CharField(_('Form Name'), max_length=200)
+    file = models.FileField(_('file'), upload_to='Templates')
 
     def __str__(self):
         return self.name
