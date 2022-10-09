@@ -3,7 +3,6 @@ from apps.training.stats.managers import SLLEventManager, SLEventManager
 
 
 class ITCStats(ITC):
-    history = None
     objects = SLLEventManager()
 
     class Meta:
@@ -14,7 +13,6 @@ class ITCStats(ITC):
 
 
 class PTCStats(PTC):
-    history = None
     objects = SLLEventManager()
 
     class Meta:
@@ -25,7 +23,6 @@ class PTCStats(PTC):
 
 
 class WBIStats(WBI):
-    history = None
     # objects = SLEventManager()
 
     class Meta:
@@ -36,7 +33,6 @@ class WBIStats(WBI):
 
 
 class WBIIStats(WBII):
-    history = None
     objects = SLEventManager()
 
     class Meta:
@@ -47,7 +43,6 @@ class WBIIStats(WBII):
 
 
 class WBIIIStats(WBIII):
-    history = None
     # objects = SLEventManager()
 
     class Meta:
@@ -58,7 +53,6 @@ class WBIIIStats(WBIII):
 
 
 class ALTStats(ALT):
-    history = None
     objects = SLEventManager()
 
     class Meta:
@@ -69,7 +63,6 @@ class ALTStats(ALT):
 
 
 class LTStats(LT):
-    history = None
     objects = SLEventManager()
 
     class Meta:
@@ -80,7 +73,6 @@ class LTStats(LT):
 
 
 class SLSpecialEventStats(SLSpecialEvent):
-    history = None
     objects = SLEventManager()
 
     class Meta:

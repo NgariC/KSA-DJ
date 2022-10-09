@@ -3,7 +3,6 @@ from apps.registrations.stats.managers import UnitManager, ScoutManager, ScoutLe
 
 
 class UnitStats(Unit):
-    history = None
     objects = UnitManager()
 
     class Meta:
@@ -14,7 +13,6 @@ class UnitStats(Unit):
 
 
 class ScoutStats(Scout):
-    history = None
     objects = ScoutManager()
 
     class Meta:
@@ -25,7 +23,6 @@ class ScoutStats(Scout):
 
 
 class ScoutLeaderStats(ScoutLeader):
-    history = None
     objects = ScoutLeaderManager()
 
     class Meta:

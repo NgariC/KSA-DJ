@@ -13,7 +13,6 @@ class InvestitureStats(Investiture):
 
 
 class BadgeCampStats(BadgeCamp):
-    history = None
     objects = BadgeCampManager()
 
     class Meta:
@@ -24,7 +23,6 @@ class BadgeCampStats(BadgeCamp):
 
 
 class ParkHolidayStats(ParkHoliday):
-    history = None
     objects = BadgeCampManager()
 
     class Meta:
@@ -35,7 +33,6 @@ class ParkHolidayStats(ParkHoliday):
 
 
 class PLCStats(PLC):
-    history = None
     objects = PLCManager()
 
     class Meta:
@@ -46,7 +43,6 @@ class PLCStats(PLC):
 
 
 class RMStats(RM):
-    history = None
     objects = PLCManager()
 
     class Meta:
