@@ -1,4 +1,3 @@
-from crispy_forms.templatetags.crispy_forms_filters import as_crispy_field
 from crispy_forms.utils import render_crispy_form
 from django.contrib import messages
 from django.contrib.auth import login, get_user_model

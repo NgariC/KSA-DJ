@@ -21,6 +21,7 @@ reportlab = "*"
 pandas = "*"
 matplotlib = "*"
 seaborn = "*"
+django-filter = "*"
 
 [dev-packages]
 docutils = "*"

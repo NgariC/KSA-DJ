@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags static %}
+
+{% block title %}Form{% endblock %}
+{% block static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}" />
+{% endblock static %}
+
+{% block breadcrumb %}{% endblock breadcrumb %}
+
+{% block content %}
+
+    <div class="img_background">
+        <div class="my_padding justify-content-center">
+            <form class="container" action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% crispy form %}
+            </form>
+        </div>
+    </div>
+{% endblock content %}
+
+
+{% block js %}
+{% endblock js %}
