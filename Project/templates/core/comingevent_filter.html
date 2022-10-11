@@ -1,0 +1,32 @@
+{% extends 'list.html' %}
+
+{% block title %}Coming Events{% endblock title %}
+
+    {% block no-table %}
+        There are no Up Coming events at the moment keep checking for the latest updates
+    {% endblock %}
+
+    {% block table-heading %}
+        Coming Events
+    {% endblock %}
+
+    {% block table %}
+        <thead>
+            <tr>
+                <th>Event Type</th>
+                <th>Starting Date</th>
+                <th>Ending Date</th>
+                <th>County</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in coming_events %}
+            <tr>
+                <td><a href="{{ i.get_absolute_url }}">{{ i.event_type }}</a></td>
+                <td>{{ i.start_date }}</td>
+                <td>{{ i.end_date }}</td>
+                <td>{{ i.county }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    {% endblock %}

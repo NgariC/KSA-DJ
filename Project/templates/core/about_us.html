@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}eScout | About-Us{% endblock title %}
+
+{% block content %}
+<section class="about-us">
+  <div class="container mydata">
+    {% if not abouts %}
+    {% else %}
+      {% for about in abouts %}
+          {{ about.content|safe }}
+      {% endfor %}
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

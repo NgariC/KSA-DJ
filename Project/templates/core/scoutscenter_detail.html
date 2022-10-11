@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ scoutscenter.name }}{% endblock %}
+{% block static %}
+{% endblock %}
+
+{% block content %}
+<div class="img_background">
+    <div class="container camp-detail-page">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{ scoutscenter.name }}</h1>
+            </div> 
+            <div class="col-md-10 offset-md-1">
+                <h6>{{ scoutscenter.description|safe }}</h6>
+            </div> 
+            <div class="col-md-8 offset-md-2 table-responsive">
+                <table class="table detail-table c">
+                    <tbody>
+                        <tr>
+                            <td><strong>Camp Warden</strong></td>
+                            <td><em>{{ scoutscenter.camp_warden }}</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email</strong></td>
+                            <td><em>{{ scoutscenter.email }}</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phone Number</strong></td>
+                            <td><em>{{ scoutscenter.phone_number }}</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>County</strong></td>
+                            <td><em>{{ scoutscenter.sub_county.county }}</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>SubCounty</strong></td>
+                            <td><em>{{ scoutscenter.sub_county.name }}</em></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><br/>
+            <div class="col-md-12">
+                <h3>Services Offered</h3>
+            </div>
+            <div class="camp-detail-table table-responsive">
+                {{ scoutscenter.services|safe }}
+            </div>
+            <div class="col-md-12">
+                <h3>Charges</h3>
+            </div>
+            <div class="camp-detail-table table-responsive">
+                {{ scoutscenter.payments|safe }}
+            </div>
+            <div class="col-md-12">
+                <h6>The marker on the map indicates the exact place of the center in google map.</h6>
+            </div>
+            <div id="map"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block js %}  
+    <script>
+        function initMap() {
+        const myLatLng = {lat: {{ scoutscenter.exact_place.latitude }}, lng: {{ scoutscenter.exact_place.longitude }}};
+        const map = new google.maps.Map(
+            document.getElementById('map'), {zoom: 15, center: myLatLng});
+        const marker = new google.maps.Marker({position: myLatLng, map: map, title: '{{ scoutscenter.name }}'});
+        }
+    </script>
+    <script async defer src="{{ GOOGLE_MAP_KEY }}"></script>
+{% endblock %}

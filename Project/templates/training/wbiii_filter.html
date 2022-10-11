@@ -1,0 +1,13 @@
+{% extends 'list.html' %}
+{% load bool %}
+
+    {% block table %}
+            {% for i in wbiiis %}
+            <tr>
+                <td>{{forloop.counter}}.</td>
+                <td>{{ i.scout_leader_name.get_short_name }}</td>
+                <td>{{ i.unit }}</td>
+                <td>{{ i.assessed|icon }}</td>
+            </tr>
+            {% endfor %}
+    {% endblock %}

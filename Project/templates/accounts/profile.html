@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static humanize %}
+
+{% block title %}{{ user }}{% endblock title %}
+
+{% block content %}
+    <div class="img_background">
+        <div class="my_padding">
+            <div class="container profile-card">
+                {% if user.link_to_scout_leader.image %}
+                    <div class="profile-back"></div><a href="{{ user.link_to_scout_leader.image.url }}"><img class="rounded-circle profile-pic" src="{{ user.link_to_scout_leader.image.url }}" alt="{{ user.name }}"></a>
+                {% else %}
+                    <div class="profile-back"></div><img class="rounded-circle profile-pic" src="{% static 'img/user.png' %}" alt="No Profile Picture">
+                {% endif %}
+                <h3 class="profile-name">{{ user.get_full_name }}</h3>
+                <div class="row">
+                    <div class="col-md-6 card-body" id="profile-details">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Username</strong></td>
+                                        <td><em>{{ user }}</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>First name</strong></td>
+                                        <td><em>{{ user.first_name }}</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Last name</strong></td>
+                                        <td><em>{{ user.last_name }}</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Enail</strong></td>
+                                        <td><em>{{ user.email }}</em></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6 card-body" id="profile-details">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td><strong>rank</strong></td>
+                                        <td><em>{{ user.link_to_scout_leader.rank }}</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Office Level</strong></td>
+                                        <td><em>{{ user.link_to_scout_leader.rank.level }}</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>SubCounty</strong></td>
+                                        <td><em>{{ user.link_to_scout_leader.sub_county }}</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Unit</strong></td>
+                                        <td><em>{{ user.link_to_scout_leader.unit }}</em></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,200 @@
+{% extends "admin/stats.html" %}
+
+{% load i18n %}
+{% load humanize %}
+{% load tz %}
+{% load mathfilters %}
+{% load static %}
+
+
+
+
+
+    {% block regions %}
+        <h2> {% blocktrans %} Regional Statistics {% endblocktrans %} </h2>
+        <div id='RegionChart'></div>
+        <div id='PieChart'></div>
+        <table>
+            <thead>
+                <tr>
+                    <th> <div class="text"> <a href="#">Region </a> </div> </th>
+                    <th> <div class="text"> <a href="#">Male </a> </div> </th>
+                    <th> <div class="text"> <a href="#">M-% </a> </div> </th>
+                    <th> <div class="text"> <a href="#">Female </a> </div> </th>
+                    <th> <div class="text"> <a href="#"> F-% </a> </div> </th>
+                    <th> <div class="text"> <a href="#">Participants </a> </div> </th>
+                    <th> <div class="text"> <a href="#">Percentage </a> </div> </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in regions %}
+                <tr class="{% cycle 'row1' 'row2' %}">
+                    <td> <strong>{{forloop.counter}}.&nbsp&nbsp</strong>{{ row.sub_county__county__region__name }} </td>
+                    <td> {{ row.male_total }} </td>
+                    <td>
+                      <strong>{{ row.male_total|div:row.total|mul:100|floatformat:2 }}%</strong>
+                    </td>
+                    <td> {{ row.female_total }} </td>
+                    <td>
+                      <strong>{{ row.female_total|div:row.total|mul:100|floatformat:2 }}%</strong>
+                    </td>
+                    <td> {{ row.total }} </td>
+                    <td>
+                      <strong>{{ row.total|div:summary_total.total|mul:100|floatformat:2 }}%</strong>
+                    </td>
+                </tr>
+                {% endfor %}
+
+                <tr style="font-weight:bold; border-top:2px solid #DDDDDD;">
+                    <td> Total </td>
+                    <td> {{ summary_total.male_total | intcomma }} </td>
+                    <td> {{ summary_total.male_total|div:summary_total.total|mul:100|floatformat:2 }}% </td>
+                    <td> {{ summary_total.female_total | intcomma }} </td>
+                    <td> {{ summary_total.female_total|div:summary_total.total|mul:100|floatformat:2 }}% </td>
+                    <td> {{ summary_total.total | intcomma }} </td>
+                    <td> 100% of Total </td>
+                </tr>
+            </tbody>
+        </table>
+    {% endblock %}
+    {% block counties %}
+        <h2> {% blocktrans %} Counties Statistics {% endblocktrans %} </h2>
+        <div id='CountyChart'></div>
+        <table>
+            <thead>
+                <tr>
+                    <th> <div class="text"> <a href="#">County </a> </div> </th>
+                    <th> <div class="text"> <a href="#">Male </a> </div> </th>
+                    <th> <div class="text"> <a href="#">M-% </a> </div> </th>
+                    <th> <div class="text"> <a href="#">Female </a> </div> </th>
+                    <th> <div class="text"> <a href="#"> F-% </a> </div> </th>
+                    <th> <div class="text"> <a href="#">Participants </a> </div> </th>
+                    <th> <div class="text"> <a href="#">Percentage </a> </div> </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in counties %}
+                <tr class="{% cycle 'row1' 'row2' %}">
+                    <td> <strong>{{forloop.counter}}.&nbsp&nbsp</strong>{{ row.sub_county__county__name }} </td>
+                    <td> {{ row.male_total }} </td>
+                    <td>
+                      <strong>{{ row.male_total|div:row.total|mul:100|floatformat:2 }}%</strong>
+                    </td>
+                    <td> {{ row.female_total }} </td>
+                    <td>
+                      <strong>{{ row.female_total|div:row.total|mul:100|floatformat:2 }}%</strong>
+                    </td>
+                    <td> {{ row.total }} </td>
+                    <td>
+                      <strong>{{ row.total|div:summary_total.total|mul:100|floatformat:2 }}%</strong>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr style="font-weight:bold; border-top:2px solid #DDDDDD;">
+                    <td> Total </td>
+                    <td> {{ summary_total.male_total | intcomma }} </td>
+                    <td> {{ summary_total.male_total|div:summary_total.total|mul:100|floatformat:2 }}% </td>
+                    <td> {{ summary_total.female_total | intcomma }} </td>
+                    <td> {{ summary_total.female_total|div:summary_total.total|mul:100|floatformat:2 }}% </td>
+                    <td> {{ summary_total.total | intcomma }} </td>
+                    <td> 100% of Total </td>
+                </tr>
+            </tbody>
+        </table>
+    {% endblock %}
+    {% block sub_counties %}
+        <h2> {% blocktrans %} SubCounties Statistics {% endblocktrans %} </h2>
+        <div id='SubCountyChart'></div>
+        <table>
+            <thead>
+                <tr>
+                    <th> <div class="text"> <a href="#">SubCounty </a> </div> </th>
+                    <th> <div class="text"> <a href="#">Male </a> </div> </th>
+                    <th> <div class="text"> <a href="#">M-% </a> </div> </th>
+                    <th> <div class="text"> <a href="#">Female </a> </div> </th>
+                    <th> <div class="text"> <a href="#"> F-% </a> </div> </th>
+                    <th> <div class="text"> <a href="#">Participants </a> </div> </th>
+                    <th> <div class="text"> <a href="#">Percentage </a> </div> </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in sub_counties %}
+                <tr class="{% cycle 'row1' 'row2' %}">
+                    <td> <strong>{{forloop.counter}}.&nbsp&nbsp</strong>{{ row.sub_county__name }} </td>
+                    <td> {{ row.male_total }} </td>
+                    <td>
+                      <strong>{{ row.male_total|div:row.total|mul:100|floatformat:2 }}%</strong>
+                    </td>
+                    <td> {{ row.female_total }} </td>
+                    <td>
+                      <strong>{{ row.female_total|div:row.total|mul:100|floatformat:2 }}%</strong>
+                    </td>
+                    <td> {{ row.total }} </td>
+                    <td>
+                      <strong>{{ row.total|div:summary_total.total|mul:100|floatformat:2 }}%</strong>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr style="font-weight:bold; border-top:2px solid #DDDDDD;">
+                    <td> Total </td>
+                    <td> {{ summary_total.male_total | intcomma }} </td>
+                    <td> {{ summary_total.male_total|div:summary_total.total|mul:100|floatformat:2 }}% </td>
+                    <td> {{ summary_total.female_total | intcomma }} </td>
+                    <td> {{ summary_total.female_total|div:summary_total.total|mul:100|floatformat:2 }}% </td>
+                    <td> {{ summary_total.total | intcomma }} </td>
+                    <td> 100% of Total </td>
+                </tr>
+            </tbody>
+        </table>
+    {% endblock %}
+
+
+{% block myjs %}
+
+<script>
+    const region_y = [{% for row in regions %}'{{ row.total }}',{% endfor %}]
+    const region_f_y = [{% for row in regions %}'{{ row.female_total }}',{% endfor %}]
+    const region_m_y = [{% for row in regions %}'{{ row.male_total }}',{% endfor %}]
+    const region_x = [{% for row in regions %}'{{ row.sub_county__county__region__name }}',{% endfor %}]
+    const county_y = [{% for row in counties %}'{{ row.total }}',{% endfor %}]
+    const county_f_y = [{% for row in counties %}'{{ row.female_total }}',{% endfor %}]
+    const county_m_y = [{% for row in counties %}'{{ row.male_total }}',{% endfor %}]
+    const county_x = [{% for row in counties %}'{{ row.sub_county__county__name }}',{% endfor %}]
+    const sub_county_y = [{% for row in sub_counties %}'{{ row.total }}',{% endfor %}]
+    const sub_county_f_y = [{% for row in sub_counties %}'{{ row.female_total }}',{% endfor %}]
+    const sub_county_m_y = [{% for row in sub_counties %}'{{ row.male_total }}',{% endfor %}]
+    const sub_county_x = [{% for row in sub_counties %}'{{ row.sub_county__name }}',{% endfor %}]
+
+    const region = {y: region_y, x: region_x, mode: 'lines+markers', name: 'Total No.', type: 'scatter'};
+    const region_f = {y: region_f_y, x: region_x, mode: 'lines+markers', name: 'Female',  type: 'bar'};
+    const region_m = {y: region_m_y, x: region_x, mode: 'lines+markers', name: 'Male',  type: 'bar'};
+    const county = {y: county_y, x: county_x, mode: 'lines+markers', name: 'Total No.', type: 'scatter'};
+    const county_f = {y: county_f_y, x: county_x, mode: 'lines+markers', name: 'Female', type: 'bar'};
+    const county_m = {y: county_m_y, x: county_x, mode: 'lines+markers', name: 'Male', type: 'bar'};
+    const sub_county = {y: sub_county_y, x: sub_county_x, mode: 'lines+markers', name: 'Total No.', type: 'scatter'};
+    const sub_county_f = {y: sub_county_f_y, x: sub_county_x, mode: 'lines+markers', name: 'Female', type: 'bar'};
+    const sub_county_m = {y: sub_county_m_y, x: sub_county_x, mode: 'lines+markers', name: 'Male', type: 'bar'};
+
+    const region_data = [region, region_f, region_m];
+    const county_data = [county, county_f, county_m];
+    const sub_county_data = [sub_county, sub_county_f, sub_county_m];
+    const pie_data = [{
+        title: 'Gender',
+        type: "pie",
+        values: [
+            {{ summary_total.male_total }},
+            {{ summary_total.female_total }}
+        ],
+        labels: ["Male", "Female"],
+        textinfo: "label+percent",
+        insidetextorientation: "radial"
+    }]
+
+    Plotly.newPlot('RegionChart', region_data, region_layout, config);
+    Plotly.newPlot('CountyChart', county_data, county_layout, config);
+    Plotly.newPlot('SubCountyChart', sub_county_data, sub_county_layout, config);
+    Plotly.newPlot('PieChart', pie_data, Pie_layout, config);
+</script>
+
+
+{% endblock %}

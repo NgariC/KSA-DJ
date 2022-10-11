@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block title %}{{ rm.sub_county.name }} Rover Mate Training{% endblock title %}
+
+{% block content %}
+<div class="img_background">
+    <div class="container detail-page">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{ rm.sub_county.name }} Rover Mate Training by {{ rm.director.get_short_name }}</h1>
+            </div>
+            <div class="col-md-8 offset-md-2 table-responsive">
+                <table class="table detail-table c">
+                    <tbody>
+                        <tr>
+                            <td><strong>Venue</strong></td>
+                            <td><em>{{ rm.venue_name }}</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Start Date</strong></td>
+                            <td><em>{{ rm.start_date }}</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>End Date</strong></td>
+                            <td><em>{{ rm.end_date }}</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Course Director</strong></td>
+                            <td><em>{{ rm.director.get_short_name }}  ({{ rm.director.phone_number }})</em></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><br><br>
+            <div class="col-md-12">
+                <h3>Support Staff</h3>
+            </div>
+            <div class="col-md-12 table-responsive">
+                <table class="table detail-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Phone Number</th>
+                            <th>SubCounty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in rm.staff.all %}
+                        <tr>
+                            <td><em><strong>{{forloop.counter}}.</strong></em></td>
+                            <td><a href="{{ i.get_absolute_url }}">{{ i.get_short_name }}</a></td>
+                            <td>{{ i.phone_number }}</td>
+                            <td>{{ i.sub_county }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div><br><br>
+            <div class="col-md-12">
+                <h3>Participants</h3>
+            </div>
+            <div class="col-md-12 table-responsive">
+                <table class="table detail-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Code</th>
+                            <th>SubCounty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in rm.trainees.all %}
+                        <tr>
+                            <td><em><strong>{{forloop.counter}}.</strong></em></td>
+                            <td><a href="{{ i.get_absolute_url }}">{{ i.get_short_name }}</a></td>
+                            <td>{{ i.code }}</td>
+                            <td>{{ i.sub_county }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <p>The marker on the map indicates the exact <strong>venue</strong> in google map.</p>
+        </div>
+        <div id="map"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        function initMap() {
+        const myLatLng = {lat: {{ rm.venue.latitude }}, lng: {{ rm.venue.longitude }}};
+        const map = new google.maps.Map(
+            document.getElementById('map'), {zoom: 15, center: myLatLng});
+        const marker = new google.maps.Marker({position: myLatLng, map: map, title: '{{ rm.venue_name }}'});
+        }
+    </script>
+    <script async defer src="{{ GOOGLE_MAP_KEY }}"></script>
+{% endblock %}

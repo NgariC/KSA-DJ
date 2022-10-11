@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ unit.name }}{% endblock %}
+
+{% block content %}
+    <div class="img_background">
+        <div class="container my_padding">
+            <div class="row">
+                <div class="col">
+                    <h1 class="text-center">{{ unit.name }} - {{ unit.unique_code }}</h1>
+                    <h3 class="text-center">{{ unit.sub_county }}</h3>
+                    {% if unit.sponsoring_authority %}
+                        {% if unit.sponsoring_authority == unit.name %}
+                        {% else %}
+                            <h5 class="text-center">Sponsored by {{ unit.sponsoring_authority }}</h5>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            {% with scouts=unit.scout_set.all scoutleaders=unit.scoutleader_set.all %}
+                {% if not scouts and not scoutleaders %}
+                    <div class="row">
+                        <div class="col">
+                            {% if unit.active %}
+                                <h3 class="text-center">The unit does not contain any members yet!</h3>
+                            {% else %}
+                                <h3 class="text-center">Register Scouts then proceed to payment of membership fee</h3>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                <div class="table-responsive">
+                    <table id="mytable" class="table detail-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Code</th>
+                                <th>SubCounty</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in scouts %}
+                            <tr>
+                                <td><a href="{% url 'registrations:scout_detail' i.id %}">{{ i.get_short_name }}</a></td>
+                                <td>{{ i.code }}</td>
+                                <td>{{ i.sub_county }}</td>
+                            </tr>
+                            {% endfor %}
+                            {% for i in scoutleaders %}
+                            <tr>
+                                <td><a href="{% url 'registrations:scout_leader_detail' i.id %}">{{ i.get_short_name }}</a></td>
+                                <td>{{ i.code }}</td>
+                                <td>{{ i.sub_county }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+{% endblock %}

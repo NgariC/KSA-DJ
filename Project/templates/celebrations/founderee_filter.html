@@ -1,0 +1,12 @@
+{% extends 'list.html' %}
+
+{% block table %}
+    {% for i in founderees %}
+    <tr>
+        <td>{{forloop.counter}}.</td>
+        <td><a href="{{ i.get_absolute_url }}">{{ i.county }}</a></td>
+        <td>{{ i.camp_chief }}</td>
+        <td>{{ i.start_date }}</td>
+    </tr>
+    {% endfor %}
+{% endblock %}

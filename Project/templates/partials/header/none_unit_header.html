@@ -1,0 +1,4 @@
+
+{% now "Y"  as year %}
+{% now "m" as month %}
+<li class="nav-item"><a class="me nav-link" href="{% url 'core:edit_profile' user.id %}">Update Profile</a></li>

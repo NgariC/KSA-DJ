@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}LT Project{% endblock title %}
+
+{% block content %}
+<div class="img_background">
+    <div class="container detail-page"> 
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{ ltproject.title }} Project for {{ ltproject.scout_leader_name.get_short_name }}</h1>
+            </div>
+            <div class="col-md-8 offset-md-2 table-responsive">
+                <table class="table detail-table c">
+                    <tbody>
+                        <tr>
+                            <td><strong>Scout Leader</strong></td>
+                            <td><em>{{ ltproject.scout_leader_name.get_short_name }}</em></td>
+                        </tr>
+                        {% if not ltproject.completion_date %}
+                        {% else %}
+                        <tr>
+                            <td><strong>Completion Date</strong></td>
+                            <td><em>{{ ltproject.completion_date }}</em></td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <td><strong>Supervisor</strong></td>
+                            <td><em>{{ ltproject.supervisor.get_short_name }}  ({{ ltproject.supervisor.phone_number }})</em></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><br><br>
+            <div class="col-md-12">
+                <h3>Project Description</h3>
+            </div>
+            <div class="col-md-12">{{ ltproject.project_description|safe }}</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

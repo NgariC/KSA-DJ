@@ -25,6 +25,8 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'debug_toolbar',
     'corsheaders',
+    'crispy_forms',
+    "crispy_bootstrap5",
     'import_export',
     'multiselectfield',
     'rest_framework',

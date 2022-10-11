@@ -1,0 +1,93 @@
+
+
+  <!--==========================
+    Footer
+  ============================-->
+{% now "Y"  as year %}
+{% now "m" as month %}
+  <footer class="bg-green text-white border-top border-info">
+    <div class="container text-center text-sm-left position-relative py-5">
+        <div class="row">
+            <div class="col-sm-6 col-md-3">
+                <h3 class="text-info pb-2 border-bottom border-info">Get Started</h3>
+                <ul class="list-unstyled d-inline-block d-sm-block">
+                    <li class="mb-2"><a class="text-light" href="{% url 'home' %}">Home</a></li>
+                    <li class="mb-2"><a class="text-light" href="{% url 'files:downloads' %}">Downloads</a></li>
+                    <li class="mb-2"><a class="text-light" href="{% url 'files:legal_documents' %}">Legal Documents</a></li>
+                    <li class="mb-2"><a class="text-light" href="{% url 'sign_up' %}">Sign Up</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <h3 class="text-info pb-2 border-bottom border-info">The Association</h3>
+                <ul class="list-unstyled d-inline-block d-sm-block">
+                    <li class="mb-2"><a class="text-light" href="{% url 'core:about_us' %}">About Us</a></li>
+                    <li class="mb-2"><a class="text-light" href="{% url 'core:scouts_centers' %}">Scouts Centers</a></li>
+                    <li class="mb-2"><a class="text-light" href="{% url 'core:contact_us' %}">Contacts</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <h3 class="text-info pb-2 border-bottom border-info">Other Links</h3>
+                <ul class="list-unstyled d-inline-block d-sm-block">
+                      <!-- <li class="mb-2"><a class="text-light" href="#">FAQ</a></li> -->
+                      <!-- <li class="mb-2"><a class="text-light" href="#">Help Desk</a></li>
+                      <li class="mb-2"><a class="text-light" href="#">Online Chat</a></li> -->
+                    <li class="mb-2"><a class="text-light" rel="noopener" href="https://kenyascouts.org/" target="_blank">KSA Main Website</a></li>
+                    <li class="mb-2"><a class="text-light" rel="noopener" href="https://kenyascouts.org/shop/" target="_blank">KSA Shop</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <h3 class="text-info pb-2 border-bottom border-info">Main Links</h3>
+                <ul class="list-unstyled d-inline-block d-sm-block">
+                    <li class="mb-2"><a class="text-light" href="{% url 'registrations:units' %}">Units</a></li>
+                    <li class="mb-2"><a class="text-light" href="{% url 'registrations:scouts' %}">Scouts</a></li>
+                    <li class="mb-2"><a class="text-light" href="{% url 'registrations:scout_leaders' %}">Scout Leaders</a></li>
+                    <li class="mb-2"><a class="text-light" href="{% url 'core:ce' %}">Up Coming events</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center position-absolute w-100 mt-4"><a href="#"><span class="scrolltotop fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-dark"></i><i class="fa fa-angle-up fa-stack-1x text-white"></i></span></a></div>
+    </div>
+    <div class="pt-5 pb-4 bg-red text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-12 text-center text-md-left pb-4">
+                    <h2 class="mb-3 text-center">The Kenya Scouts Association</h2>
+                    <p class="mb-1 text-center"><i class="fa fa-map-marker fa-fw"></i>&nbsp;Rowallan Scout Camp, Jamhuri Park, Kibera Drive.</p>
+                    <p class="mb-1 text-center"><i class="fa fa-phone fa-fw"></i>&nbsp;+254 020 202 0819 or +254 733 919 333</p>
+                    <p class="mb-1 text-center">P.O. Box 41422- 00100 Nairobi, Kenya</p>
+                    <p class="mb-1 text-center"><i class="fa fa-envelope fa-fw"></i> <a style="color: #fff !important;" href="mailto:info@kenyascouts.org" class="text-dark">info@kenyascouts.org</a></p>
+                </div>
+{#                <div class="col-lg-12 text-center pb-4">#}
+{#                    <h2 class="mb-2">Subscribe to our newsletter<br><br></h2>#}
+{#                    <form class="d-flex justify-content-center">#}
+{#                        <div class="form-group w-75">#}
+{#                            <div class="input-group">#}
+{#                              <input class="my_input" type="text" required="" placeholder="Your email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}$" inputmode="email" style="width:80% !important">#}
+{#                                <div class="input-group-append" style="width:20%;">#}
+{#                                  <button class="btn btn-dark" type="submit" style="border-radius:0 !important;width:100%">Go!</button>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </form>#}
+{#                </div>#}
+                <div class="col-lg-12 text-center pb-4">
+                    <h2 class="mb-0">Follow us<br><br></h2>
+                    <div>
+                      <a href="https://www.facebook.com/KENYA-SCOUTS-ASSOCIATION-173091289160/?ref=nf&hc_ref=ARRzAc-556ccTUbOBLDywXBLIlrfNnsL66wUeu0d2xp-9ko2AE_kvTrheRJk2AuoA_8" class="text-white mx-2 mx-lg-0 ml-lg-3"><i class="fab fa-3x fa-facebook-square fa-2x"></i></a>
+                      <a href="https://twitter.com/KenyaScouts?ref_src=twsrc%5Etfw%7Ctwcamp%5Eembeddedtimeline%7Ctwterm%5Eprofile%3AKenyaScouts&ref_url=http%3A%2F%2Fkenyascouts.org%2F" class="text-white mx-2 mx-lg-0 ml-lg-3"><i class="fab fa-3x fa-twitter fa-2x"></i></a>
+                      <a href="https://www.youtube.com/channel/UCPESiusff38Isp_oH4Rlfqg" class="text-white mx-2 mx-lg-0 ml-lg-3"><i class="fab fa-3x fa-youtube fa-2x"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center text-lg-center py-2 small bg-green">
+
+        <div class="d-flex align-items-center justify-content-center small bg-green copyright">
+            <div>Copyright &copy; {{ company }} {% now "Y" %}  &nbsp</div>
+            <div><a href="{% url 'privacy_policy' %}">Privacy Policy</a>
+                &middot;<a href="{% url 'terms_&_conditions' %}">Terms &amp; Conditions</a>
+            </div>
+        </div>
+    </div>
+</footer>

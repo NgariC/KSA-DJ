@@ -1,0 +1,184 @@
+
+          <li class="nav-item dropdown">
+            <a class="me nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside">Registrations</a>
+            <ul class="dropdown-menu shadow">
+              <li>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a class="dropdown-item" href="{% url 'registrations:units' %}">Units</a>
+                            </td>
+                            <td>
+                                <a class="dropdown-item" href="{% url 'registrations:add_unit' %}"><i class="fa fa-plus"></i> Add</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+              </li>
+              <li>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a class="dropdown-item" href="{% url 'registrations:scout_leaders' %}">Scout Leaders</a>
+                            </td>
+                            <td>
+                                <a class="dropdown-item" href="{% url 'registrations:add_scout_leader' %}"><i class="fa fa-plus"></i> Add</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+              </li>
+              <li>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a class="dropdown-item" href="{% url 'registrations:scouts' %}">Scouts</a>
+                            </td>
+                            <td>
+                                <a class="dropdown-item" href="{% url 'registrations:section_select' %}"><i class="fa fa-plus"></i> Add</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="me nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside">Events</a>
+            <ul class="dropdown-menu shadow">
+              <li>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a class="dropdown-item" href="{% url 'core:ce' %}">UpComing</a>
+                            </td>
+                            <td>
+                                <a class="dropdown-item" href="{% url 'core:add_ce' %}"><i class="fa fa-plus"></i> Add</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+              </li>
+              <li class="dropend">
+                <a href="#" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Scouts</a>
+                <ul class="dropdown-menu shadow">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><a class="dropdown-item" href="{% url 'youth_programme:i' %}">Investiture</a></td>
+                            <td><a class="dropdown-item" href="{% url 'youth_programme:add_i' %}"><i class="fa fa-plus"></i> Add</a></td>
+                        </tr>
+                        <tr>
+                            <td><a class="dropdown-item" href="{% url 'youth_programme:bc' %}">Badge Camp</a></td>
+                            <td><a class="dropdown-item" href="{% url 'youth_programme:add_bc' %}"><i class="fa fa-plus"></i> Add</a></td>
+                        </tr>
+                        <tr>
+                            <td><a class="dropdown-item" href="{% url 'youth_programme:ph' %}">Park Holiday</a></td>
+                            <td><a class="dropdown-item" href="{% url 'youth_programme:add_ph' %}"><i class="fa fa-plus"></i> Add</a></td>
+                        </tr>
+                        <tr>
+                            <td><a class="dropdown-item" href="{% url 'youth_programme:plc' %}">PLC</a></td>
+                            <td><a class="dropdown-item" href="{% url 'youth_programme:add_plc' %}"><i class="fa fa-plus"></i> Add</a></td>
+                        </tr>
+                        <tr>
+                            <td><a class="dropdown-item" href="{% url 'youth_programme:rm' %}">Rover mate</a></td>
+                            <td><a class="dropdown-item" href="{% url 'youth_programme:add_rm' %}"><i class="fa fa-plus"></i> Add</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                </ul>
+              </li>
+              <li class="dropend">
+                <a href="#" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Scout Leaders</a>
+                <ul class="dropdown-menu shadow">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><a class="dropdown-item" href="{% url 'training:itc' %}">ITC</a></td>
+                            <td><a class="dropdown-item" href="{% url 'training:add_itc' %}"><i class="fa fa-plus"></i> Add</a></td>
+                        </tr>
+                        <tr>
+                            <td><a class="dropdown-item" href="{% url 'training:ptc' %}">PTC</a></td>
+                            <td><a class="dropdown-item" href="{% url 'training:add_ptc' %}"><i class="fa fa-plus"></i> Add</a></td>
+                        </tr>
+                        <tr>
+                            <td><a class="dropdown-item" href="{% url 'training:wbii' %}">WoodBadge Course</a></td>
+                            <td><a class="dropdown-item" href="{% url 'training:add_wbii' %}"><i class="fa fa-plus"></i> Add</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                </ul>
+              </li>
+              <li class="dropend">
+                <a href="#" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Competitions</a>
+                <ul class="dropdown-menu shadow">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><a class="dropdown-item" href="{% url 'competitions:teams' %}">Teams</a></td>
+                            <td><a class="dropdown-item" href="{% url 'competitions:team_section_select' %}"><i class="fa fa-plus"></i> Add</a></td>
+                        </tr>
+                        <tr>
+                            <td><a class="dropdown-item" href="{% url 'competitions:competitions' %}">Competitions</a></td>
+                            <td><a class="dropdown-item" href="{% url 'competitions:level_select' %}"><i class="fa fa-plus"></i> Add</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                </ul>
+              </li>
+              <li class="dropend">
+                <a href="#" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Celebrations</a>
+                <ul class="dropdown-menu shadow">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><a class="dropdown-item" href="{% url 'celebrations:founderee' %}">Founderee</a></td>
+                            <td><a class="dropdown-item" href="{% url 'celebrations:add_founderee' %}"><i class="fa fa-plus"></i> Add</a></td>
+                        </tr>
+                        <tr>
+                            <td><a class="dropdown-item" href="{% url 'celebrations:patrons_day_participants' %}">Patrons Day Participants</a></td>
+                            <td><a class="dropdown-item" href="{% url 'celebrations:add_patrons_day_participants' %}"><i class="fa fa-plus"></i> Add</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="me nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside">Projects</a>
+            <ul class="dropdown-menu shadow">
+              <li>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a class="dropdown-item" href="{% url 'projects:unit_p' %}">Unit Projects</a>
+                            </td>
+                            <td>
+                                <a class="dropdown-item" href="{% url 'projects:add_unit_project' %}"><i class="fa fa-plus"></i> Add</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+              </li>
+              <li>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a class="dropdown-item" href="{% url 'projects:csa_p' %}">CSA Projects</a>
+                            </td>
+                            <td>
+                                <a class="dropdown-item" href="{% url 'projects:add_csa_project' %}"><i class="fa fa-plus"></i> Add</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+              </li>
+            </ul>
+          </li>

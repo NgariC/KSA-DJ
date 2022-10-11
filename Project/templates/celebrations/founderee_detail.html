@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}{{ founderee.county }} Founderee{% endblock %}
+
+{% block content %}
+<div class="img_background">
+    <div class="container detail-page"> 
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{ founderee.county }} County Founderee</h1>
+            </div>
+            <div class="col-md-8 offset-md-2 table-responsive">
+                <table class="table detail-table c">
+                    <tbody>
+                        <tr>
+                            <td><strong>Venue</strong></td>
+                            <td><em>{{ founderee.venue_name }}</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Start Date</strong></td>
+                            <td><em>{{ founderee.start_date }}</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>End Date</strong></td>
+                            <td><em>{{ founderee.end_date }}</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Camp Chief</strong></td>
+                            <td><em>{{ founderee.camp_chief.get_short_name }}  ({{ founderee.camp_chief.phone_number }})</em></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><br><br>
+            <div class="col-md-12">
+                <h3>Support Staff</h3>
+            </div>
+            <div class="col-md-12 table-responsive">
+                <table class="table detail-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Phone Number</th>
+                            <th>SubCounty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in founderee.support_staff.all %}
+                        <tr>
+                            <td><em><strong>{{forloop.counter}}.</strong></em></td>
+                            <td><a href="{{ i.get_absolute_url }}">{{ i.get_short_name }}</a></td>
+                            <td>{{ i.phone_number }}</td>
+                            <td>{{ i.sub_county }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div><br><br>
+        </div>
+        <div class="col-md-12">
+            <p>The marker on the map indicates the exact <strong>venue</strong> in google map.</p>
+        </div>
+        <div id="map"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}        
+    <script>
+        function initMap() {
+        const myLatLng = {lat: {{ founderee.venue.latitude }}, lng: {{ founderee.venue.longitude }}};
+        const map = new google.maps.Map(
+            document.getElementById('map'), {zoom: 15, center: myLatLng});
+        const marker = new google.maps.Marker({position: myLatLng, map: map, title: '{{ founderee.venue_name }}'});
+        }
+    </script>
+    <script async defer src="{{ GOOGLE_MAP_KEY }}"></script>
+{% endblock %}

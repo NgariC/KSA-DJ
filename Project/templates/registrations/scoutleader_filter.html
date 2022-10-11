@@ -1,0 +1,12 @@
+{% extends 'list.html' %}
+
+{% block table %}
+    {% for i in scout_leaders %}
+    <tr>
+        <td>{{forloop.counter}}.</td>
+        <td><a href="{% url 'registrations:scout_leader_detail' i.id %}">{{ i.get_short_name }}</a></td>
+        <td>{{ i.code }}</td>
+        <td>{{ i.sub_county }}</td>
+    </tr>
+    {% endfor %}
+{% endblock %}

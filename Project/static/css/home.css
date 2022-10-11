@@ -1,0 +1,148 @@
+.mybackground{
+  background:linear-gradient(to right,#b80103 0%,#006b00 100%) ;
+}
+
+
+
+.carousel-item .img-fluid {
+  width:100%;
+}
+
+.carousel-caption {
+  position: absolute!important;
+  z-index: 10!important;
+  height: 55%;
+  vertical-align: middle!important;
+  text-align: center;
+  font-family: "Montserrat", sans-serif!important;
+}
+
+@media screen and (max-width: 768px) {
+  .carousel-item p{display: none;}
+}
+.we_produce{
+  font-family: 'Montserrat', serif;
+  background-size: cover;
+  background-attachment: fixed !important;
+}
+
+#membership {
+  background: #b80103;
+  padding-top:4em;
+  padding-bottom:4em;
+}
+
+.w{
+  color: white;
+  font-family: 'Montserrat', serif;
+}
+
+.u{
+  font-family: 'Montserrat', serif;
+}
+
+
+caption a{
+  text-decoration:underline;
+}
+
+
+/* Sections Header */
+.section-title {
+  font-size: 32px;
+  color: #111!important;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-family: 'Montserrat', serif;
+}
+
+.section-description {
+  text-align: center;
+  padding-bottom: 40px;
+  color: #666;
+}
+
+
+
+
+.scouting-in-brief .intro{
+  width:100% !important;
+  font-family: "Montserrat", sans-serif!important;
+}
+
+
+/* Departments */
+#departments {
+  background: #fff;
+  background-size: cover;
+  padding: 80px 0 60px 0;
+}
+
+#departments .box {
+  padding: 50px 20px;
+  margin-bottom: 50px;
+  text-align: center;
+  border: 1px solid #e6e6e6;
+  min-height: 290px;
+  position: relative;
+  background: #fafafa;
+}
+
+#departments .icon {
+  position: absolute;
+  top: -36px;
+  left: calc(50% - 36px);
+  transition: 0.2s;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  width: 72px;
+  height: 72px;
+  background: #b80103;
+}
+
+#departments .icon a {
+  display: inline-block;
+}
+
+#departments .icon i {
+  color: #fff;
+  font-size: 24px;
+}
+
+#departments .box:hover .icon {
+  background: #fff;
+  border: 2px solid #b80103;
+}
+
+#departments .box:hover .icon i {
+  color: #b80103;
+}
+
+#departments .box:hover .icon a {
+  color: #b80103;
+}
+
+#departments .title {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+}
+
+#departments .title a {
+  color: #111;
+}
+
+#departments .description {
+  font-size: 14px;
+  line-height: 24px;
+  font-family: "Montserrat", sans-serif;
+}

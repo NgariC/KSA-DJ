@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static humanize %}
+
+{% block title %}{{ scout.get_short_name }}{% endblock title %}
+
+
+{% block content %}
+    <div class="img_background">
+        <div class="my_padding">
+            <div class="container profile-card">
+                {% if scout.image %}
+                    <div class="profile-back"></div><a href="{{ scout.image.url }}"><img class="rounded-circle profile-pic" src="{{ scout.image.url }}" alt="{{ scout.name }}"></a>
+                {% else %}
+                    <div class="profile-back"></div><img class="rounded-circle profile-pic" src="{% static 'img/user.png' %}" alt="No Profile Picture">
+                {% endif %}
+                <h3 class="profile-name">{{ scout.get_full_name }}</h3>
+                <div class="row justify-content-md-center">
+                    <div class="col col-md-8 card-body" id="profile-details">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Code</strong></td>
+                                        <td><em>{{ scout.code }}</em></td>
+                                    </tr>
+                                    {% if scout.section == 'Jasiri' %}
+                                        <tr>
+                                            <td><strong>Email</strong></td>
+                                            <td><em>{{ scout.email }}</em></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Phone Number</strong></td>
+                                            <td><em>{{ scout.phone_number }}</em></td>
+                                        </tr>
+                                    {% endif %}
+                                    <tr>
+                                        <td><strong>SubCounty</strong></td>
+                                        <td><em>{{ scout.sub_county }}</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Unit</strong></td>
+                                        <td><em>{{ scout.unit }}</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Registration Date</strong></td>
+                                        <td><em>{{ scout.registration_date|naturaltime }}</em></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        {% if user.is_staff or user.link_to_scout_leader.rank.level == "SubCounty" %}
+                            <button class="button">
+                                <a href="{% url 'registrations:scout_unit_update' scout.id %}">
+                                    Unit change application
+                                </a>
+                            </button>
+                            {% if scout.section == 'Jasiri' %}
+                            {% elif scout.section == 'Mwamba' or 'Chipukizi' or 'Sungura' %}
+                                <button class="button">
+                                    <a href="{% url 'registrations:scout_section_update' scout.id %}">
+                                        Section change application
+                                    </a>
+                                </button>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

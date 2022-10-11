@@ -1,0 +1,13 @@
+{% extends 'list.html' %}
+
+{% block table %}
+    {% for i in slse %}
+    <tr>
+        <td>{{forloop.counter}}.</td>
+        <td><a href="{{ i.get_absolute_url }}">{{ i.event_name }}</a></td>
+        <td>{{ i.venue_name }}</td>
+        <td>{{ i.start_date }}</td>
+        <td>{{ i.sub_county }}</td>
+    </tr>
+    {% endfor %}
+{% endblock %}

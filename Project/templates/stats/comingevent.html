@@ -1,0 +1,90 @@
+{% extends "admin/stats.html" %}
+
+{% load i18n %}
+{% load humanize %}
+{% load tz %}
+{#{% load mathfilters %}#}
+{% load static %}
+
+
+
+
+
+    {% block regions %}
+        <h2> {% blocktrans %} Regional Statistics {% endblocktrans %} </h2>
+        <div id='RegionChart'></div>
+        <table>
+            <thead>
+                <tr>
+                    <th> <div class="text"> <a href="#">Region </a> </div> </th>
+                    <th> <div class="text"> <a href="#">Events </a> </div> </th>
+                    <th> <div class="text"> <a href="#">Percentage </a> </div> </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in regions %}
+                <tr class="{% cycle 'row1' 'row2' %}">
+                    <td> <strong>{{forloop.counter}}.&nbsp&nbsp</strong>{{ row.county__region__name }} </td>
+                    <td> {{ row.total }} </td>
+                    <td>
+                      <strong>{{ row.total|div:summary_total.total|mul:100|floatformat:2 }}%</strong>
+                    </td>
+                </tr>
+                {% endfor %}
+
+                <tr style="font-weight:bold; border-top:2px solid #DDDDDD;">
+                    <td> Total </td>
+                    <td> {{ summary_total.total | intcomma }} </td>
+                    <td> 100% of Total </td>
+                </tr>
+            </tbody>
+        </table>
+    {% endblock %}
+    {% block counties %}
+        <h2> {% blocktrans %} Counties Statistics {% endblocktrans %} </h2>
+        <div id='CountyChart'></div>
+        <table>
+            <thead>
+                <tr>
+                    <th> <div class="text"> <a href="#">County </a> </div> </th>
+                    <th> <div class="text"> <a href="#">Events </a> </div> </th>
+                    <th> <div class="text"> <a href="#">Percentage </a> </div> </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in counties %}
+                <tr class="{% cycle 'row1' 'row2' %}">
+                    <td> <strong>{{forloop.counter}}.&nbsp&nbsp</strong>{{ row.county__name }} </td>
+                    <td> {{ row.total }} </td>
+                    <td>
+                      <strong>{{ row.total|div:summary_total.total|mul:100|floatformat:2 }}%</strong>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr style="font-weight:bold; border-top:2px solid #DDDDDD;">
+                    <td> Total </td>
+                    <td> {{ summary_total.total | intcomma }} </td>
+                    <td> 100% of Total </td>
+                </tr>
+            </tbody>
+        </table>
+    {% endblock %}
+
+
+{% block myjs %}
+
+<script>
+    const region_y = [{% for row in regions %}'{{ row.total }}',{% endfor %}]
+    const region_x = [{% for row in regions %}'{{ row.county__region__name }}',{% endfor %}]
+    const county_y = [{% for row in counties %}'{{ row.total }}',{% endfor %}]
+    const county_x = [{% for row in counties %}'{{ row.county__name }}',{% endfor %}]
+
+    const region = {y: region_y, x: region_x, mode: 'lines+markers', name: 'Total No.', type: 'scatter'};
+    const county = {y: county_y, x: county_x, mode: 'lines+markers', name: 'Total No.', type: 'scatter'};
+
+    Plotly.newPlot('RegionChart', region, region_layout, config);
+    Plotly.newPlot('CountyChart', county, county_layout, config);
+</script>
+
+
+{% endblock %}

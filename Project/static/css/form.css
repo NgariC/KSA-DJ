@@ -1,0 +1,113 @@
+/* FORM */
+form{
+  color: #fff!important;
+}
+.geoposition-results {
+    color: black;
+}
+
+/* Date */
+.selectdatewidget {
+    display: inline-block;
+}
+select[name$="_day"].selectdatewidget {
+    width: 27%;
+}
+select[name$="_month"].selectdatewidget {
+    width: 38%;
+}
+select[name$="_year"].selectdatewidget {
+    width: 35%;
+}
+
+/* autocomplete */
+.select2-container--admin-autocomplete .select2-selection--single {
+    background-color: var(--primary-fg)!important;
+}
+.select2-container--admin-autocomplete .select2-search--dropdown .select2-search__field {
+    background: var(--primary-fg)!important;
+    color: var(--high-fg)!important;
+}
+.select2-container--admin-autocomplete .select2-selection--single .select2-selection__rendered {
+    background-color: var(--primary-fg)!important;
+    color: var(--high-fg)!important;
+}
+.select2-container--admin-autocomplete .select2-selection--multiple .select2-selection__rendered {
+    background-color: var(--primary-fg)!important;
+    color: var(--high-fg)!important;
+}
+.select2-container--admin-autocomplete .select2-results__option[aria-selected=true] {
+    background-color: var(--primary-fg)!important;
+    color: var(--high-fg)!important;
+}
+.select2-container--admin-autocomplete .select2-selection--multiple .select2-selection__choice {
+    background-color: var(--primary-fg)!important;
+}
+.select2-container--admin-autocomplete .select2-selection--multiple .select2-selection__choice__remove {
+    color: var(--high-fg)!important;
+}
+.select2-container--admin-autocomplete .select2-results > .select2-results__options {
+    background-color: var(--primary-fg)!important;
+    color: var(--high-fg)!important;
+}
+.select2-container--admin-autocomplete .select2-results__option[aria-disabled=true] {
+    color: var(--high-fg)!important;
+}
+.select2-container--admin-autocomplete .select2-selection--multiple {
+    background-color: var(--primary-fg)!important;
+}
+.select2-container--admin-autocomplete .select2-results__option[aria-selected=true] {
+    background-color: #bdd8b2!important;
+}
+.select2-container--admin-autocomplete .select2-selection--multiple .select2-selection__choice {
+    background-color: var(--preview)!important;
+    border: 1px solid #1418dd!important;
+}
+
+.select2-container--admin-autocomplete .select2-selection--single,
+.select2-container--admin-autocomplete .select2-selection--multiple{
+    width: 100% !important;
+    min-height: 2.8em!important;
+}
+.select2-container--admin-autocomplete.select2-container {
+    min-height: 2.8em!important;
+    width: 100% !important;
+}
+input[type=text], input[type=password], input[type=email], input[type=url],
+input[type=number], input[type=tel], input[type=date], textarea, select, .vTextField {
+    border-radius: 4px;
+    padding: 5px 6px;
+    margin-top: 0;
+    color: var(--high-fg)!important;
+    background-color: var(--primary-fg)!important;
+    min-height: 2.8em!important;
+}
+
+/*Links */
+.primaryAction:hover, .primaryAction:active, .primaryAction:focus,
+.pAction:hover, .pAction:active, .pAction:focus {
+    background: var(--secondary);
+    color: var(--primary-fg);
+    outline: none;
+    text-decoration: none;
+}
+.primaryAction, [name=action]{
+    background: var(--primary);
+    color: var(--primary-fg);
+    margin-right: 0;
+    margin-left:auto;
+    display:block;
+    mix-blend-mode: difference;
+}
+.pAction, [name=action]{
+  background: var(--primary);
+  color: var(--primary-fg);
+  height: 2rem;
+}
+.buttonHolder{
+    display: flex;
+    justify-content: space-between;
+    width: fit-content;
+    margin-right: 0;
+    margin-left: auto;
+}

@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block title %}{{ competition.year }} {{ competition.sub_county.name }} Competition{% endblock title %}
+
+{% block content %}
+<div class="img_background">
+    <div class="container detail-page"> 
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{ competition.year }} {{ competition.sub_county.name }} {{ competition.level }} Competition</h1><br/>
+                {% if competition.level == "SubCounty" %}
+                    <h1>{{ competition.sub_county.name }}</h1>
+                {% elif competition.level == "County" %}
+                    <h1>{{ competition.county.name }}</h1>
+                {% elif competition.level == "Regional" %}
+                    <h1>{{ competition.region.name }}</h1>
+                {% elif competition.level == "National" %}
+                    <h1> National </h1>
+                {% else %}
+                    <h1>{{ competition.country.name }}</h1>
+                {% endif %}
+            </div>
+            <div class="col-md-8 offset-md-2 table-responsive">
+                <table class="table detail-table c">
+                    <tbody>
+                        <tr>
+                            <td><strong>Venue</strong></td>
+                            <td><em>{{ competition.venue_name }}</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Start Date</strong></td>
+                            <td><em>{{ competition.start_date }}</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>End Date</strong></td>
+                            <td><em>{{ competition.end_date }}</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Chief Assessor</strong></td>
+                            <td><em>{{ competition.chief.get_short_name }}  ({{ competition.chief.phone_number }})</em></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><br><br>
+            <div class="col-md-12">
+                <h3>Assistant Assessors</h3>
+            </div>
+            <div class="col-md-12 table-responsive">
+                <table class="table detail-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Phone Number</th>
+                            <th>County</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in competition.assessors.all %}
+                        <tr>
+                            <td><em><strong>{{forloop.counter}}.</strong></em></td>
+                            <td><a href="{{ i.get_absolute_url }}">{{ i.get_short_name }}</a></td>
+                            <td>{{ i.phone_number }}</td>
+                            <td>{{ i.sub_county.county }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div><br><br>
+            <div class="col-md-12">
+                <h3>Teams
+                    {% if not competition.payments %}
+                        <a href="{% url 'competitions:competition_update' competition.id %}"> (Update Teams)</a>
+                    {% else %}
+                    {% endif %}
+                </h3>
+            </div>
+            <div class="col-md-12 table-responsive">
+                <table class="table detail-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Section</th>
+                            <th>Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in competition.teams.all %}
+                        <tr>
+                            <td><em><strong>{{forloop.counter}}.</strong></em></td>
+                            <td><a href="{{ i.get_absolute_url }}">{{ i.name }}</a></td>
+                            <td>{{ i.section }}</td>
+                            <td>{{ i.unit.name }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <p>The marker on the map indicates the exact <strong>venue</strong> in google map.</p>
+        </div>
+        <div id="map"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}        
+    <script>
+        function initMap() {
+        var myLatLng = {lat: {{ competition.venue.latitude }}, lng: {{ competition.venue.longitude }}};
+        var map = new google.maps.Map(
+            document.getElementById('map'), {zoom: 15, center: myLatLng});
+        var marker = new google.maps.Marker({position: myLatLng, map: map, title: '{{ competition.venue_name }}'});
+        }
+    </script>
+    <script async defer src="{{ GOOGLE_MAP_KEY }}"></script>
+{% endblock %}

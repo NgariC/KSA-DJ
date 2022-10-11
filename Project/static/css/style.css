@@ -1,0 +1,129 @@
+@import url(fonts.css);
+@import url(header.css);
+@import url(footer.css);
+:root {
+    --primary: #38572f;
+    --secondary: #2e4725;
+    --accent: #f5dd5d;
+    --primary-fg: #fff;
+    --high-fg: #000;
+
+    --body-fg: #333;
+    --body-bg: #fff;
+    --body-quiet-color: #666;
+    --body-loud-color: #000;
+    --preview: #f9bebf;
+
+    --clr-light: #fdffc4;
+    --clr-lighter: #edf0a2;
+    --clr-dark: #00332a;
+    --clr-darker: #00241d;
+    --clr-primary: #2dca98;
+    --clr-secondary: #c3fcf2;
+    --clr-accent: #ff7750;
+    --word: #000000;
+    --inverted_word: #ffffff;
+    --success: #008000;
+
+    --foreground: var(--clr-dark);
+    --background: var(--clr-light);
+    --background_darker: var(--clr-lighter);
+    --theme_color: var(--clr-primary)
+  }
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+}
+
+footer a {
+    color: var(--clr-secondary);
+    outline: none;
+    text-decoration: none;
+}
+
+table a {
+    color: var(--clr-dark);
+}
+
+
+.img_background{
+    background-image:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url("../img/my_bg.jpg");
+    background-size: cover;
+    background-attachment: fixed !important;
+    color: var(--primary-fg)!important;
+}
+
+/* List Tables  */
+
+.img_background .table{
+    background: var(--primary-fg);
+}
+.my_padding{
+    padding-top:5rem;
+    padding-bottom:4rem;
+}
+
+/* Profile Card */
+.profile-back {
+    background-color:#9b1f1f;
+    height:150px;
+    margin-bottom:-75px;
+}
+.profile-pic {
+    width:250px;
+    height:250px;
+    margin-bottom:10px;
+}
+.profile-card {
+    text-align:center;
+    margin-bottom:15px;
+    border:1px solid #9b1f1f;
+}
+.profile-name {
+    background-color:#9b1f1f;
+    color:#fff;
+    font-family:'Actor', sans-serif;
+    font-size:16px;
+    font-weight:bold;
+    padding:5px 0;
+    border-radius:100px;
+    max-width:300px;
+    margin:0 auto 10px auto;
+}
+.detail-name {
+    background-color:#fff;
+    font-family:'Actor', sans-serif;
+    font-size:16px;
+    padding:5px 0;
+    border-radius:100px;
+    max-width:600px;
+    margin:0 auto 10px auto;
+}
+.profile-card table{
+    background: #fff;
+}
+.detail-page{
+  padding-top:5rem;
+  padding-bottom:4rem;
+}
+.detail-page p, .detail-page h1, .detail-page h3{
+  text-align: center;
+}
+.camp-detail-page{
+  padding-top:4em;
+  padding-bottom:4em;
+}
+
+.camp-detail-page h6, .camp-detail-page h1, .camp-detail-page h3{
+  color: #fff!important;
+  text-align: center;
+}
+#map {
+  width:100%;
+  height:450px;
+  background:grey
+}

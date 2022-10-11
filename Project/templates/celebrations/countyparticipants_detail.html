@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% block title %}{{ countyparticipants.county }} Patron's Day participants{% endblock %}
+
+{% block content %}
+<div class="img_background">
+    <div class="container detail-page">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{ countyparticipants.county }} County Patrons Day non awardees participants</h1>
+            </div>
+            <div class="col-md-12">
+                <h3>Sungura Scouts</h3>
+            </div>
+            <div class="col-md-12 table-responsive">
+                <table class="table detail-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Unique Code</th>
+                            <th>SubCounty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in countyparticipants.sungura_scouts.all %}
+                        <tr>
+                            <td><em><strong>{{forloop.counter}}.</strong></em></td>
+                            <td><a href="{{ i.get_absolute_url }}">{{ i.get_short_name }}</a></td>
+                            <td>{{ i.unique_code }}</td>
+                            <td>{{ i.sub_county.name }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div><br><br>
+            <div class="col-md-12">
+                <h3>Chipukizi Scouts</h3>
+            </div>
+            <div class="col-md-12 table-responsive">
+                <table class="table detail-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Unique Code</th>
+                            <th>SubCounty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in countyparticipants.chipukizi_scouts.all %}
+                        <tr>
+                            <td><em><strong>{{forloop.counter}}.</strong></em></td>
+                            <td><a href="{{ i.get_absolute_url }}">{{ i.get_short_name }}</a></td>
+                            <td>{{ i.unique_code }}</td>
+                            <td>{{ i.sub_county.name }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div><br><br>
+            <div class="col-md-12">
+                <h3>Mwamba Scouts</h3>
+            </div>
+            <div class="col-md-12 table-responsive">
+                <table class="table detail-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Unique Code</th>
+                            <th>SubCounty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in countyparticipants.mwamba_scouts.all %}
+                        <tr>
+                            <td><em><strong>{{forloop.counter}}.</strong></em></td>
+                            <td><a href="{{ i.get_absolute_url }}">{{ i.get_short_name }}</a></td>
+                            <td>{{ i.unique_code }}</td>
+                            <td>{{ i.sub_county.name }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div><br><br>
+            <div class="col-md-12">
+                <h3>Jasiri Scouts</h3>
+            </div>
+            <div class="col-md-12 table-responsive">
+                <table class="table detail-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Unique Code</th>
+                            <th>SubCounty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in countyparticipants.jasiri_scouts.all %}
+                        <tr>
+                            <td><em><strong>{{forloop.counter}}.</strong></em></td>
+                            <td><a href="{{ i.get_absolute_url }}">{{ i.get_short_name }}</a></td>
+                            <td>{{ i.unique_code }}</td>
+                            <td>{{ i.sub_county.name }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div><br><br>
+            <div class="col-md-12">
+                <h3>Scout Leaders</h3>
+            </div>
+            <div class="col-md-12 table-responsive">
+                <table class="table detail-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Unique Code</th>
+                            <th>Phone Number</th>
+                            <th>SubCounty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in countyparticipants.scout_leaders.all %}
+                        <tr>
+                            <td><em><strong>{{forloop.counter}}.</strong></em></td>
+                            <td><a href="{{ i.get_absolute_url }}">{{ i.get_short_name }}</a></td>
+                            <td>{{ i.unique_code }}</td>
+                            <td>{{ i.phone_number }}</td>
+                            <td>{{ i.sub_county.name }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div><br><br>
+        </div>
+    </div>
+</div>
+{% endblock %}

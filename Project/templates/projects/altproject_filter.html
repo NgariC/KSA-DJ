@@ -1,0 +1,12 @@
+{% extends 'list.html' %}
+
+{% block table %}
+    {% for i in alt_projects %}
+    <tr>
+        <td>{{forloop.counter}}.</td>
+        <td><a href="{{ i.get_absolute_url }}">{{ i.title }}</a></td>
+        <td>{{ i.scout_leader_name.get_short_name }}</td>
+        <td>{{ i.scout_leader_name.sub_county.county }}</td>
+    </tr>
+    {% endfor %}
+{% endblock %}

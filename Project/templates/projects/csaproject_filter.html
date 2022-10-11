@@ -1,0 +1,11 @@
+{% extends 'list.html' %}
+
+{% block table %}
+    {% for i in csa_projects %}
+    <tr>
+        <td>{{forloop.counter}}.</td>
+        <td><a href="{{ i.get_absolute_url }}">{{ i.title }}</a></td>
+        <td>{{ i.project_code }}</td>
+    </tr>
+    {% endfor %}
+{% endblock %}

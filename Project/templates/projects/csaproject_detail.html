@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}{{ csaproject.csa_number }} CSA Project{% endblock title %}
+
+{% block content %}
+<div class="img_background">
+    <div class="container my_padding">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{ csaproject.title }} Project</h1>
+            </div>
+            <div class="col-md-8 offset-md-2 table-responsive">
+                <table class="table detail-table c">
+                    <tbody>
+                        <tr>
+                            <td><strong>Project Code</strong></td>
+                            <td><em>{{ csaproject.project_code }}</em></td>
+                        </tr>
+                        {% if not csaproject.completion_date %}
+                        {% else %}
+                        <tr>
+                            <td><strong>Completion Date</strong></td>
+                            <td><em>{{ csaproject.completion_date }}</em></td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <td><strong>Supervisor</strong></td>
+                            <td><em>{{ csaproject.supervisor.get_full_name }}  ({{ csaproject.supervisor.phone_number }})</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Jasiri Scouts</strong></td>
+                            <td>{% for i in csaproject.jasiri_scouts.all %}
+                            <em><strong>{{forloop.counter}}.&nbsp&nbsp</strong>{{ i.get_full_name }}  ({{ i.phone_number }})</em><br>
+                            {% endfor %}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><br><br>
+            <div class="col-md-12">
+                <h3>Project Description</h3>
+            </div>
+            <div class="col-md-12">{{ csaproject.project_description|safe }}</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'list.html' %}
+
+{% block table %}
+    {% for i in patrons_day_participants %}
+    <tr>
+        <td>{{forloop.counter}}.</td>
+        <td><a href="{{ i.get_absolute_url }}">{{ i.county }}</a></td>
+        <td>{{ i.sungura_scouts.count }}</td>
+        <td>{{ i.chipukizi_scouts.count }}</td>
+        <td>{{ i.mwamba_scouts.count }}</td>
+        <td>{{ i.jasiri_scouts.count }}</td>
+        <td>{{ i.scout_leaders.count }}</td>
+    </tr>
+    {% endfor %}
+{% endblock %}

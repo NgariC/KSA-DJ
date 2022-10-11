@@ -1,0 +1,276 @@
+{% extends 'base.html' %}
+{% load static humanize %}
+
+{% block title %} {{ brand }} {% endblock title %}
+{% block static %}
+  <link href="{% static 'css/home.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <!--
+    ####################################################
+    C A R O U S E L
+    ####################################################
+    -->
+
+    {% if not slides %}
+    {% else %}
+        <div id="carousel" class="carousel slide carousel-fade" data-ride="carousel" data-interval="6000">
+            <div class="carousel-inner" role="listbox">
+                {% for slide in slides %}
+                    {% if forloop.first %}
+                        <div class="carousel-item active">
+                    {% else %}
+                        <div class="carousel-item">
+                    {% endif %}
+                            <picture>
+                                <img srcset="{{ slide.image.url }}" alt="{% if slide.title %}{{ slide.title }}{% else %}No title{% endif %}" class="d-block img-fluid">
+                            </picture>
+
+                            <div class="carousel-caption">
+                                <div>
+                                    {% if slide.title %}
+                                        <h2>{{ slide.title }}</h2>
+                                    {% endif %}
+                                    {% if slide.description %}
+                                        <p>{{ slide.description }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    {% endif %}
+
+    <!--
+    ####################################################
+    A B O U T - U S
+    ####################################################
+    -->
+    {% if not abouts %}
+    {% else %}
+        <section class="about-us">
+        <div class="container my_padding">
+            {% for about in abouts %}
+                {{ about.content|safe }}
+            {% endfor %}
+        </div>
+        </section>
+    {% endif %}
+    <!--
+    ####################################################
+    M E M B E R S H I P
+    ####################################################
+    -->
+    <section id="membership">
+      <div class="container pt-5">
+        <div class="section-header">
+          <h3 class="section-title">Membership</h3><br>
+        </div>
+        <div class="row counters">
+
+          <div class="col-lg-4 col-md-12 text-center">
+            <span class="w">{{ total_scouts|intword }}</span>
+            <p class="text-center w">SCOUTS</p>
+  				</div>
+
+          <div class="col-lg-4 col-md-12 text-center">
+            <span class="w">{{ scoutleaders_count|intcomma }}</span>
+            <p class="text-center w" >SUPPORT STAFF</p>
+  				</div>
+
+          <div class="col-lg-4 col-md-12 text-center">
+            <span class="w">
+            <script>const d = new Date();
+            document.write(d.getFullYear()-1910);</script>
+            </span>
+            <p class="text-center w">YEARS</p>
+  				</div>
+
+  			</div>
+
+      </div>
+    </section>
+
+
+
+    <!--
+    ####################################################
+    D E P A R T M E N T S
+    ####################################################
+    -->
+    {% if not departments %}
+    {% else %}
+      <section id="departments">
+        <div class="container">
+          <div class="section-header">
+            <h3 class="section-title">Departments</h3>
+            <p class="section-description">These are the major departments in The Kenya Scouts Association</p>
+          </div>
+          <div class="row">
+          {% for department in departments %}
+              <div class="col-lg-4 col-md-6">
+                <div class="box">
+                  <div class="icon"><a href=""><i class="{{ department.icon }}"></i></a></div>
+                  <h4 class="title"><a href="">{{ department.name }}</a></h4>
+                    <p class="description">{{ department.description }}</p>
+                </div>
+              </div>
+          {% endfor %}
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+    <!--
+    ####################################################
+    W E - P R O D U C E
+    ####################################################
+    -->
+    {% if not we_produce %}
+    {% else %}
+    {% for i in we_produce %}
+        <section class="we_produce" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url({{ i.image.url }}) fixed center center;">
+            <div class="container my_padding">
+                <div class="row table-responsive">
+                    <div class="col-lg-12 text-center" id="we_produce">
+                        <h3 class="w">{{ i.title|upper }}</h3>
+                        {{ i.content|safe }}
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+    {% endif %}
+
+    <!--
+    ####################################################
+    U P   C O M I N G   E V E N T S
+    ####################################################
+    -->
+
+    {% if not comingevents %}
+    {% else %}
+        <section id="data-table" class="mybackground">
+            <div class="container my_padding">
+                <section>
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="section-title">Up Coming Events</h3><br>
+                        </div>
+                    </div>
+                    <div class="table-responsive bounce animated home-table">
+                        <table class="table table-striped table-bordered table-hover">
+                            <caption class="lead text-center">
+                                Check out all <a href="{% url 'core:ce' %}">Up Coming Events</a>.</caption>
+                            <thead>
+                                <tr>
+                                    <th>Event Type</th>
+                                    <th>Starting Date</th>
+                                    <th>County</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in comingevents %}
+                                    <tr>
+                                        <td><a href="{% url 'core:ce_detail' i.id %}">{{ i.event_type }}</a></td>
+                                        <td>{{ i.start_date }}</td>
+                                        <td>{{ i.county__name }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </section>
+    {% endif %}
+
+    <!--
+    ####################################################
+    D O W N L O A D A B L E   D O C U M E N T S
+    ####################################################
+    -->
+    <section id="data-table" class="mybackground">
+    {% if not document_list %}
+    {% else %}
+        <div class="container my_padding">
+            <section>
+                <div class="row">
+                    <div class="col">
+                        <h3 class="section-title">Latest Downloadable Documents</h3><br>
+                    </div>
+                </div>
+                <div class="table-responsive bounce animated home-table">
+                    <table class="table table-striped table-bordered table-hover">
+                        <caption class="lead text-center">
+                            Check out all <a href="{% url 'files:downloads' %}">Downloadable Files</a>.</caption>
+                        <thead>
+                            <tr>
+                                <th>Document Name</th>
+                                <th>File Type</th>
+                                <th>Size</th>
+                                <th>Upload Time</th>
+                                <th>Download</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in document_list %}
+                                <tr>
+                                    <td>{{ i.doc_name|upper }}</td>
+                                    <td>{{ i.extension }}</td>
+                                    <td>{{ i.filesize }} </td>
+                                    <td>{{ i.timestamp.date }}</td>
+                                    <td>
+                                        <a href="{{ i.file.url }}" download>
+                                            <i class="fa fa-download" aria-hidden="true"></i>Download
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    {% endif %}
+    </section>
+
+    <!--
+    ####################################################
+    S C O U T I N G   I N   B R I E F
+    ####################################################
+    -->
+    {% if not scouting_in_brief %}
+      {% else %}
+      {% for i in scouting_in_brief %}
+          <div class="scouting-in-brief">
+              <div class="container my_padding">
+                  <div class="intro">
+                      <h1 class="text-center u"><strong>{{ i.title|upper }}</strong><br></h1>
+                      {{ i.content|safe }}
+                  </div>
+              </div>
+          </div>
+      {% endfor %}
+    {% endif %}
+
+
+
+
+
+{% endblock %}
+
+
+{% block js %}
+{% endblock %}

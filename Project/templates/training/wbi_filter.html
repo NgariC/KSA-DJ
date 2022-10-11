@@ -1,0 +1,13 @@
+{% extends 'list.html' %}
+{% load bool %}
+
+    {% block table %}
+            {% for i in wbis %}
+            <tr>
+                <td>{{forloop.counter}}.</td>
+                <td>{{ i.scout_leader_name.get_short_name }}</td>
+                <td>{{ i.submission_date }}</td>
+                <td>{{ i.marked|icon }}</td>
+            </tr>
+            {% endfor %}
+    {% endblock %}

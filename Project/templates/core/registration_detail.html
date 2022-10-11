@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ registration.event }}{% endblock title %}
+
+{% block content %}
+<div class="img_background">
+    <div class="container detail-page">
+        <h1>Thanks {{ registration.first_name }} {{ registration.last_name }} for confirming your plan to attend
+            {{ registration.event }}. In case of any development you will be contacted via the contact details
+            provided during this registration.</h1>
+    </div>
+</div>
+{% endblock %}

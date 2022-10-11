@@ -1,0 +1,8 @@
+{% for i in units %}
+<tr>
+    <td>{{forloop.counter}}.</td>
+    <td><a href="{% url 'registrations:unit_detail' i.id %}">{{ i.name }}</a></td>
+    <td>{{ i.code }}</td>
+    <td>{{ i.sub_county.name }}</td>
+</tr>
+{% endfor %}

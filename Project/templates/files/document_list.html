@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Documents{% endblock title %}
+
+{% block content %}
+    <div class="img_background">
+        <div class="container my_padding">
+            {% if not documents %}
+                <div class="row">
+                    <div class="col">
+                        <h3 class="text-center">There are no Downloadable Documents yet! Keep checking for the latest documents</h3>
+                    </div>
+                </div>
+            {% else %}
+                <div class="row">
+                    <div class="col">
+                        <h1 class="text-center">Downloadable Documents</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="table-responsive">
+                        <table id="mytable" class="table detail-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Document Name</th>
+                                    <th>File Type</th>
+                                    <th>Size</th>
+                                    <th>Upload Time</th>
+                                    <th>Download</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in documents %}
+                                <tr>
+                                    <td>{{forloop.counter}}.</td>
+                                    <td>{{ i.doc_name|upper }}</td>
+                                    <td>{{ i.extension }}</td>
+                                    <td>{{ i.filesize }} </td>
+                                    <td>{{ i.timestamp.date }}</td>
+                                    <td>
+                                        <a href="{{ i.file.url }}" download>
+                                            <i class="fa fa-download" aria-hidden="true"></i>Download
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

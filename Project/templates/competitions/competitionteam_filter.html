@@ -1,0 +1,13 @@
+{% extends 'list.html' %}
+
+{% block table %}
+    {% for i in teams %}
+    <tr>
+        <td>{{forloop.counter}}.</td>
+        <td><a href="{{ i.get_absolute_url }}">{{ i.name }}</a></td>
+        <td>{{ i.section }}</td>
+        <td>{{ i.unit }}</td>
+        <td>{{ i.unit.sub_county }}</td>
+    </tr>
+    {% endfor %}
+{% endblock %}

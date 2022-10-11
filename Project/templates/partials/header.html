@@ -1,0 +1,65 @@
+<div class="header">
+<div id="menu_area" class="menu-area">
+<nav class="navbar navbar-light navbar-expand-lg mainmenu">
+    <div class="container">
+      <a class="me navbar-brand" href="{% url 'home' %}">{{ brand }}</a>
+      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-content">
+          <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar-content">
+        <ul class="navbar-nav d-flex ms-auto">
+        {% if user.is_authenticated %}
+
+            {% if user.is_staff %}
+                {% include 'partials/header/super_user.html' %}
+            {% else %}
+                {% if user.link_to_scout_leader == None %}
+                    {% include 'partials/header/none_unit_header.html' %}
+                {% else %}
+                    {% if user.link_to_scout_leader.rank.level == "National" %}
+                        {% include 'partials/header/national_header.html' %}
+                    {% elif user.link_to_scout_leader.rank.level == "Regional" %}
+                        {% include 'partials/header/regional_header.html' %}
+                    {% elif user.link_to_scout_leader.rank.level == "County" %}
+                        {% include 'partials/header/county_header.html' %}
+                    {% elif user.link_to_scout_leader.rank.level == "SubCounty" %}
+                        {% include 'partials/header/sub_county_header.html' %}
+                    {% else %}
+                        {% include 'partials/header/unit_header.html' %}
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+
+
+            {% if user.link_to_scout_leader.rank.level == "Unit" and user.link_to_scout_leader.unit == None %}
+            {% else %}
+                <li class="nav-item"><a class="me nav-link" href="{% url 'payments:mpesa_payments' %}">Payments</a></li>
+            {% endif %}
+          <li class="nav-item"><a class="me nav-link" href="{% url 'core:contact_us' %}">Contact Us</a></li>
+          <li class="nav-item dropdown">
+            <a class="me nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside">{{ user.get_short_name }}</a>
+            <ul class="dropdown-menu shadow">
+              <li><a class="dropdown-item" href="{% url 'view_profile' %}">View Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'edit_profile' user.id %}">Update Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>
+                {% if user.is_staff %}
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin Site</a></li>
+                    <li><a class="dropdown-item" href="{% url 'stats_admin:index' %}">Stats Site</a></li>
+                {% endif %}
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
+            </ul>
+          </li>
+
+
+        {% else %}
+            <li><a class="me nav-link" href="{% url 'login' %}">Sign in</a></li>
+            <li><a class="me nav-link" href="{% url 'sign_up' %}">Sign Up</a></li>
+        {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+</div>

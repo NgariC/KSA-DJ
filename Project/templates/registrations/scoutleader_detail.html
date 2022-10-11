@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static humanize %}
+
+{% block title %}{{ scoutleader.get_short_name }}{% endblock title %}
+
+
+{% block content %}
+    <div class="img_background">
+        <div class="my_padding">
+            <div class="container profile-card">
+                {% if scoutleader.image %}
+                    <div class="profile-back"></div><a href="{{ scoutleader.image.url }}"><img class="rounded-circle profile-pic" src="{{ scoutleader.image.url }}" alt="{{ scoutleader.name }}"></a>
+                {% else %}
+                    <div class="profile-back"></div><img class="rounded-circle profile-pic" src="{% static 'img/user.png' %}" alt="No Profile Picture">
+                {% endif %}
+                <h3 class="profile-name">{{ scoutleader.get_full_name }}</h3>
+                <div class="row justify-content-md-center">
+                    <div class="col col-md-8 card-body" id="profile-details">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Code</strong></td>
+                                        <td><em>{{ scoutleader.code }}</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Email</strong></td>
+                                        <td><em>{{ scoutleader.email }}</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Phone Number</strong></td>
+                                        <td><em>{{ scoutleader.phone_number }}</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>SubCounty</strong></td>
+                                        <td><em>{{ scoutleader.sub_county }}</em></td>
+                                    </tr>
+                                    {% if scoutleader.unit %}
+                                    <tr>
+                                        <td><strong>Unit</strong></td>
+                                        <td><em>{{ scoutleader.unit }}</em></td>
+                                    </tr>
+                                    {% endif %}
+                                    <tr>
+                                        <td><strong>Level of Training</strong></td>
+                                        <td><em>{{ scoutleader.training }}</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Registration Date</strong></td>
+                                        <td><em>{{ scoutleader.registration_date|naturaltime }}</em></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        {% if user.link_to_scout_leader.id == scoutleader.id %}
+                            <button class="button">
+                                <a href="{% url 'registrations:scout_leader_unit_update' scoutleader.id %}">
+                                    Unit change application
+                                </a>
+                            </button>
+                            <button class="button">
+                                <a href="{% url 'registrations:add_scout_leader_cert' %}">
+                                    Add Scout Leader's Certificate
+                                </a>
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
