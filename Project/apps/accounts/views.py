@@ -1,7 +1,9 @@
 from crispy_forms.utils import render_crispy_form
 from django.contrib import messages
 from django.contrib.auth import login, get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
@@ -9,12 +11,13 @@ from django.urls import reverse_lazy, reverse
 from django.utils.safestring import mark_safe
 from django.views import View
 from django.views.generic import CreateView
-from django.views.generic.edit import FormMixin
+from django.views.generic.edit import FormMixin, UpdateView
 
 from apps.accounts.forms import RegisterForm, ReactivateEmailForm, CustomLoginForm
 from apps.accounts.mixins import NextUrlMixin, RequestFormAttachMixin
-from apps.accounts.models import EmailActivation
+from apps.accounts.models import EmailActivation, User
 from apps.accounts.utils import DisAllowLoggedInUser
+from apps.core.forms import UserForm
 
 
 class CustomLoginView(DisAllowLoggedInUser, NextUrlMixin, RequestFormAttachMixin, LoginView):
@@ -90,3 +93,31 @@ class AccountEmailActivateView(FormMixin, View):
     def form_invalid(self, form):
         context = {'form': form, "key": self.key}
         return render(self.request, 'registration/activation-error.html', context)
+
+
+def view_profile(request, pk=None):
+    user = User.objects.get(pk=pk) if pk else request.user
+    args = {'user': user}
+    return render(request, 'accounts/profile.html', args)
+
+
+class UserUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    form_class = UserForm
+    model = User
+    template_name = 'form.html'
+    success_url = '/profile'
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['email'] = self.request.user.email
+        initial['first_name'] = self.request.user.first_name
+        initial['last_name'] = self.request.user.last_name
+        initial['link_to_scout_leader'] = self.request.user.link_to_scout_leader
+        return initial
+
+    def get_success_message(self, cleaned_data):
+        return u"{0} updated!".format(self.object)

@@ -9,6 +9,7 @@ from django.utils.translation import gettext_lazy as _
 
 from apps.accounts.managers import UserManager, EmailActivationManager
 from apps.accounts.utils import unique_key_generator
+from apps.registrations.models import ScoutLeader
 
 
 class Groups(Group):
@@ -31,6 +32,8 @@ class User(AbstractUser):
     username = None
     email = models.EmailField(_('email address'), unique=True)
     image = models.ImageField(_("Profile Picture"), upload_to='profile_image/%Y/%m/%d', null=True, blank=True)
+    link_to_scout_leader = models.OneToOneField(ScoutLeader, on_delete=models.CASCADE, db_constraint=False, null=True,
+                                                blank=True)
 
     objects = UserManager()
     USERNAME_FIELD = 'email'

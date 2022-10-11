@@ -4,6 +4,7 @@ from django import forms
 from django.contrib.admin.widgets import AutocompleteSelect, AutocompleteSelectMultiple
 from tinymce.widgets import TinyMCE
 
+from apps.accounts.models import User
 from apps.core.project_requirements.admins import auto_admin_site
 from apps.core.models import ComingEvent, Registration
 from apps.core.project_requirements.querysets import CountyQ, ScoutLeaderQ, SubCountyQ, ComingEventQ
@@ -137,3 +138,43 @@ class RegistrationForm(forms.ModelForm):
             )
         )
 
+
+class UserForm(forms.ModelForm):
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
+    email = forms.EmailField(required=True)
+    link_to_scout_leader = forms.ModelChoiceField(widget=AutocompleteSelect(
+        User._meta.get_field('link_to_scout_leader'), auto_admin_site),
+        queryset=ScoutLeaderQ)
+
+    class Meta:
+        model = User
+        fields = (
+            'email',
+            'first_name',
+            'last_name',
+            'link_to_scout_leader',
+        )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'id-myForm'
+        self.helper.form_method = 'POST'
+        self.helper.form_class = 'form-horizontal form-bordered form-inline'
+        self.helper.label_class = 'col-lg-4'
+        self.helper.field_class = 'col-lg-8'
+        self.helper.layout = Layout(
+            Fieldset('User Profile Details',
+                     Row(
+                         Column('email', css_class='form-group col-md-6 mb-0'),
+                         Column('first_name', css_class='form-group col-md-6 mb-0'),
+                         Column('last_name', css_class='form-group col-md-6 mb-0'),
+                         Column('link_to_scout_leader', css_class='form-group col-md-6 mb-0'),
+                         css_class='form-row'
+                     ),
+                     ),
+            ButtonHolder(
+                Submit('submit', 'Update', css_class='primaryAction')
+            ),
+        )
