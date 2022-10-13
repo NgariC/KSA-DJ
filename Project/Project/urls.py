@@ -10,7 +10,7 @@ from django.views.generic import TemplateView
 from apps.accounts.views import AccountEmailActivateView, SignUp, CustomLoginView, view_profile, UserUpdate
 from apps.core.project_requirements import sitemaps
 from apps.core.project_requirements.admins import auto_admin_site, stats_admin_site, strict_admin_site
-from apps.core.views import DashboardView
+from apps.core.views import DashboardView, clear
 
 admin.site.site_header = "KSA Portal Administration"
 admin.site.site_title = "KSA Administrator"
@@ -61,6 +61,12 @@ urlpatterns += i18n_patterns(
     path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 )
+
+htmx_urlpatterns = [
+    path('clear/', clear, name='clear'),
+]
+
+urlpatterns += htmx_urlpatterns
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

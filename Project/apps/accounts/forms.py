@@ -7,6 +7,7 @@ from django.core.exceptions import ValidationError
 from django.urls import reverse_lazy, reverse
 from django.utils.safestring import mark_safe
 from django.utils.text import capfirst
+from django.utils.translation import gettext_lazy as _
 
 from apps.accounts.models import User, EmailActivation
 
@@ -43,9 +44,9 @@ class CustomLoginForm(forms.Form):
                                strip=False,
                                widget=forms.PasswordInput(attrs={"autocomplete": "current-password"}), )
     error_messages = {
-        "invalid_login": "Please enter a correct %(email)s and password. "
-                         "Note that both fields may be case-sensitive.",
-        "inactive": "This account is inactive. Contact the administrator for more information about your account",
+        "invalid_login": _("Please enter a correct %(email)s and password. "
+                           "Note that both fields may be case-sensitive."),
+        "inactive": _("This account is inactive. Contact the administrator for more information about your account"),
     }
 
     def __init__(self, request, *args, **kwargs):
@@ -83,28 +84,32 @@ class CustomLoginForm(forms.Form):
             # user email is registered, check active/
             not_active = qs.filter(is_active=False)
             if not_active.exists():
-                ## not active, check email activation
-                link = reverse("account:resend-activation")
-                reconfirm_msg = """Go to <a href='{resend_link}'>
-                resend confirmation email</a>.
-                """.format(resend_link=link)
-                confirm_email = EmailActivation.objects.filter(email=email)
-                is_confirmable = confirm_email.confirmable().exists()
-                if is_confirmable:
-                    msg1 = f"Please check your email to confirm your account or {reconfirm_msg.lower()}"
-
-                    raise forms.ValidationError(mark_safe(msg1))
-                if email_confirm_exists := EmailActivation.objects.email_exists(email).exists():
-                    msg2 = f"Email not confirmed. {reconfirm_msg}"
-                    raise forms.ValidationError(mark_safe(msg2))
-                if not is_confirmable:
-                    raise forms.ValidationError("This user is inactive.")
+                self._extracted_from_clean_12(email)
         user = authenticate(request, username=email, password=password)
         if user is None:
-            raise forms.ValidationError("Invalid credentials")
+            raise forms.ValidationError(_("Invalid credentials"))
         login(request, user)
         self.user = user
         return data
+
+    # TODO Rename this here and in `clean`
+    def _extracted_from_clean_12(self, email):
+        ## not active, check email activation
+        link = reverse("account:resend-activation")
+        reconfirm_msg = _("""Go to <a href='{resend_link}'>
+                resend confirmation email</a>.
+                """).format(resend_link=link)
+        confirm_email = EmailActivation.objects.filter(email=email)
+        is_confirmable = confirm_email.confirmable().exists()
+        if is_confirmable:
+            msg1 = _(f"Please check your email to confirm your account or {reconfirm_msg.lower()}")
+
+            raise forms.ValidationError(mark_safe(msg1))
+        if email_confirm_exists := EmailActivation.objects.email_exists(email).exists():
+            msg2 = _(f"Email not confirmed. {reconfirm_msg}")
+            raise forms.ValidationError(mark_safe(msg2))
+        if not is_confirmable:
+            raise forms.ValidationError(_("This user is inactive."))
 
     # def clean(self):
     #     email = self.cleaned_data.get("email")
@@ -129,12 +134,13 @@ class CustomLoginForm(forms.Form):
             )
         if not user.email_confirmed:
             link = reverse("resend-activation")
-            reconfirm_msg = """Go to <a href='{resend_link}'> resend confirmation email</a>.""".format(resend_link=link)
-            msg1 = f"Please check your email to confirm your account or {reconfirm_msg.lower()}"
+            reconfirm_msg = _("""Go to <a href='{resend_link}'> resend confirmation email</a>.""").format(
+                resend_link=link)
+            msg1 = _(f"Please check your email to confirm your account or {reconfirm_msg.lower()}")
 
             raise ValidationError(
                 forms.ValidationError(mark_safe(msg1)),
-                code="email not confirmed",
+                code=_("email not confirmed"),
             )
 
     def get_user(self):
@@ -143,7 +149,7 @@ class CustomLoginForm(forms.Form):
     def get_invalid_login_error(self):
         return ValidationError(
             self.error_messages["invalid_login"],
-            code="invalid_login",
+            code=_("invalid_login"),
             params={"email": self.username_field.verbose_name},
         )
 
@@ -154,7 +160,7 @@ class ReactivateEmailForm(forms.Form):
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if not User.objects.email_exists(email).exists():
-            msg = """This email does not exists, would you like to <a href="{link}">Sign Up</a>?
-            """.format(link=reverse("sign_up"))
+            msg = _("""This email does not exists, would you like to <a href="{link}">Sign Up</a>?
+            """).format(link=reverse("sign_up"))
             raise forms.ValidationError(mark_safe(msg))
         return email

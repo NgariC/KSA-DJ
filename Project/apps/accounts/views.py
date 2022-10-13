@@ -9,6 +9,7 @@ from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
 from django.urls import reverse_lazy, reverse
 from django.utils.safestring import mark_safe
+from django.utils.translation import gettext_lazy as _
 from django.views import View
 from django.views.generic import CreateView
 from django.views.generic.edit import FormMixin, UpdateView
@@ -60,15 +61,15 @@ class AccountEmailActivateView(FormMixin, View):
             if confirm_qs.count() == 1:
                 obj = confirm_qs.first()
                 obj.activate()
-                messages.success(request, "Your email has been confirmed. Please login.")
+                messages.success(request, _("Your email has been confirmed. Please login."))
                 return redirect("login")
             else:
                 activated_qs = qs.filter(activated=True)
                 if activated_qs.exists():
                     reset_link = reverse("password_reset")
-                    msg = """Your email has already been confirmed
+                    msg = _("""Your email has already been confirmed
                     Do you need to <a href="{link}">reset your password</a>?
-                    """.format(link=reset_link)
+                    """).format(link=reset_link)
                     messages.success(request, mark_safe(msg))
                     return redirect("login")
         context = {'form': self.get_form(), 'key': key}
@@ -80,7 +81,7 @@ class AccountEmailActivateView(FormMixin, View):
         return self.form_valid(form) if form.is_valid() else self.form_invalid(form)
 
     def form_valid(self, form):
-        msg = """Activation link sent, please check your email."""
+        msg = _("""Activation link sent, please check your email.""")
         request = self.request
         messages.success(request, msg)
         email = form.cleaned_data.get("email")
@@ -120,4 +121,4 @@ class UserUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return initial
 
     def get_success_message(self, cleaned_data):
-        return u"{0} updated!".format(self.object)
+        return _(u"{0} updated!").format(self.object)

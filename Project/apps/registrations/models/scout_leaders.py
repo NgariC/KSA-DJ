@@ -17,7 +17,7 @@ old_enough_26 = datetime.date.today() - datetime.timedelta(days=9490)
 
 def over_26_years(value):
     if value > old_enough_26:
-        raise ValidationError("The age have to be 26 years and above!")
+        raise ValidationError(_("The age have to be 26 years and above!"))
     return value
 
 

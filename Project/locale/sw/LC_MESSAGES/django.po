@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-04 11:18+0300\n"
-"PO-Revision-Date: 2022-10-04 13:33+0300\n"
+"POT-Creation-Date: 2022-10-13 19:10+0300\n"
+"PO-Revision-Date: 2022-10-13 19:15+0300\n"
 "Last-Translator: Charles Ngari <ngangaricharles@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,72 +19,567 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: Project/settings/base.py:188
+#: Project/settings/base.py:190
 msgid "English"
 msgstr "Kingereza"
 
-#: Project/settings/base.py:189
+#: Project/settings/base.py:191
 msgid "French"
 msgstr "Kifaransa"
 
-#: Project/settings/base.py:190
+#: Project/settings/base.py:192
 msgid "Swahili"
 msgstr "Kiswahili"
 
-#: apps/accounts/models.py:15
+#: apps/accounts/forms.py:47
+#, python-format
+msgid ""
+"Please enter a correct %(email)s and password. Note that both fields may be "
+"case-sensitive."
+msgstr ""
+
+#: apps/accounts/forms.py:49
+msgid ""
+"This account is inactive. Contact the administrator for more information "
+"about your account"
+msgstr ""
+
+#: apps/accounts/forms.py:90
+msgid "Invalid credentials"
+msgstr ""
+
+#: apps/accounts/forms.py:99
+#, python-brace-format
+msgid ""
+"Go to <a href='{resend_link}'>\n"
+"                resend confirmation email</a>.\n"
+"                "
+msgstr ""
+
+#: apps/accounts/forms.py:105 apps/accounts/forms.py:139
+msgid ""
+"Please check your email to confirm your account or {reconfirm_msg.lower()}"
+msgstr ""
+
+#: apps/accounts/forms.py:109
+#, python-brace-format
+msgid "Email not confirmed. {reconfirm_msg}"
+msgstr ""
+
+#: apps/accounts/forms.py:112
+msgid "This user is inactive."
+msgstr ""
+
+#: apps/accounts/forms.py:137
+#, python-brace-format
+msgid "Go to <a href='{resend_link}'> resend confirmation email</a>."
+msgstr ""
+
+#: apps/accounts/forms.py:143
+msgid "email not confirmed"
+msgstr ""
+
+#: apps/accounts/forms.py:152
+msgid "invalid_login"
+msgstr ""
+
+#: apps/accounts/forms.py:163
+#, python-brace-format
+msgid ""
+"This email does not exists, would you like to <a href=\"{link}\">Sign Up</a>?\n"
+"            "
+msgstr ""
+
+#: apps/accounts/models.py:16 apps/core/models.py:26 apps/core/models.py:69
+#: apps/core/models.py:84 apps/files/models.py:39
 msgid "description"
 msgstr "maelezo"
 
-#: apps/accounts/models.py:20
+#: apps/accounts/models.py:21
 msgid "group"
 msgstr "kundi"
 
-#: apps/accounts/models.py:21
+#: apps/accounts/models.py:22
 msgid "groups"
 msgstr "makundi"
 
-#: apps/accounts/models.py:32 apps/accounts/models.py:42
+#: apps/accounts/models.py:33 apps/accounts/models.py:45
 msgid "email address"
-msgstr ""
+msgstr "barua pepe"
 
-#: apps/accounts/models.py:33
+#: apps/accounts/models.py:34 apps/registrations/models/abstract.py:15
 msgid "Profile Picture"
-msgstr ""
+msgstr "Picha ya Wasifu"
 
-#: apps/accounts/models.py:43
+#: apps/accounts/models.py:46 apps/core/models.py:17
 msgid "key"
 msgstr ""
 
-#: apps/accounts/models.py:44
+#: apps/accounts/models.py:47
 msgid "activated"
-msgstr ""
+msgstr "imeamilishwa"
 
-#: apps/accounts/models.py:45
+#: apps/accounts/models.py:48
 msgid "forced_expired"
 msgstr ""
 
-#: apps/accounts/models.py:46
+#: apps/accounts/models.py:49
 msgid "expires"
 msgstr ""
 
-#: apps/accounts/models.py:47
+#: apps/accounts/models.py:50 apps/core/models.py:29
 msgid "timestamp"
 msgstr ""
 
-#: apps/accounts/models.py:48
+#: apps/accounts/models.py:51
 msgid "update"
+msgstr ""
+
+#: apps/accounts/views.py:64
+msgid "Your email has been confirmed. Please login."
+msgstr ""
+
+#: apps/accounts/views.py:70
+#, python-brace-format
+msgid ""
+"Your email has already been confirmed\n"
+"                    Do you need to <a href=\"{link}\">reset your password</a>?\n"
+"                    "
+msgstr ""
+
+#: apps/accounts/views.py:84
+msgid "Activation link sent, please check your email."
+msgstr ""
+
+#: apps/accounts/views.py:124
+#, python-brace-format
+msgid "{0} updated!"
+msgstr ""
+
+#: apps/celebrations/forms.py:18 apps/celebrations/forms.py:26
+#: apps/celebrations/forms.py:94
+msgid "Only active Scout Leaders are valid options"
+msgstr ""
+
+#: apps/celebrations/forms.py:44
+msgid "Add a new founderee event"
+msgstr "Ongeza tukio jipya la mwanzilishi"
+
+#: apps/celebrations/forms.py:78
+msgid "Only active Sungura Scouts are valid options"
+msgstr ""
+
+#: apps/celebrations/forms.py:82
+msgid "Only active Chipukizi Scouts are valid options"
+msgstr ""
+
+#: apps/celebrations/forms.py:86
+msgid "Only active Mwamba Scouts are valid options"
+msgstr ""
+
+#: apps/celebrations/forms.py:90
+msgid "Only active Jasiri Scouts are valid options"
+msgstr ""
+
+#: apps/celebrations/forms.py:109
+msgid "Add participants to the Patrons Day who are not awardees"
+msgstr ""
+
+#: apps/celebrations/models/founderee.py:17
+msgid "Founderee Year"
+msgstr ""
+
+#: apps/celebrations/models/founderee.py:27 apps/competitions/models.py:99
+#: apps/core/models.py:104 apps/training/models.py:21
+#: apps/youth_programme/models.py:20
+msgid "start date"
+msgstr "Tarehe ya kuanza"
+
+#: apps/celebrations/models/founderee.py:28 apps/competitions/models.py:100
+#: apps/core/models.py:105 apps/training/models.py:22
+#: apps/youth_programme/models.py:21
+msgid "end date"
+msgstr "Tarehe ya mwisho"
+
+#: apps/celebrations/models/founderee.py:29 apps/competitions/models.py:101
+#: apps/training/models.py:20 apps/training/models.py:205
+#: apps/youth_programme/models.py:18
+msgid "report"
+msgstr ""
+
+#: apps/celebrations/models/founderee.py:31 apps/core/models.py:108
+#: apps/training/models.py:23 apps/youth_programme/models.py:22
+msgid "Venue Name"
+msgstr "Jina la ukumbi"
+
+#: apps/celebrations/models/founderee.py:32 apps/competitions/models.py:104
+#: apps/core/models.py:109 apps/training/models.py:24
+#: apps/training/models.py:206 apps/youth_programme/models.py:23
+msgid "venue"
+msgstr "ukumbi"
+
+#: apps/celebrations/models/patrons_day.py:16
+msgid "awards date"
+msgstr ""
+
+#: apps/celebrations/models/patrons_day.py:17
+msgid "Awards Year"
+msgstr ""
+
+#: apps/celebrations/models/patrons_day.py:126 apps/competitions/models.py:17
+#: apps/competitions/models.py:41 apps/jurisdictions/models.py:12
+#: apps/jurisdictions/models.py:28 apps/jurisdictions/models.py:43
+#: apps/jurisdictions/models.py:66 apps/jurisdictions/models.py:86
+#: apps/jurisdictions/models.py:110
+#: apps/registrations/models/scout_leaders.py:75
+#: apps/youth_programme/models.py:54
+msgid "name"
+msgstr ""
+
+#: apps/celebrations/models/patrons_day.py:137
+#: apps/celebrations/models/patrons_day.py:167
+msgid "Year"
+msgstr ""
+
+#: apps/celebrations/models/patrons_day.py:138
+msgid "date added"
+msgstr ""
+
+#: apps/celebrations/models/patrons_day.py:168
+msgid "date"
+msgstr ""
+
+#: apps/celebrations/stats/models.py:13
+msgid "Founderee Stats"
+msgstr ""
+
+#: apps/celebrations/stats/models.py:14
+msgid "Founderees Stats"
+msgstr ""
+
+#: apps/celebrations/stats/models.py:23 apps/celebrations/stats/models.py:24
+msgid "PatronsDay Stats"
+msgstr ""
+
+#: apps/celebrations/views/list.py:14 apps/celebrations/views/list.py:29
+#: apps/competitions/views/list.py:14 apps/competitions/views/list.py:29
+#: apps/projects/views/list.py:18 apps/projects/views/list.py:57
+#: apps/projects/views/list.py:72 apps/projects/views/list.py:87
+#: apps/registrations/views/list.py:15 apps/registrations/views/list.py:32
+#: apps/registrations/views/list.py:48 apps/training/views/list.py:15
+#: apps/training/views/list.py:30 apps/training/views/list.py:45
+#: apps/training/views/list.py:60 apps/training/views/list.py:75
+#: apps/training/views/list.py:90 apps/training/views/list.py:105
+#: apps/training/views/list.py:120 apps/youth_programme/views/list.py:14
+#: apps/youth_programme/views/list.py:29 apps/youth_programme/views/list.py:44
+#: apps/youth_programme/views/list.py:59 apps/youth_programme/views/list.py:74
+#, python-brace-format
+msgid "{opts.verbose_name}"
+msgstr ""
+
+#: apps/celebrations/views/list.py:15 apps/celebrations/views/list.py:30
+#: apps/competitions/views/list.py:15 apps/competitions/views/list.py:16
+#: apps/competitions/views/list.py:30 apps/projects/views/list.py:19
+#: apps/projects/views/list.py:20 apps/projects/views/list.py:58
+#: apps/projects/views/list.py:59 apps/projects/views/list.py:73
+#: apps/projects/views/list.py:74 apps/projects/views/list.py:88
+#: apps/projects/views/list.py:89 apps/registrations/views/list.py:17
+#: apps/registrations/views/list.py:33 apps/registrations/views/list.py:49
+#: apps/training/views/list.py:16 apps/training/views/list.py:31
+#: apps/training/views/list.py:46 apps/training/views/list.py:47
+#: apps/training/views/list.py:61 apps/training/views/list.py:76
+#: apps/training/views/list.py:77 apps/training/views/list.py:91
+#: apps/training/views/list.py:106 apps/training/views/list.py:121
+#: apps/youth_programme/views/list.py:15 apps/youth_programme/views/list.py:30
+#: apps/youth_programme/views/list.py:45 apps/youth_programme/views/list.py:60
+#: apps/youth_programme/views/list.py:75
+#, python-brace-format
+msgid "{opts.verbose_name_plural}"
+msgstr ""
+
+#: apps/celebrations/views/list.py:16 apps/competitions/views/list.py:31
+#: apps/training/views/list.py:17 apps/training/views/list.py:32
+#: apps/training/views/list.py:62 apps/training/views/list.py:92
+#: apps/training/views/list.py:107 apps/training/views/list.py:122
+#: apps/youth_programme/views/list.py:16 apps/youth_programme/views/list.py:31
+#: apps/youth_programme/views/list.py:46 apps/youth_programme/views/list.py:61
+#: apps/youth_programme/views/list.py:76
+#, python-brace-format
+msgid "{opts.verbose_name_plural} Events"
+msgstr ""
+
+#: apps/celebrations/views/list.py:17 apps/celebrations/views/list.py:32
+#: apps/competitions/views/list.py:17 apps/competitions/views/list.py:32
+#: apps/projects/views/list.py:21 apps/projects/views/list.py:60
+#: apps/projects/views/list.py:75 apps/projects/views/list.py:90
+#: apps/training/views/list.py:18 apps/training/views/list.py:33
+#: apps/training/views/list.py:48 apps/training/views/list.py:63
+#: apps/training/views/list.py:78 apps/training/views/list.py:93
+#: apps/training/views/list.py:108 apps/training/views/list.py:123
+#: apps/youth_programme/views/list.py:17 apps/youth_programme/views/list.py:32
+#: apps/youth_programme/views/list.py:47 apps/youth_programme/views/list.py:62
+#: apps/youth_programme/views/list.py:77
+#, python-brace-format
+msgid ""
+"There are no {opts.verbose_name_plural} carried out within your jurisdiction"
+" yet!"
+msgstr ""
+
+#: apps/celebrations/views/list.py:31
+#, python-brace-format
+msgid "Patrons Day Participants {opts.verbose_name_plural}"
+msgstr ""
+
+#: apps/competitions/models.py:28 apps/competitions/models.py:92
+#, fuzzy
+#| msgid "SubCounty Level"
+msgid "SubCounty"
+msgstr "ngazi ya kata_ndogo"
+
+#: apps/competitions/models.py:29 apps/competitions/models.py:93
+#, fuzzy
+#| msgid "county"
+msgid "County"
+msgstr "kata"
+
+#: apps/competitions/models.py:30
+#, fuzzy
+#| msgid "region"
+msgid "Region"
+msgstr "mkoa"
+
+#: apps/competitions/models.py:31 apps/competitions/models.py:95
+#, fuzzy
+#| msgid "National Level"
+msgid "National"
+msgstr "ngazi ya taifa"
+
+#: apps/competitions/models.py:32 apps/competitions/models.py:96
+#, fuzzy
+#| msgid "Zonal Level"
+msgid "Zonal"
+msgstr "ngazi ya eneo"
+
+#: apps/competitions/models.py:35 apps/youth_programme/models.py:50
+msgid "Chipukizi"
+msgstr ""
+
+#: apps/competitions/models.py:36 apps/youth_programme/models.py:51
+msgid "Mwamba"
+msgstr ""
+
+#: apps/competitions/models.py:37 apps/youth_programme/models.py:52
+msgid "Jasiri"
+msgstr ""
+
+#: apps/competitions/models.py:39 apps/competitions/models.py:98
+msgid "Competition Year"
+msgstr ""
+
+#: apps/competitions/models.py:40 apps/registrations/models/abstract.py:14
+msgid "gender"
+msgstr ""
+
+#: apps/competitions/models.py:46 apps/competitions/models.py:102
+msgid "Level of Competition"
+msgstr ""
+
+#: apps/competitions/models.py:48
+msgid "Team Section"
+msgstr ""
+
+#: apps/competitions/models.py:49
+msgid "If the Team is a Special team"
+msgstr ""
+
+#: apps/competitions/models.py:94
+#, fuzzy
+#| msgid "Regional Level"
+msgid "Regional"
+msgstr "ngazi ya mkoa"
+
+#: apps/competitions/models.py:103
+msgid "venue name"
+msgstr "jina la ukumbi"
+
+#: apps/competitions/stats/models.py:13
+msgid "Competition Team Stats"
+msgstr ""
+
+#: apps/competitions/stats/models.py:14
+msgid "Competition Teams Stats"
+msgstr ""
+
+#: apps/competitions/stats/models.py:23
+msgid "Competition Stats"
+msgstr ""
+
+#: apps/competitions/stats/models.py:24
+msgid "Competitions Stats"
+msgstr ""
+
+#: apps/core/models.py:18
+msgid "value"
+msgstr ""
+
+#: apps/core/models.py:25 apps/core/models.py:47 apps/core/models.py:58
+msgid "title"
+msgstr ""
+
+#: apps/core/models.py:27
+msgid "Slide Image"
+msgstr ""
+
+#: apps/core/models.py:28
+msgid "featured"
+msgstr ""
+
+#: apps/core/models.py:48 apps/core/models.py:59
+msgid "content"
+msgstr ""
+
+#: apps/core/models.py:49
+msgid "Background Image"
+msgstr ""
+
+#: apps/core/models.py:68
+msgid "department name"
+msgstr ""
+
+#: apps/core/models.py:70
+msgid "icon"
+msgstr ""
+
+#: apps/core/models.py:79
+msgid "cover photo"
+msgstr ""
+
+#: apps/core/models.py:80
+msgid "camp center name"
+msgstr ""
+
+#: apps/core/models.py:81
+msgid "camp warden"
+msgstr ""
+
+#: apps/core/models.py:82 apps/core/models.py:154
+#: apps/registrations/models/scout_leaders.py:27
+#: apps/registrations/models/scouts.py:40
+msgid "email"
+msgstr ""
+
+#: apps/core/models.py:83 apps/core/models.py:155
+#: apps/registrations/models/scout_leaders.py:28
+#: apps/registrations/models/scouts.py:42
+msgid "phone number"
+msgstr ""
+
+#: apps/core/models.py:85
+msgid "services"
+msgstr ""
+
+#: apps/core/models.py:86 apps/training/models.py:25
+#: apps/training/models.py:125 apps/training/models.py:207
+#: apps/youth_programme/models.py:24
+msgid "payments"
+msgstr ""
+
+#: apps/core/models.py:88
+msgid "exact place"
+msgstr ""
+
+#: apps/core/models.py:103
+msgid "Type of Event"
+msgstr ""
+
+#: apps/core/models.py:106
+msgid "Requirement to attend"
+msgstr ""
+
+#: apps/core/models.py:110
+msgid "is featured"
+msgstr ""
+
+#: apps/core/models.py:113
+msgid "is published"
+msgstr ""
+
+#: apps/core/models.py:119
+msgid "enable event registration"
+msgstr ""
+
+#: apps/core/models.py:120
+msgid "allow registration until"
+msgstr ""
+
+#: apps/core/models.py:139 apps/training/models.py:36
+#: apps/youth_programme/models.py:39
+msgid "Start date should be before end date."
+msgstr "Tarehe ya kuanza inapaswa kuwa kabla ya tarehe ya mwisho."
+
+#: apps/core/models.py:142
+msgid "Please select a registration deadline."
+msgstr ""
+
+#: apps/core/models.py:151
+msgid "First Name"
+msgstr ""
+
+#: apps/core/models.py:152
+msgid "Last Name"
+msgstr ""
+
+#: apps/core/models.py:156
+msgid "Message"
+msgstr ""
+
+#: apps/core/project_requirements/log.py:40
+msgid "Changed"
+msgstr ""
+
+#: apps/files/models.py:10
+msgid "time stamp"
+msgstr ""
+
+#: apps/files/models.py:11
+msgid "Document name"
+msgstr ""
+
+#: apps/files/models.py:12 apps/files/models.py:61
+msgid "file"
+msgstr ""
+
+#: apps/files/models.py:40
+msgid "date to cease showing"
+msgstr ""
+
+#: apps/files/models.py:60
+msgid "Form Name"
+msgstr ""
+
+#: apps/geoposition/fields.py:10
+msgid "A geoposition (latitude and longitude)"
+msgstr ""
+
+#: apps/geoposition/forms.py:10
+msgid "Enter a valid geoposition."
+msgstr ""
+
+#: apps/geoposition/forms.py:16 apps/geoposition/widgets.py:35
+#: apps/geoposition/widgets.py:49
+msgid "latitude"
+msgstr ""
+
+#: apps/geoposition/forms.py:17 apps/geoposition/widgets.py:39
+#: apps/geoposition/widgets.py:53
+msgid "longitude"
 msgstr ""
 
 #: apps/jurisdictions/models.py:11 apps/jurisdictions/models.py:42
 #: apps/jurisdictions/models.py:109
+#: apps/registrations/models/scout_leaders.py:74
 msgid "code"
 msgstr "kanuni"
-
-#: apps/jurisdictions/models.py:12 apps/jurisdictions/models.py:28
-#: apps/jurisdictions/models.py:43 apps/jurisdictions/models.py:66
-#: apps/jurisdictions/models.py:86 apps/jurisdictions/models.py:110
-msgid "name"
-msgstr ""
 
 #: apps/jurisdictions/models.py:20
 msgid "country"
@@ -103,6 +598,8 @@ msgid "regions"
 msgstr ""
 
 #: apps/jurisdictions/models.py:45 apps/jurisdictions/models.py:68
+#: apps/registrations/models/abstract.py:17
+#: apps/registrations/models/units.py:19
 msgid "activeness"
 msgstr ""
 
@@ -170,6 +667,310 @@ msgstr ""
 msgid "ranks"
 msgstr ""
 
+#: apps/projects/models.py:15
+msgid "Proposal"
+msgstr ""
+
+#: apps/projects/models.py:17
+msgid "1st Report"
+msgstr ""
+
+#: apps/projects/models.py:20
+msgid "2nd Report"
+msgstr ""
+
+#: apps/projects/models.py:23
+msgid "3rd Report"
+msgstr ""
+
+#: apps/projects/models.py:26
+msgid "completion date"
+msgstr ""
+
+#: apps/projects/models.py:34
+msgid "Project Title"
+msgstr ""
+
+#: apps/projects/models.py:136
+msgid "detailed report"
+msgstr ""
+
+#: apps/registrations/models/abstract.py:11
+msgid "first name"
+msgstr ""
+
+#: apps/registrations/models/abstract.py:12
+msgid "middle name"
+msgstr ""
+
+#: apps/registrations/models/abstract.py:13
+msgid "surname"
+msgstr ""
+
+#: apps/registrations/models/abstract.py:16
+msgid "registration date"
+msgstr ""
+
+#: apps/registrations/models/abstract.py:34
+msgid "Picture"
+msgstr ""
+
+#: apps/registrations/models/scout_leaders.py:20
+msgid "The age have to be 26 years and above!"
+msgstr ""
+
+#: apps/registrations/models/scout_leaders.py:25
+msgid "date of birth"
+msgstr ""
+
+#: apps/registrations/models/scout_leaders.py:26
+#: apps/registrations/models/scouts.py:38
+msgid "National ID/Passport"
+msgstr ""
+
+#: apps/registrations/models/scout_leaders.py:29
+msgid "tsc number"
+msgstr ""
+
+#: apps/registrations/models/scout_leaders.py:33
+msgid "Level of Training"
+msgstr ""
+
+#: apps/registrations/models/scout_leaders.py:35
+msgid "life member"
+msgstr ""
+
+#: apps/registrations/models/scout_leaders.py:51
+msgid "A life member should always be active. Mark the Scout Leader as active"
+msgstr ""
+
+#: apps/registrations/models/scouts.py:19
+msgid "Birth Certificate Number"
+msgstr ""
+
+#: apps/registrations/models/scouts.py:20
+#, fuzzy
+#| msgid "description"
+msgid "section"
+msgstr "maelezo"
+
+#: apps/registrations/models/scouts.py:22
+msgid "investiture"
+msgstr ""
+
+#: apps/registrations/models/scouts.py:23
+msgid "jasiri investiture"
+msgstr ""
+
+#: apps/registrations/models/scouts.py:31
+msgid "Chui Badge Award"
+msgstr ""
+
+#: apps/registrations/models/scouts.py:35
+msgid "Simba Badge Award"
+msgstr ""
+
+#: apps/registrations/models/scouts.py:41
+msgid "example@gmail.com (Leave blank if the Scout is not a Jasiri)"
+msgstr ""
+
+#: apps/registrations/models/scouts.py:75
+msgid "For a Jasiri Scout the National Id/Passport must be provided."
+msgstr ""
+
+#: apps/registrations/models/scouts.py:77
+msgid "For a Jasiri Scout the Email must be provided."
+msgstr ""
+
+#: apps/registrations/models/scouts.py:79
+msgid "For a Jasiri Scout the Phone Number must be provided."
+msgstr ""
+
+#: apps/registrations/models/scouts.py:81
+msgid "A Sungura Scout cannot attain the highest badge of a Chipukizi Scout."
+msgstr ""
+
+#: apps/registrations/models/scouts.py:83
+msgid "A Sungura Scout cannot attain the highest badge of a Mwamba Scout."
+msgstr ""
+
+#: apps/registrations/models/scouts.py:85
+msgid "A Sungura Scout cannot attain the highest badge of a Jasiri Scout."
+msgstr ""
+
+#: apps/registrations/models/scouts.py:87
+msgid "A Chipukizi Scout cannot attain the highest badge of a Mwamba Scout."
+msgstr ""
+
+#: apps/registrations/models/scouts.py:89
+msgid "A Chipukizi Scout cannot attain the highest badge of a Jasiri Scout."
+msgstr ""
+
+#: apps/registrations/models/scouts.py:91
+msgid "A Mwamba Scout cannot attain the highest badge of a Jasiri Scout."
+msgstr ""
+
+#: apps/registrations/models/scouts.py:93
+msgid "Only Jasiri Scouts can undergo Jasiri Investiture"
+msgstr ""
+
+#: apps/registrations/models/units.py:13
+#, fuzzy
+#| msgid "Unit Level"
+msgid "Unit Name"
+msgstr "ngazi ya kitengo"
+
+#: apps/registrations/models/units.py:14
+msgid "sponsoring authority"
+msgstr ""
+
+#: apps/registrations/models/units.py:15 apps/youth_programme/models.py:55
+#, fuzzy
+#| msgid "description"
+msgid "sections"
+msgstr "maelezo"
+
+#: apps/registrations/models/units.py:17
+msgid "date warranted"
+msgstr ""
+
+#: apps/registrations/stats/models.py:13 apps/registrations/stats/models.py:14
+msgid "Units Stats"
+msgstr ""
+
+#: apps/registrations/stats/models.py:23 apps/registrations/stats/models.py:24
+msgid "Scouts Stats"
+msgstr ""
+
+#: apps/registrations/stats/models.py:33 apps/registrations/stats/models.py:34
+msgid "Scout Leaders Stats"
+msgstr ""
+
+#: apps/registrations/views/list.py:16
+#, python-brace-format
+msgid "{opts.app_label}/{opts.model_name}_filter"
+msgstr ""
+
+#: apps/registrations/views/list.py:18 apps/registrations/views/list.py:34
+#: apps/registrations/views/list.py:50
+msgid "Registered Units"
+msgstr ""
+
+#: apps/registrations/views/list.py:19
+msgid "There are no registered units within your jurisdiction yet!"
+msgstr "Bado hakuna vitengo vilivyosajiliwa katika eneo la mamlaka yako!"
+
+#: apps/registrations/views/list.py:35
+msgid "There are no registered Scouts within your jurisdiction yet!"
+msgstr ""
+
+#: apps/registrations/views/list.py:51
+msgid "There are no registered Scout Leaders within your jurisdiction yet!"
+msgstr ""
+
+#: apps/training/models.py:110
+msgid "theory book"
+msgstr ""
+
+#: apps/training/models.py:111
+msgid "submission date"
+msgstr ""
+
+#: apps/training/models.py:124
+msgid "comments"
+msgstr ""
+
+#: apps/training/models.py:126
+msgid "marked"
+msgstr ""
+
+#: apps/training/models.py:132
+msgid "WoodBadge I (Theory)"
+msgstr ""
+
+#: apps/training/models.py:133
+msgid "WoodBadge I (Theories)"
+msgstr ""
+
+#: apps/training/models.py:156
+msgid "The theory cannot be marked without a maker."
+msgstr ""
+
+#: apps/training/models.py:161
+msgid "WoodBadge Number"
+msgstr ""
+
+#: apps/training/models.py:165 apps/training/models.py:246
+#: apps/training/models.py:273
+msgid ""
+"Only active Scout Leaders with training level of Four Beads are valid "
+"options"
+msgstr ""
+
+#: apps/training/models.py:179
+msgid "WoodBadge II (Course)"
+msgstr ""
+
+#: apps/training/models.py:180
+msgid "WoodBadge II (Courses)"
+msgstr ""
+
+#: apps/training/models.py:208
+msgid "assessed"
+msgstr ""
+
+#: apps/training/models.py:214
+msgid "WoodBadge III (Assessment)"
+msgstr ""
+
+#: apps/training/models.py:215
+msgid "WoodBadge III (Assessments)"
+msgstr ""
+
+#: apps/training/models.py:238
+msgid "The Application cannot be marked as assessed without an assessor."
+msgstr ""
+
+#: apps/training/models.py:243
+msgid "ALT Number"
+msgstr ""
+
+#: apps/training/models.py:259
+msgid "ALT"
+msgstr ""
+
+#: apps/training/models.py:270
+msgid "LT Number"
+msgstr ""
+
+#: apps/training/models.py:286
+msgid "LT"
+msgstr ""
+
+#: apps/training/models.py:296
+msgid "Event Name"
+msgstr ""
+
+#: apps/training/models.py:314
+msgid "Scout Leader Special Event"
+msgstr ""
+
+#: apps/youth_programme/models.py:32
+msgid "Limited to only active Scout Leaders"
+msgstr ""
+
+#: apps/youth_programme/models.py:49
+msgid "Sungura"
+msgstr ""
+
+#: apps/youth_programme/models.py:209
+msgid "Patrol Leaders Course"
+msgstr ""
+
+#: apps/youth_programme/models.py:229
+msgid "Limited to active Scout Leaders with training level of PTC and above"
+msgstr ""
+
 #: templates/admin/base_site.html:6 templates/admin/base_site.html:11
 msgid "MyProject"
 msgstr ""
@@ -210,6 +1011,18 @@ msgstr ""
 msgid ""
 "Thank you for using %(site_name)s!\n"
 "%(site_domain)s"
+msgstr ""
+
+#: templates/registration/activation-error.html:8
+msgid "Activation Error. Please try again."
+msgstr ""
+
+#: templates/registration/activation-error.html:10
+msgid "Re-activate your Email Below."
+msgstr ""
+
+#: templates/registration/activation-error.html:15
+msgid "Resend Activation"
 msgstr ""
 
 #: templates/registration/login.html:7 templates/registration/login.html:16
@@ -306,4 +1119,18 @@ msgstr ""
 
 #: templates/registration/sign_up.html:7
 msgid "Sign Up"
+msgstr ""
+
+#: templates/stats/comingevent.html:14 templates/stats/county.html:14
+#: templates/stats/stats.html:6 templates/stats/sub_county.html:14
+msgid " Regional Statistics "
+msgstr ""
+
+#: templates/stats/comingevent.html:44 templates/stats/county.html:61
+#: templates/stats/stats.html:11 templates/stats/sub_county.html:61
+msgid " Counties Statistics "
+msgstr ""
+
+#: templates/stats/stats.html:16 templates/stats/sub_county.html:106
+msgid " SubCounties Statistics "
 msgstr ""

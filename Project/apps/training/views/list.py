@@ -1,3 +1,5 @@
+from django.utils.translation import gettext_lazy as _
+
 from apps.core.project_requirements.access import SubCountyMemberQueryset, CountyMemberQueryset, StaffMemberQueryset, FilterSetClass, \
     CountyFilterSetClass, StaffFilterSetClass
 from apps.training.models import ITC, PTC, WBI, WBII, WBIII, ALT, LT, SLSpecialEvent
@@ -10,10 +12,10 @@ class ITCList(FilterSetClass, SubCountyMemberQueryset):
     def get_context_data(self, **kwargs):
         opts = self.object_list.model._meta
         ctx = super().get_context_data(**kwargs)
-        ctx['title'] = f"{opts.verbose_name}"
-        ctx['title_plural'] = f"{opts.verbose_name_plural}"
-        ctx['table_heading'] = f"{opts.verbose_name_plural} Events"
-        ctx['no_table'] = f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!"
+        ctx['title'] = _(f"{opts.verbose_name}")
+        ctx['title_plural'] = _(f"{opts.verbose_name_plural}")
+        ctx['table_heading'] = _(f"{opts.verbose_name_plural} Events")
+        ctx['no_table'] = _(f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!")
         ctx['list_display'] = ['#', 'Venue', 'Start Date', 'SubCounty']
         return ctx
 
@@ -25,10 +27,10 @@ class PTCList(FilterSetClass, SubCountyMemberQueryset):
     def get_context_data(self, **kwargs):
         opts = self.object_list.model._meta
         ctx = super().get_context_data(**kwargs)
-        ctx['title'] = f"{opts.verbose_name}"
-        ctx['title_plural'] = f"{opts.verbose_name_plural}"
-        ctx['table_heading'] = f"{opts.verbose_name_plural} Events"
-        ctx['no_table'] = f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!"
+        ctx['title'] = _(f"{opts.verbose_name}")
+        ctx['title_plural'] = _(f"{opts.verbose_name_plural}")
+        ctx['table_heading'] = _(f"{opts.verbose_name_plural} Events")
+        ctx['no_table'] = _(f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!")
         ctx['list_display'] = ['#', 'Venue', 'Start Date', 'SubCounty']
         return ctx
 
@@ -40,10 +42,10 @@ class WBIList(CountyFilterSetClass, CountyMemberQueryset):
     def get_context_data(self, **kwargs):
         opts = self.object_list.model._meta
         ctx = super().get_context_data(**kwargs)
-        ctx['title'] = f"{opts.verbose_name}"
-        ctx['title_plural'] = f"{opts.verbose_name_plural}"
-        ctx['table_heading'] = f"{opts.verbose_name_plural}"
-        ctx['no_table'] = f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!"
+        ctx['title'] = _(f"{opts.verbose_name}")
+        ctx['title_plural'] = _(f"{opts.verbose_name_plural}")
+        ctx['table_heading'] = _(f"{opts.verbose_name_plural}")
+        ctx['no_table'] = _(f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!")
         ctx['list_display'] = ['#', 'Scout Leader', 'Submission Date', 'Marked']
         return ctx
 
@@ -55,10 +57,10 @@ class WBIIList(CountyFilterSetClass, CountyMemberQueryset):
     def get_context_data(self, **kwargs):
         opts = self.object_list.model._meta
         ctx = super().get_context_data(**kwargs)
-        ctx['title'] = f"{opts.verbose_name}"
-        ctx['title_plural'] = f"{opts.verbose_name_plural}"
-        ctx['table_heading'] = f"{opts.verbose_name_plural} Events"
-        ctx['no_table'] = f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!"
+        ctx['title'] = _(f"{opts.verbose_name}")
+        ctx['title_plural'] = _(f"{opts.verbose_name_plural}")
+        ctx['table_heading'] = _(f"{opts.verbose_name_plural} Events")
+        ctx['no_table'] = _(f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!")
         ctx['list_display'] = ['#', 'Venue', 'Start Date', 'County']
         return ctx
 
@@ -70,10 +72,10 @@ class WBIIIList(FilterSetClass, SubCountyMemberQueryset):
     def get_context_data(self, **kwargs):
         opts = self.object_list.model._meta
         ctx = super().get_context_data(**kwargs)
-        ctx['title'] = f"{opts.verbose_name}"
-        ctx['title_plural'] = f"{opts.verbose_name_plural}"
-        ctx['table_heading'] = f"{opts.verbose_name_plural}"
-        ctx['no_table'] = f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!"
+        ctx['title'] = _(f"{opts.verbose_name}")
+        ctx['title_plural'] = _(f"{opts.verbose_name_plural}")
+        ctx['table_heading'] = _(f"{opts.verbose_name_plural}")
+        ctx['no_table'] = _(f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!")
         ctx['list_display'] = ['#', 'Scout Leader', 'Unit', 'Assessed']
         return ctx
 
@@ -85,10 +87,10 @@ class ALTList(StaffFilterSetClass, StaffMemberQueryset):
     def get_context_data(self, **kwargs):
         opts = self.object_list.model._meta
         ctx = super().get_context_data(**kwargs)
-        ctx['title'] = f"{opts.verbose_name}"
-        ctx['title_plural'] = f"{opts.verbose_name_plural}"
-        ctx['table_heading'] = f"{opts.verbose_name_plural} Events"
-        ctx['no_table'] = f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!"
+        ctx['title'] = _(f"{opts.verbose_name}")
+        ctx['title_plural'] = _(f"{opts.verbose_name_plural}")
+        ctx['table_heading'] = _(f"{opts.verbose_name_plural} Events")
+        ctx['no_table'] = _(f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!")
         ctx['list_display'] = ['#', 'Venue', 'Start Date', 'County']
         return ctx
 
@@ -100,10 +102,10 @@ class LTList(StaffFilterSetClass, StaffMemberQueryset):
     def get_context_data(self, **kwargs):
         opts = self.object_list.model._meta
         ctx = super().get_context_data(**kwargs)
-        ctx['title'] = f"{opts.verbose_name}"
-        ctx['title_plural'] = f"{opts.verbose_name_plural}"
-        ctx['table_heading'] = f"{opts.verbose_name_plural} Events"
-        ctx['no_table'] = f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!"
+        ctx['title'] = _(f"{opts.verbose_name}")
+        ctx['title_plural'] = _(f"{opts.verbose_name_plural}")
+        ctx['table_heading'] = _(f"{opts.verbose_name_plural} Events")
+        ctx['no_table'] = _(f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!")
         ctx['list_display'] = ['#', 'Venue', 'Start Date', 'County']
         return ctx
 
@@ -115,9 +117,9 @@ class SLSpecialEventList(FilterSetClass, SubCountyMemberQueryset):
     def get_context_data(self, **kwargs):
         opts = self.object_list.model._meta
         ctx = super().get_context_data(**kwargs)
-        ctx['title'] = f"{opts.verbose_name}"
-        ctx['title_plural'] = f"{opts.verbose_name_plural}"
-        ctx['table_heading'] = f"{opts.verbose_name_plural} Events"
-        ctx['no_table'] = f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!"
+        ctx['title'] = _(f"{opts.verbose_name}")
+        ctx['title_plural'] = _(f"{opts.verbose_name_plural}")
+        ctx['table_heading'] = _(f"{opts.verbose_name_plural} Events")
+        ctx['no_table'] = _(f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!")
         ctx['list_display'] = ['#', 'Event Name', 'Venue', 'Start Date', 'SubCounty']
         return ctx

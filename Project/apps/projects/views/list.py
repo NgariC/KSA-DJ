@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
 from apps.core.project_requirements.access import NationalMemberQueryset, UnitMemberQueryset, NationalFilterSetClass, \
@@ -14,10 +15,10 @@ class CSAProjectList(LoginRequiredMixin, FilterSetClass, generic.ListView):
     def get_context_data(self, **kwargs):
         opts = self.object_list.model._meta
         ctx = super().get_context_data(**kwargs)
-        ctx['title'] = f"{opts.verbose_name}"
-        ctx['title_plural'] = f"{opts.verbose_name_plural}"
-        ctx['table_heading'] = f"{opts.verbose_name_plural}"
-        ctx['no_table'] = f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!"
+        ctx['title'] = _(f"{opts.verbose_name}")
+        ctx['title_plural'] = _(f"{opts.verbose_name_plural}")
+        ctx['table_heading'] = _(f"{opts.verbose_name_plural}")
+        ctx['no_table'] = _(f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!")
         ctx['list_display'] = ['#', 'Title', 'Project Code']
         return ctx
 
@@ -53,10 +54,10 @@ class UnitProjectList(FilterSetClass, UnitMemberQueryset):
     def get_context_data(self, **kwargs):
         opts = self.object_list.model._meta
         ctx = super().get_context_data(**kwargs)
-        ctx['title'] = f"{opts.verbose_name}"
-        ctx['title_plural'] = f"{opts.verbose_name_plural}"
-        ctx['table_heading'] = f"{opts.verbose_name_plural}"
-        ctx['no_table'] = f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!"
+        ctx['title'] = _(f"{opts.verbose_name}")
+        ctx['title_plural'] = _(f"{opts.verbose_name_plural}")
+        ctx['table_heading'] = _(f"{opts.verbose_name_plural}")
+        ctx['no_table'] = _(f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!")
         ctx['list_display'] = ['#', 'Title', 'Unit', 'Coordinator']
         return ctx
 
@@ -68,10 +69,10 @@ class ALTProjectList(NationalFilterSetClass, NationalMemberQueryset):
     def get_context_data(self, **kwargs):
         opts = self.object_list.model._meta
         ctx = super().get_context_data(**kwargs)
-        ctx['title'] = f"{opts.verbose_name}"
-        ctx['title_plural'] = f"{opts.verbose_name_plural}"
-        ctx['table_heading'] = f"{opts.verbose_name_plural}"
-        ctx['no_table'] = f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!"
+        ctx['title'] = _(f"{opts.verbose_name}")
+        ctx['title_plural'] = _(f"{opts.verbose_name_plural}")
+        ctx['table_heading'] = _(f"{opts.verbose_name_plural}")
+        ctx['no_table'] = _(f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!")
         ctx['list_display'] = ['#', 'Title', "Scout Leader's Name", 'County']
         return ctx
 
@@ -83,9 +84,9 @@ class LTProjectList(NationalFilterSetClass, NationalMemberQueryset):
     def get_context_data(self, **kwargs):
         opts = self.object_list.model._meta
         ctx = super().get_context_data(**kwargs)
-        ctx['title'] = f"{opts.verbose_name}"
-        ctx['title_plural'] = f"{opts.verbose_name_plural}"
-        ctx['table_heading'] = f"{opts.verbose_name_plural}"
-        ctx['no_table'] = f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!"
+        ctx['title'] = _(f"{opts.verbose_name}")
+        ctx['title_plural'] = _(f"{opts.verbose_name_plural}")
+        ctx['table_heading'] = _(f"{opts.verbose_name_plural}")
+        ctx['no_table'] = _(f"There are no {opts.verbose_name_plural} carried out within your jurisdiction yet!")
         ctx['list_display'] = ['#', 'Title', "Scout Leader's Name", 'County']
         return ctx

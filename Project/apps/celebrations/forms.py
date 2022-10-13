@@ -2,6 +2,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Column, HTML, Row, Submit, ButtonHolder
 from django import forms
 from django.contrib.admin.widgets import AutocompleteSelect, AutocompleteSelectMultiple
+from django.utils.translation import gettext_lazy as _
 
 from apps.celebrations.models import Founderee, CountyParticipants
 from apps.core.project_requirements.utilities import report_template
@@ -14,7 +15,7 @@ class FoundereeForm(forms.ModelForm):
     camp_chief = forms.ModelChoiceField(widget=AutocompleteSelect(Founderee._meta.get_field('camp_chief'),
                                                                   auto_admin_site),
                                         queryset=ScoutLeaderQ,
-                                        help_text="Only active Scout Leaders are valid options")
+                                        help_text=_("Only active Scout Leaders are valid options"))
     start_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     end_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     county = forms.ModelChoiceField(widget=AutocompleteSelect(Founderee._meta.get_field('county'), auto_admin_site),
@@ -22,7 +23,7 @@ class FoundereeForm(forms.ModelForm):
     support_staff = forms.ModelMultipleChoiceField(
         widget=AutocompleteSelectMultiple(Founderee._meta.get_field('support_staff'), auto_admin_site),
         queryset=ScoutLeaderQ,
-        help_text="Only active Scout Leaders are valid options")
+        help_text=_("Only active Scout Leaders are valid options"))
 
     class Meta:
         model = Founderee
@@ -40,7 +41,7 @@ class FoundereeForm(forms.ModelForm):
         self.helper.label_class = 'col-lg-3'
         self.helper.field_class = 'col-lg-9'
         self.helper.layout = Layout(
-            Fieldset('Add a new founderee event',
+            Fieldset(_('Add a new founderee event'),
                      HTML("""
                         <br>
                         """
@@ -74,23 +75,23 @@ class CountyParticipantsForm(forms.ModelForm):
     sungura_scouts = forms.ModelMultipleChoiceField(
         widget=AutocompleteSelectMultiple(CountyParticipants._meta.get_field('sungura_scouts'), auto_admin_site),
         queryset=ScoutQ,
-        help_text="Only active Sungura Scouts are valid options")
+        help_text=_("Only active Sungura Scouts are valid options"))
     chipukizi_scouts = forms.ModelMultipleChoiceField(
         widget=AutocompleteSelectMultiple(CountyParticipants._meta.get_field('chipukizi_scouts'), auto_admin_site),
         queryset=ScoutQ,
-        help_text="Only active Chipukizi Scouts are valid options")
+        help_text=_("Only active Chipukizi Scouts are valid options"))
     mwamba_scouts = forms.ModelMultipleChoiceField(
         widget=AutocompleteSelectMultiple(CountyParticipants._meta.get_field('mwamba_scouts'), auto_admin_site),
         queryset=ScoutQ,
-        help_text="Only active Mwamba Scouts are valid options")
+        help_text=_("Only active Mwamba Scouts are valid options"))
     jasiri_scouts = forms.ModelMultipleChoiceField(
         widget=AutocompleteSelectMultiple(CountyParticipants._meta.get_field('jasiri_scouts'), auto_admin_site),
         queryset=ScoutQ,
-        help_text="Only active Jasiri Scouts are valid options")
+        help_text=_("Only active Jasiri Scouts are valid options"))
     scout_leaders = forms.ModelMultipleChoiceField(
         widget=AutocompleteSelectMultiple(CountyParticipants._meta.get_field('scout_leaders'), auto_admin_site),
         queryset=ScoutLeaderQ,
-        help_text="Only active Scout Leaders are valid options")
+        help_text=_("Only active Scout Leaders are valid options"))
 
     class Meta:
         model = CountyParticipants
@@ -105,7 +106,7 @@ class CountyParticipantsForm(forms.ModelForm):
         self.helper.label_class = 'col-lg-3'
         self.helper.field_class = 'col-lg-9'
         self.helper.layout = Layout(
-            Fieldset('Add participants to the Patrons Day who are not awardees',
+            Fieldset(_('Add participants to the Patrons Day who are not awardees'),
                      HTML("""
                         <br>
                         """

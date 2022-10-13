@@ -12,7 +12,7 @@ from apps.registrations.utilities import SECTION, u_code
 class Unit(models.Model):
     name = models.CharField(_("Unit Name"), max_length=100, db_index=True)
     sponsoring_authority = models.CharField(_('sponsoring authority'), max_length=100, blank=True, null=True)
-    sections = MultiSelectField(_('sections'), choices=SECTION, min_choices=1, max_choices=4, max_length=10,
+    sections = MultiSelectField(_('sections'), choices=SECTION, min_choices=1, max_choices=4, max_length=70,
                                 db_index=True)
     date_warranted = models.DateTimeField(_('date warranted'), auto_now_add=True, editable=False, db_index=True)
     sub_county = models.ForeignKey(SubCounty, on_delete=models.PROTECT)
