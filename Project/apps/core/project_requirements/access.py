@@ -53,7 +53,7 @@ class TraceableUpdate:
 
 class DateRegulated:
     pass
-    # if datetime.datetime.now().month == 1 or datetime.datetime.now().month == 2 or datetime.datetime.now().month == 3:
+    # if datetime.datetime.now().month in [1, 2, 3]:
     #     template_name = 'form.html'
     # else:
     #     template_name = 'registrations/reg_not_allowed.html'

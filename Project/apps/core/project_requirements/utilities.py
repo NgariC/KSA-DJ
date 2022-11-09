@@ -10,14 +10,15 @@ from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db.models import Q
 from django.utils.html import format_html
+from django.utils.translation import gettext_lazy as _
 from matplotlib import pyplot as plt
 
 GENDER = (
-    ('M', 'Male'),
-    ('F', 'Female'),
+    ('M', _('Male')),
+    ('F', _('Female')),
 )
 
-mobile_num_regex = RegexValidator(regex="^[0-9]{10,15}$", message="Entered mobile number isn't in a right format!")
+mobile_num_regex = RegexValidator(regex="^[0-9]{10,15}$", message=_("Entered mobile number isn't in a right format!"))
 
 old_enough_18 = datetime.date.today() - datetime.timedelta(days=6570)
 old_enough_3 = datetime.date.today() - datetime.timedelta(days=1095)
@@ -34,22 +35,22 @@ years_back_100 = int(datetime.date.today().year) - 100
 def active(modeladmin, request, queryset):
     rows_updated = queryset.update(active=True)
     if rows_updated == 1:
-        message_bit = f"1 {modeladmin.model._meta.model_name} was"
+        message_bit = _(f"1 {modeladmin.model._meta.model_name} was")
     else:
-        message_bit = f"{rows_updated} {modeladmin.model._meta.model_name}s were"
-    modeladmin.message_user(request, f"{message_bit} successfully marked as active.")
+        message_bit = _(f"{rows_updated} {modeladmin.model._meta.model_name}s were")
+    modeladmin.message_user(request, _(f"{message_bit} successfully marked as active."))
 
 
 active.allowed_permissions = ('change',)
 
-active.short_description = "Mark selected %(verbose_name_plural)s as active"
+active.short_description = _("Mark selected %(verbose_name_plural)s as active")
 
 
 def validate_file_extension(value):
     ext = os.path.splitext(value.name)[1]
     valid_extensions = ['.pdf', '.doc', '.docx']
     if ext not in valid_extensions:
-        raise ValidationError(u'File not supported!')
+        raise ValidationError(_(u'File not supported!'))
 
 
 class Perm:
@@ -136,23 +137,23 @@ class List:
         return "\n".join(['%d %s (%s %s)' % (i, a.get_short_name, a.phone_number, a.sub_county.name) for i, a in
                           enumerate(obj.staff.all(), start=1)])
 
-    no_of_participants.short_description = "Participants No."
-    participants_list.short_description = "List of Participants"
-    staff_list.short_description = "Support Staff list"
+    no_of_participants.short_description = _("Participants No.")
+    participants_list.short_description = _("List of Participants")
+    staff_list.short_description = _("Support Staff list")
 
 
 def payments(modeladmin, request, queryset):
     rows_updated = queryset.update(payments=True)
     if rows_updated == 1:
-        message_bit = f"1 {modeladmin.model._meta.model_name} was"
+        message_bit = _(f"1 {modeladmin.model._meta.model_name} was")
     else:
-        message_bit = f"{rows_updated} {modeladmin.model._meta.model_name}s were"
-    modeladmin.message_user(request, f"{message_bit} successfully marked as paid.")
+        message_bit = _(f"{rows_updated} {modeladmin.model._meta.model_name}s were")
+    modeladmin.message_user(request, _(f"{message_bit} successfully marked as paid."))
 
 
 payments.allowed_permissions = ('change',)
 
-payments.short_description = "Mark selected %(verbose_name_plural)s as paid"
+payments.short_description = _("Mark selected %(verbose_name_plural)s as paid")
 
 
 class Team(Perm):
@@ -164,28 +165,29 @@ class Team(Perm):
 
     def competitors_list(self, obj):
         return "\n".join(
-            ['%d %s (%s %s)' % (i, a.get_short_name, a.unit, a.gender) for i, a in enumerate(obj.competitors.all(), start=1)])
+            ['%d %s (%s %s)' % (i, a.get_short_name, a.unit, a.gender) for i, a in
+             enumerate(obj.competitors.all(), start=1)])
 
     def leaders_list(self, obj):
         return "\n".join(['%d %s (%s %s)' % (i, a.get_short_name, a.phone_number, a.sub_county.name) for i, a in
                           enumerate(obj.leaders.all(), start=1)])
 
-    no_of_scouts.short_description = "Competitors"
-    no_of_scout_leaders.short_description = "Leaders"
-    competitors_list.short_description = "Competitors List."
-    leaders_list.short_description = "Leaders List"
+    no_of_scouts.short_description = _("Competitors")
+    no_of_scout_leaders.short_description = _("Leaders")
+    competitors_list.short_description = _("Competitors List.")
+    leaders_list.short_description = _("Leaders List")
 
 
 class CoEvent:
     def no_of_scouts(self, obj):
         return obj.competitors_count
 
-    no_of_scouts.short_description = "Competitors"
+    no_of_scouts.short_description = _("Competitors")
 
     def no_of_scout_leaders(self, obj):
         return obj.leaders_count
 
-    no_of_scout_leaders.short_description = "Leaders"
+    no_of_scout_leaders.short_description = _("Leaders")
 
     def assessor_list(self, obj):
         return "\n".join(['%d %s (%s %s)' % (i, a.get_short_name, a.phone_number, a.sub_county.name) for i, a in
@@ -195,43 +197,44 @@ class CoEvent:
         return "\n".join(
             ['%d %s (%s %s)' % (i, a.get_short_name, a.unit, a.gender) for i, a in enumerate(obj.teams.all(), start=1)])
 
-    no_of_scouts.short_description = "Competitors"
-    no_of_scout_leaders.short_description = "Leaders"
-    assessor_list.short_description = "Assessors List."
-    teams_list.short_description = "Teams List."
+    no_of_scouts.short_description = _("Competitors")
+    no_of_scout_leaders.short_description = _("Leaders")
+    assessor_list.short_description = _("Assessors List.")
+    teams_list.short_description = _("Teams List.")
 
 
 class Staff:
     def no_of_staff(self, obj):
         return obj._staff_count
 
-    no_of_staff.short_description = "Support Staff No."
+    no_of_staff.short_description = _("Support Staff No.")
 
 
 class ScoutsAward(Perm):
     def no_of_scouts(self, obj):
         return obj._scouts_count
 
-    no_of_scouts.short_description = "Scouts No."
+    no_of_scouts.short_description = _("Scouts No.")
 
     def awardees_list(self, obj):
         return "\n".join(
-            ['%d %s (%s %s)' % (i, a.get_short_name, a.unit, a.gender) for i, a in enumerate(obj.awardees.all(), start=1)])
+            ['%d %s (%s %s)' % (i, a.get_short_name, a.unit, a.gender) for i, a in
+             enumerate(obj.awardees.all(), start=1)])
 
-    awardees_list.short_description = "Awarded Scouts."
+    awardees_list.short_description = _("Awarded Scouts.")
 
 
 class ScoutLeadersAward(Perm):
     def no_of_scout_leaders(self, obj):
         return obj._scout_leaders_count
 
-    no_of_scout_leaders.short_description = "Scout Leaders No."
+    no_of_scout_leaders.short_description = _("Scout Leaders No.")
 
     def awardees_list(self, obj):
         return "\n".join(['%d %s (%s %s)' % (i, a.get_short_name, a.phone_number, a.sub_county.name) for i, a in
                           enumerate(obj.awardees.all(), start=1)])
 
-    awardees_list.short_description = "Awarded Scout Leaders."
+    awardees_list.short_description = _("Awarded Scout Leaders.")
 
 
 class AwardEvent(Perm):
@@ -250,11 +253,11 @@ class AwardEvent(Perm):
     def no_of_scout_leaders(self, obj):
         return obj._scout_leaders_count
 
-    no_of_sungura_scouts.short_description = "Sungura Awardees"
-    no_of_chipukizi_scouts.short_description = "Chipukizi Awardees"
-    no_of_mwamba_scouts.short_description = "Mwamba Awardees"
-    no_of_jasiri_scouts.short_description = "Jasiri Awardees"
-    no_of_scout_leaders.short_description = "Scout Leaders Awardees"
+    no_of_sungura_scouts.short_description = _("Sungura Awardees")
+    no_of_chipukizi_scouts.short_description = _("Chipukizi Awardees")
+    no_of_mwamba_scouts.short_description = _("Mwamba Awardees")
+    no_of_jasiri_scouts.short_description = _("Jasiri Awardees")
+    no_of_scout_leaders.short_description = _("Scout Leaders Awardees")
 
 
 class AwardAttendees(Perm):
@@ -264,18 +267,15 @@ class AwardAttendees(Perm):
     def scout_leaders(self, obj):
         return obj._scout_leaders_attendees_count
 
-    scouts.short_description = "Other Scouts"
-    scout_leaders.short_description = "Other Scout Leaders"
+    scouts.short_description = _("Other Scouts")
+    scout_leaders.short_description = _("Other Scout Leaders")
 
 
 def report_template(model):
     return format_html(
-        'Download the report template <a class="button" target="_blank" href="%sTemplates/%s.docx">here</a> '
-        'then attach in this form' % (settings.MEDIA_URL, model)
-    )
-
-
-
+        _('Download the report template <a class="button" target="_blank" href="%sTemplates/%s.docx">here</a> '
+          'then attach in this form' % (settings.MEDIA_URL, model)
+          ))
 
 
 def get_graph():

@@ -1,5 +1,8 @@
+import datetime
+
 from django.contrib import admin
 from django.db import models
+from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
@@ -39,3 +42,6 @@ class Person(models.Model):
             height=self.image.height,
         )
         )
+
+    def was_registered_recently(self):
+        return self.registration_date >= timezone.now() - datetime.timedelta(days=5)
