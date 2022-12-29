@@ -44,8 +44,7 @@ class Event(models.Model):
 
     @property
     def cert_amount(self):
-        trainees = self.trainees.count()
-        return trainees * 100
+        return (self.trainees.count() * 100) if self.trainees.exists() else 0
 
 
 class ITC(Event):

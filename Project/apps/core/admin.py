@@ -1,6 +1,7 @@
 import sys
 
 from django.contrib import admin
+from django.contrib.admin import SimpleListFilter
 from django.contrib.admin.models import LogEntry, DELETION
 from django.contrib.flatpages.models import FlatPage
 from django.contrib.sites.models import Site
@@ -20,9 +21,24 @@ from apps.core.stats import ComingEventStats
 from apps.core.project_requirements.utilities import OnlySuper, Perm, Permi
 
 
+class ResourceTypeFilter(SimpleListFilter):
+    title = "Resource Type"
+    parameter_name = "resource_type"
+
+    def lookups(self, request, model_admin):
+        qs = model_admin.get_queryset(request)
+        types = qs.values_list("content_type_id", "content_type__model")
+        return list(types.order_by("content_type__model").distinct())
+
+    def queryset(self, request, queryset):
+        if self.value() is None:
+            return queryset
+        return queryset.filter(content_type_id=self.value())
+
+
 class LogEntryAdmin(admin.ModelAdmin):
     # date_hierarchy = 'action_time'
-    list_filter = ['user', 'content_type__model', 'action_flag']
+    list_filter = ['user', ResourceTypeFilter, 'action_flag']
     search_fields = ['object_repr', 'change_message']
     list_display = ['action_time', 'user', 'content_type', 'object_link', 'action_flag']
     list_select_related = ['user', 'content_type']
@@ -89,7 +105,7 @@ class SlideAdmin(admin.ModelAdmin):
 
 @admin.register(About)
 class AboutAdmin(OnlySuper, admin.ModelAdmin):
-    list_display = ('id',)
+    list_display = ('id', 'tags')
 
 
 @admin.register(WeProduce)

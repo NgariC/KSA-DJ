@@ -1,4 +1,6 @@
 from django.conf import settings
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import Q
 from django.urls import reverse
@@ -7,6 +9,12 @@ from apps.core.project_requirements.utilities import mobile_num_regex
 from apps.registrations.models import Unit, Scout, ScoutLeader
 from apps.training.models import ITC, PTC
 from apps.youth_programme.models import Investiture, BadgeCamp, ParkHoliday, PLC, RM
+
+
+def payments_limit():
+    return Q(model='unit') | Q(model='scout') | Q(model='scoutleader') | Q(model='itc') | Q(model='ptc') | \
+           Q(model='investitures') | Q(model='badgecamp') | Q(model='parkholiday') | Q(model='plc') | \
+           Q(model='rovermate')
 
 
 class PaymentsList(models.Model):
@@ -170,3 +178,17 @@ class C2BPayments(models.Model):
     FirstName = models.CharField(max_length=20, blank=True, null=True)
     MiddleName = models.CharField(max_length=20, blank=True, null=True)
     LastName = models.CharField(max_length=20, blank=True, null=True)
+
+
+class Payments(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, blank=True, null=True)
+    content_type = models.ForeignKey(ContentType, limit_choices_to=payments_limit, on_delete=models.SET_NULL, null=True)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+    ref_number = models.CharField(max_length=16, editable=False)
+    paid = models.BooleanField('Payments Done', default=False, db_index=True)
+    phone_number = models.CharField(validators=[mobile_num_regex], max_length=13,
+                                    help_text='The phone number will be used to make payments')
+    amount_paid = models.PositiveIntegerField()

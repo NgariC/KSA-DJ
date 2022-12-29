@@ -2,20 +2,30 @@ import sys
 
 import pandas as pd
 from django.contrib import admin
+from django.contrib.contenttypes.admin import GenericTabularInline
 from django.db import models
 from django.db.models import Count, Q
 from django import forms
 
 from import_export.admin import ImportExportActionModelAdmin, ExportActionModelAdmin
 
+from apps.analytics.models import ObjectViewed
 from apps.core.project_requirements.admins import auto_admin_site, stats_admin_site
 from apps.core.project_requirements.utilities import Perm, Permi, years_back_3, years_back_26, years_back_27, \
     years_back_100, active
+from apps.payments.models import Payments
 from apps.registrations.models import Unit, Scout, ScoutLeader, ScoutLeaderCert
 from apps.registrations.certs import print_cert, print_warrant
 from apps.registrations.resources import ScoutLeaderResource, ScoutResource, UnitResource
 from apps.registrations.utilities import unit_chart, unit_table, scouts_table, scouts_chart
 from apps.registrations.stats import UnitStats, ScoutStats, ScoutLeaderStats
+
+
+class ObjectViewedInline(GenericTabularInline):
+    model = ObjectViewed
+
+class PaymentsInline(GenericTabularInline):
+    model = Payments
 
 
 class ScoutLeaderCertInline(admin.TabularInline):
@@ -76,7 +86,7 @@ class ScoutAdmin(Perm, ImportExportActionModelAdmin):
     def get_changeform_initial_data(self, request):
         return {'phone_number': '07'}
 
-    actions = ExportActionModelAdmin.actions + (active, )
+    actions = ExportActionModelAdmin.actions + (active,)
     resource_class = ScoutResource
     list_per_page = 100
     radio_fields = {"gender": admin.HORIZONTAL, "section": admin.HORIZONTAL}
@@ -139,7 +149,7 @@ class ScoutLeaderAdmin(Perm, ImportExportActionModelAdmin):
     def get_changeform_initial_data(self, request):
         return {'phone_number': '07'}
 
-    actions = ExportActionModelAdmin.actions + (active, )
+    actions = ExportActionModelAdmin.actions + (active,)
     resource_class = ScoutLeaderResource
     inlines = [ScoutLeaderCertInline]
     list_per_page = 100
@@ -195,12 +205,14 @@ class ScoutLeaderAdmin(Perm, ImportExportActionModelAdmin):
 class AutoUnitAdmin(Perm, Permi, admin.ModelAdmin):
     list_per_page = sys.maxsize
     show_full_result_count = False
+    ordering = ('name', )
     search_fields = ('id', 'name', 'sections', 'sponsoring_authority', 'sub_county__name', 'sub_county__county__name')
 
 
 class AutoScoutAdmin(Perm, Permi, admin.ModelAdmin):
     list_per_page = sys.maxsize
     show_full_result_count = False
+    ordering = ('first_name', )
     search_fields = ('first_name', 'middle_name', 'surname', 'section', 'unit__name', 'unit__id',
                      'unit__sub_county__name', 'unit__sub_county__county__name')
 
@@ -208,6 +220,7 @@ class AutoScoutAdmin(Perm, Permi, admin.ModelAdmin):
 class AutoScoutLeaderAdmin(Perm, Permi, admin.ModelAdmin):
     list_per_page = sys.maxsize
     show_full_result_count = False
+    ordering = ('first_name', )
     search_fields = (
         'first_name', 'middle_name', 'surname', 'unit__name', 'unit__id', 'national_id', 'training',
         'sub_county__name', 'sub_county__county__name')

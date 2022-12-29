@@ -20,20 +20,19 @@ class UserResource(resources.ModelResource):
                         'groups', 'user_permissions',
                         'last_login', 'date_joined')
 
-    @staticmethod
-    def dehydrate_groups(self, obj):
-        data = [x.name for x in obj.groups.all()]
+    def dehydrate_groups(self, user):
+        data = [x.name for x in user.groups.all()]
         return ", ".join(data)
 
-    @staticmethod
-    def dehydrate_user_permissions(self, obj):
-        data = [x.name for x in obj.user_permissions.all()]
+    def dehydrate_user_permissions(self, user):
+        data = [x.name for x in user.user_permissions.all()]
         return ", ".join(data)
 
-    @staticmethod
-    def dehydrate_last_login(self, obj):
-        return obj.last_login.strftime('%d-%m-%Y')
+    def dehydrate_last_login(self, user):
+        return user.last_login.strftime('%d-%m-%Y') if user.last_login else ""
 
-    @staticmethod
-    def dehydrate_date_joined(self, obj):
-        return obj.date_joined.strftime('%d-%m-%Y')
+    def dehydrate_date_joined(self, user):
+        return user.date_joined.strftime('%d-%m-%Y')
+
+    def dehydrate_image(self, user):
+        return user.image.url if user.image and hasattr(user.image, 'url') else user.image

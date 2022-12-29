@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.fields import GenericRelation
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Q
@@ -6,6 +7,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from tinymce.models import HTMLField
 
+from apps.analytics.models import TaggedItem
 from apps.core.managers import ComingEventManager, ScoutCenterManager
 from apps.core.project_requirements.utilities import mobile_num_regex
 from apps.geoposition.fields import GeopositionField
@@ -36,6 +38,7 @@ class Slide(models.Model):
 
 class About(models.Model):
     content = HTMLField()
+    tags = GenericRelation(TaggedItem)
 
     objects = models.Manager()
 
